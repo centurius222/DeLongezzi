@@ -1,0 +1,293 @@
+/* Holiday pack 'pizza', 16:10, made by tools/holiday-packs/gen16.py pack from pizzafriday1610v2.png:
+   the template's layout (the custom themes'), shown whole on any screen, in #ff2a1a. */
+
+:root[data-holiday='pizza'] {
+  --skin-text: #f3dcb2;
+  --skin-caption: #ecd3a4;
+  --skin-led: #ffe2b0; /* the readouts: a hot core ... */
+  --skin-led-edge: #e8891a; /* ... in an amber tube ... */
+  --skin-led-glow: 0 0 2px #ff9a1a, 0 0 7px #d86a0a, 0 0 16px rgba(220, 110, 10, 0.7); /* ... glowing */
+  --skin-red: #b8481c;
+  --chart-text: #f0e2c8;
+  --chart-grid: rgba(255, 225, 180, 0.08);
+  color-scheme: dark;
+  --color-base-100: #161616;
+  --color-base-200: #111111;
+  --color-base-300: #0b0b0b;
+  --color-base-content: var(--skin-text);
+  --color-primary: #c8702c;
+  --color-primary-content: #1a0d05;
+  --color-secondary: var(--skin-red);
+  --color-secondary-content: #ffffff;
+  --color-accent: #ffc36a;
+  --color-accent-content: #1a0d05;
+  --color-neutral: #262626;
+  --color-neutral-content: var(--skin-text);
+  --color-info: oklch(68.455% 0.148 237.251);
+  --color-info-content: oklch(0% 0 0);
+  --color-success: #ffc36a;
+  --color-success-content: #1a0d05;
+  --color-warning: oklch(83.242% 0.139 82.95);
+  --color-warning-content: oklch(16.648% 0.027 82.95);
+  --color-error: oklch(71.785% 0.17 13.118);
+  --color-error-content: oklch(14.357% 0.034 13.118);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+:root[data-holiday='pizza'] {
+  --u: min(calc(100vw / 1587), calc(100vh / 991));
+  --ox: calc((100vw - 1587 * var(--u)) / 2);
+  --oy: calc((100vh - 991 * var(--u)) / 2);
+  --bars: var(--bars-lr, #0b0b0b); /* CustomThemeStyles: from the picture's left and right edges ... */
+  --shade: 0; /* the windows' shading behind the numbers: off unless the theme sets it (Window shading) */
+  /* the same scale as a plain number (for zoom): length / length via tan(atan2()) */
+  --s: min(tan(atan2(100vw, 1587px)), tan(atan2(100vh, 991px)));
+}
+/* phones: their address bar comes and goes, so measure the screen as it is shown right now */
+@supports (height: 100dvh) {
+  :root[data-holiday='pizza'] {
+    --u: min(calc(100dvw / 1587), calc(100dvh / 991));
+    --ox: calc((100dvw - 1587 * var(--u)) / 2);
+    --oy: calc((100dvh - 991 * var(--u)) / 2);
+    --s: min(tan(atan2(100dvw, 1587px)), tan(atan2(100dvh, 991px)));
+  }
+}
+@media (max-aspect-ratio: 1587/991) {
+  :root[data-holiday='pizza'] { --bars: var(--bars-tb, #0b0b0b); /* ... or top and bottom */ }
+}
+
+:root[data-holiday='pizza'] [data-slot='page'] {
+  background: linear-gradient(#161616, #0b0b0b) !important;
+}
+
+:root[data-holiday='pizza'] {
+  --pack-picture: url('art/page.webp'); /* written once: the upload builds the picture in */
+  --bars-lr: linear-gradient(to right, #3c1f10, #46190f);
+  --bars-tb: linear-gradient(to bottom, #673e2a, #46291d);
+  --skin-led: rgb(255, 180, 175);
+  --skin-led-edge: #ff2a1a;
+  --skin-led-glow: 0 0 2px #ff2a1a, 0 0 7px #d92416, 0 0 16px #d92416b3;
+  --skin-caption: rgb(255, 202, 198);
+  --color-primary: #ff2a1a;
+  --chart-text: rgb(255, 212, 209);
+  --chart-grid: rgba(255, 42, 26, 0.12);
+  --shade: 0.28;
+  --n-topx: -32;
+  --n-topy: 55;
+  --n-midx: -33;
+  --n-midy: 48;
+  --n-tankx: 0;
+  --n-tanky: 50;
+  --n-controlsx: -30;
+  --n-controlsy: 30;
+  --n-tarex: 6;
+  --n-tarey: -21;
+  --n-clockx: -30;
+  --n-menuy: 22;
+}
+
+@media (orientation: landscape) {
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='page'] { height: 100vh; height: 100dvh !important;
+  background: var(--pack-picture) center / contain no-repeat scroll, var(--bars) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='content'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='content'] *:has(> [data-slot='manual']) { overflow: hidden !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='card'] { border: 0 !important; background: transparent !important; box-shadow: none !important; overflow: visible !important; padding: 0 !important; color: var(--skin-text); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-unclip],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='columns'] > section,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metrics-row'] { overflow: visible !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-piece] { display: none; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='page'] > .backdrop-blur-sm { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] { position: fixed !important; left: calc(var(--ox) + 0 * var(--u)); top: calc(var(--oy) + 0 * var(--u)); width: calc(340 * var(--u)); height: calc(991 * var(--u)); padding: 0 !important; border: 0 !important;
+  background: transparent !important; overflow: visible !important; color: var(--skin-text); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-slot='logo'] { height: calc(190 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-slot='logo'] > img { visibility: hidden; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] hr,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='social'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='collapse'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='credit'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='menu-foot'] { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] { height: calc(54 * var(--u)) !important; margin: 0 0 0 calc(32 * var(--u)) !important; width: calc(266 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > a { height: 100% !important; min-height: 0 !important;
+  padding: 0 0 0 calc(14 * var(--u)) !important; gap: calc(16 * var(--u)) !important; font-size: calc(24 * var(--u)) !important; line-height: 1 !important;
+  color: var(--skin-caption) !important; background: transparent !important; box-shadow: none !important; white-space: nowrap; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-slot='logo'] { width: 100% !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'][data-collapsed] [data-menu] > a { width: 100% !important; justify-content: flex-start !important; aspect-ratio: auto !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'][data-collapsed] [data-menu] > a::after { content: attr(aria-label); white-space: nowrap; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-menu] > a[aria-current='page'] { color: var(--skin-led) !important; text-shadow: 0 0 6px rgba(255, 160, 60, 0.6); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > a > svg { width: calc(30 * var(--u)); height: calc(30 * var(--u)); flex: none; color: var(--skin-caption); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > :not(a) .btn,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > .btn:not(a),
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] [role='button'] { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--skin-caption) !important; width: calc(36 * var(--u)) !important; min-width: 0 !important; height: calc(36 * var(--u)) !important; min-height: 0 !important; padding: 0 !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > :not(a) .btn svg,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] [role='button'] svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] .dropdown-content { left: 0 !important; right: auto !important; top: 100% !important; z-index: 20;
+  min-width: calc(220 * var(--u)); background: #24150c !important; color: #f3dcb2 !important; border: 1px solid rgba(230, 196, 140, 0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6) !important; font-size: calc(22 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] .indicator { display: inline-flex; align-items: center; gap: calc(10 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] .indicator-item { position: static !important; transform: none !important; translate: none !important; order: 2;
+  padding: 0 calc(6 * var(--u)) !important; border-radius: calc(7 * var(--u)); font-size: calc(15 * var(--u)); line-height: calc(22 * var(--u)); font-weight: 800; height: auto !important;
+  background: #9e3a12 !important; color: #fff !important; box-shadow: 0 0 8px rgba(255, 110, 30, 0.6); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='menu'] { position: fixed !important; left: calc(var(--ox) + 355 * var(--u)); top: calc(var(--oy) + 172 * var(--u)); width: calc(1225 * var(--u)); height: calc(74 * var(--u)); background: transparent !important; box-shadow: none !important; padding: 0 !important; overflow: visible !important; z-index: 2; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='mode-tab'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='mode-tab'][data-active] { --neon: #ff2a1a;
+  display: inline-flex !important; align-items: center; justify-content: center; margin: 0 !important; padding: 0 !important;
+  font-size: calc(25 * var(--u)) !important; font-weight: 700 !important; text-transform: uppercase; white-space: nowrap;
+  color: rgb(255, 244, 244) !important; -webkit-text-stroke: calc(2.2 * var(--u)) var(--neon); paint-order: stroke fill;
+  text-shadow: 0 0 2px var(--neon), 0 0 7px var(--neon), 0 0 14px var(--neon), 0 0 24px color-mix(in srgb, var(--neon) 60%, transparent) !important;
+  border: 0 !important; background: transparent !important; box-shadow: none !important; min-height: 0 !important; min-width: 0 !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='mode-tab']::before { content: ''; flex: none; width: calc(34 * var(--u)); height: calc(34 * var(--u)); margin-right: calc(10 * var(--u));
+  background: rgb(255, 244, 244); -webkit-mask: var(--tab-icon) center / contain no-repeat; mask: var(--tab-icon) center / contain no-repeat;
+  filter: drop-shadow(0 0 2px var(--neon)) drop-shadow(0 0 6px var(--neon)) drop-shadow(0 0 12px var(--neon)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='mode-tab'] > svg,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='mode-tab'] > img { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='standby'] { position: absolute !important; left: calc(5 * var(--u)); top: calc(5 * var(--u)); width: calc(212 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_power.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='brew'] { position: absolute !important; left: calc(218 * var(--u)); top: calc(5 * var(--u)); width: calc(206 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_brew.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='manual'] { position: absolute !important; left: calc(426 * var(--u)); top: calc(5 * var(--u)); width: calc(205 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_manual.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='steam'] { position: absolute !important; left: calc(633 * var(--u)); top: calc(5 * var(--u)); width: calc(204 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_steam.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='water'] { position: absolute !important; left: calc(839 * var(--u)); top: calc(5 * var(--u)); width: calc(202 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_water.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='grind'] { position: absolute !important; left: calc(1043 * var(--u)); top: calc(5 * var(--u)); width: calc(178 * var(--u)); height: calc(64 * var(--u)); flex: none !important; --tab-icon: url('art/ic_grind.webp'); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='hint'] { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] [data-part='metric'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='temp'] [data-part='metric'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='pressure'] [data-part='metric'] { display: contents !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] > [data-part='value'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] > [data-part='caption'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='flow'] > [data-part='sub'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-part='pct'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-part='caption'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] div:has(> [data-slot='tank-bar']) { position: absolute !important; margin: 0 !important; padding: 0 !important; transform: none; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] > [data-part='caption'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-part='caption'] { font-size: calc(24 * var(--u)) !important; font-weight: 700 !important;
+  letter-spacing: 0.04em; line-height: 1 !important; text-transform: uppercase; color: var(--skin-caption) !important; white-space: nowrap; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] > [data-part='caption'] svg { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] > [data-part='value'] { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] [data-part='value'] > span:first-child { font-size: calc(56 * var(--numk, 1) * var(--u)) !important; font-weight: 600; line-height: 1;
+  color: var(--skin-led) !important; text-shadow: var(--skin-led-glow); -webkit-text-stroke: calc(3 * var(--u)) var(--skin-led-edge); paint-order: stroke fill; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] [data-part='value'] > span + span,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] [data-part='value'] > span + span > span { font-size: calc(26 * var(--u)) !important; font-weight: 500; color: var(--skin-text) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='metric'] [data-part='value'] > span + span > span { margin: 0 calc(5 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='temp']::before,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='pressure']::before,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::before,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::after { content: ''; position: absolute; pointer-events: none; border-radius: calc(8 * var(--u)); background: rgba(10, 5, 2, var(--shade, 0.28)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] { position: fixed !important; left: calc(var(--ox) + 355 * var(--u)); top: calc(var(--oy) + 255 * var(--u)); width: calc(1092 * var(--u)); height: calc(212 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::before { left: calc(40 * var(--u)); top: calc(50 * var(--u)); width: calc(274 * var(--u)); height: calc(124 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::after { left: calc(708 * var(--u)); top: calc(50 * var(--u)); width: calc(334 * var(--u)); height: calc(124 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='flow'] { left: calc(128 * var(--u)); top: calc(68 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='weight'] { left: calc(795 * var(--u)); top: calc(68 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='flow'] > [data-part='value'] { left: calc(40 * var(--u)); top: calc(88 * var(--u)); width: calc(200 * var(--u)); height: calc(80 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='flow'] > [data-part='sub'] { left: calc(222 * var(--u)); top: calc(122 * var(--u)); width: calc(80 * var(--u)); height: calc(30 * var(--u));
+  display: flex; align-items: center; font-size: calc(24 * var(--u)) !important; color: var(--skin-caption) !important; transform: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='value'] { left: calc(725 * var(--u)); top: calc(88 * var(--u)); width: calc(300 * var(--u)); height: calc(80 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'] { left: calc(376.5 * var(--u)); top: calc(15.5 * var(--u)); z-index: 1; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'] > button { width: calc(284 * var(--u)) !important; height: calc(284 * var(--u)) !important; min-width: 0 !important; min-height: 0 !important; box-shadow: none !important; --gm-cup: calc(221.52 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] { left: calc(397 * var(--u)); top: calc(337 * var(--u)); width: calc(232 * var(--u)); height: calc(60 * var(--u)); display: flex; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] button,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] button:disabled { width: 100%; height: 100%; min-height: 0;
+  border: 0 !important; border-radius: 999px !important; background: transparent !important; box-shadow: none !important;
+  opacity: 1 !important; font-size: calc(24 * var(--u)); font-weight: 800; gap: calc(8 * var(--u));
+  --neon: #ff2a1a; color: rgb(255, 244, 244) !important; -webkit-text-stroke: calc(2 * var(--u)) var(--neon); paint-order: stroke fill;
+  text-shadow: 0 0 2px var(--neon), 0 0 7px var(--neon), 0 0 14px var(--neon) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] button svg { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] button { letter-spacing: 0.08em; text-transform: uppercase; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='temp'] { position: fixed !important; left: calc(var(--ox) + 365 * var(--u)); top: calc(var(--oy) + 487 * var(--u)); width: calc(352 * var(--u)); height: calc(173 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='temp']::before { left: calc(34 * var(--u)); top: calc(66 * var(--u)); width: calc(296 * var(--u)); height: calc(80 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='temp'] { left: calc(72 * var(--u)); top: calc(47 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='temp'] > [data-part='value'] { left: calc(34 * var(--u)); top: calc(70 * var(--u)); width: calc(296 * var(--u)); height: calc(74 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='pressure'] { position: fixed !important; left: calc(var(--ox) + 1027 * var(--u)); top: calc(var(--oy) + 485 * var(--u)); width: calc(420 * var(--u)); height: calc(175 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='pressure']::before { left: calc(32 * var(--u)); top: calc(68 * var(--u)); width: calc(238 * var(--u)); height: calc(78 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='pressure'] { left: calc(90 * var(--u)); top: calc(47 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='pressure'] > [data-part='value'] { left: calc(32 * var(--u)); top: calc(70 * var(--u)); width: calc(238 * var(--u)); height: calc(74 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='pressure'] [data-part='value'] > span + span { font-size: calc(22 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] { position: fixed !important; left: calc(var(--ox) + 1462 * var(--u)); top: calc(var(--oy) + 250 * var(--u)); width: calc(108 * var(--u)); height: calc(412 * var(--u)); flex: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-part='caption'] { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-part='pct'] { left: calc(22 * var(--u)); top: calc(22 * var(--u)); width: calc(64 * var(--u)); height: calc(30 * var(--u));
+  display: flex; align-items: center; justify-content: center; font-size: calc(19 * var(--u)) !important; font-weight: 800; color: var(--skin-caption) !important;
+  background: rgba(20, 10, 4, 0.75); border-radius: calc(6 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] div:has(> [data-slot='tank-bar']) { left: calc(-110 * var(--u)); top: calc(212 * var(--u)); width: calc(330 * var(--u)); height: calc(32 * var(--u)) !important;
+  transform: rotate(-90deg) !important; border-radius: 999px !important; background: #1a0d05 !important;
+  box-shadow: 0 0 0 1.5px rgba(220, 180, 120, 0.7), 0 0 8px rgba(255, 150, 40, 0.45); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] [data-slot='tank-bar'] { border-radius: 999px !important; background: repeating-linear-gradient(135deg, #ffffff 0 9px, #ff2a1a 9px 18px) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] { position: fixed !important; left: calc(var(--ox) + 352 * var(--u)); top: calc(var(--oy) + 680 * var(--u)); width: calc(561 * var(--u)); height: calc(230 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper'] > div:last-child { display: contents !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper'] > [data-part='caption'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] button.btn-circle,
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper']:first-child [data-part='stepper-value'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-toggle'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='pressure-row'] { position: absolute !important; margin: 0 !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper'] > [data-part='caption'] { left: calc(66 * var(--u)); font-size: calc(19 * var(--u)) !important; font-weight: 600; line-height: 1; color: var(--skin-caption) !important; white-space: nowrap; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper']:first-child > [data-part='caption'] { top: calc(50 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper'] + [data-part='stepper'] > [data-part='caption'] { top: calc(120 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] button.btn-circle { width: calc(46 * var(--u)) !important; height: calc(46 * var(--u)) !important; min-height: 0 !important; min-width: 0 !important; padding: 0 !important;
+  border: 2px solid rgba(230, 196, 140, 0.85) !important; color: #fff3dc !important; background: radial-gradient(#3a2414, #150b05) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] button.btn-circle > svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [aria-label='Decrease Temperature'] { left: calc(385 * var(--u)); top: calc(37 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [aria-label='Increase Temperature'] { left: calc(455 * var(--u)); top: calc(37 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [aria-label='Decrease Stop at'] { left: calc(385 * var(--u)); top: calc(107 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [aria-label='Increase Stop at'] { left: calc(455 * var(--u)); top: calc(107 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper']:first-child [data-part='stepper-value'] { left: calc(212 * var(--u)); top: calc(32 * var(--u)); width: calc(147 * var(--u)); height: calc(56 * var(--u)); display: flex; align-items: center; justify-content: center; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-toggle'] { left: calc(212 * var(--u)); top: calc(102 * var(--u)); width: calc(147 * var(--u)); height: calc(56 * var(--u)); min-height: 0 !important; padding: 0 !important; display: flex !important; flex-direction: row !important; align-items: center; justify-content: center; background: transparent !important; border: 0 !important; box-shadow: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-value'] { font-size: calc(40 * var(--u)) !important; font-weight: 600 !important; line-height: 1 !important;
+  color: var(--skin-led) !important; text-shadow: var(--skin-led-glow); -webkit-text-stroke: calc(2 * var(--u)) var(--skin-led-edge); paint-order: stroke fill; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-value'] > span { font-size: calc(24 * var(--u)) !important; color: var(--skin-led) !important; -webkit-text-stroke: calc(1 * var(--u)) var(--skin-led-edge); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-pill'] { position: absolute; left: 50%; top: calc(100% + calc(2 * var(--u))); translate: -50% 0;
+  margin: 0 !important; padding: 0 calc(6 * var(--u)) !important; background: transparent !important; color: var(--skin-caption) !important;
+  font-size: calc(15 * var(--u)) !important; line-height: 1.1 !important; white-space: nowrap; min-height: 0 !important; height: auto !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='pressure-row'] { left: calc(40 * var(--u)); top: calc(178 * var(--u)); width: calc(480 * var(--u)); height: calc(30 * var(--u)); display: flex; align-items: center; gap: calc(10 * var(--u)) !important; padding: 0 !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] input[type='range'] { flex: 1 1 auto !important; height: calc(20 * var(--u)); --range-bg: #2a1206; --range-thumb: #fff1d6; color: #ff2a1a; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='pressure-value'] { flex: none; font-size: calc(26 * var(--u)) !important; line-height: 1 !important; color: var(--skin-caption) !important; text-shadow: 0 0 6px #000; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='pressure-value'] > span { font-size: calc(18 * var(--u)) !important; color: var(--skin-caption) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='chart'] { position: fixed !important; left: calc(var(--ox) + 952 * var(--u)); top: calc(var(--oy) + 692 * var(--u)); width: calc(606 * var(--u)); height: calc(204 * var(--u)); min-height: 0 !important; overflow: hidden !important;
+  background: rgba(14, 7, 3, 0.62) !important; border-radius: calc(10 * var(--u)); padding: calc(4 * var(--u)) calc(6 * var(--u)) calc(4 * var(--u)) calc(4 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='chart'] img { width: 100% !important; height: 100% !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='chart'] > div:first-child { --cz: clamp(0.65, var(--s), 1); transform: scale(var(--cz)); transform-origin: 0 0; flex: none !important;
+  width: calc(100% / var(--cz)) !important; height: calc(100% / var(--cz)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']):has([data-part='metrics-row'].opacity-0) [data-card='chart'] { position: fixed !important; left: calc(var(--ox) + 355 * var(--u)); top: calc(var(--oy) + 250 * var(--u)); width: calc(1220 * var(--u)); height: calc(660 * var(--u)); z-index: 3; background: rgba(8, 6, 4, 0.96) !important; box-shadow: 0 0 0 1px rgba(255, 220, 170, 0.25) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='clock'] { display: flex; position: fixed !important; left: calc(var(--ox) + 1000 * var(--u)); top: calc(var(--oy) + 930 * var(--u)); width: calc(375 * var(--u)); height: calc(48 * var(--u)); align-items: center; justify-content: space-evenly;
+  font-size: calc(30 * var(--u)); font-weight: 600; letter-spacing: 0.05em; line-height: 1; color: var(--skin-led); text-shadow: var(--skin-led-glow);
+  -webkit-text-stroke: calc(2 * var(--u)) var(--skin-led-edge); paint-order: stroke fill; z-index: 5; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='clock-ampm'] { font-size: calc(19 * var(--u)); }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='menu'] { translate: calc((0 + var(--n-x, 0) + var(--n-tabsx, 0)) * var(--u)) calc((3 + var(--n-tabsy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] { translate: calc((0 + var(--n-x, 0) + var(--n-topx, 0)) * var(--u)) calc((0 + var(--n-topy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'] { translate: calc((0 + var(--n-brewx, 0)) * var(--u)) calc((0 + var(--n-brewy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='sub'] { translate: calc((0 + var(--n-tarex, 0)) * var(--u)) calc((0 + var(--n-tarey, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='flow'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='flow'] > [data-part='value'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='flow'] > [data-part='sub'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::before { translate: calc(var(--n-flowx, 0) * var(--u)) calc(var(--n-flowy, 0) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-caption='weight'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-metric='weight'] > [data-part='value'],
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow']::after { translate: calc(var(--n-weightx, 0) * var(--u)) calc(var(--n-weighty, 0) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='temp'] { translate: calc((var(--n-x, 0) + var(--n-midx, 0) + var(--n-tempx, 0)) * var(--u)) calc((var(--n-midy, 0) + var(--n-tempy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='pressure'] { translate: calc((var(--n-x, 0) + var(--n-midx, 0) + var(--n-pressurex, 0)) * var(--u)) calc((var(--n-midy, 0) + var(--n-pressurey, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='tank'] { translate: calc((0 + var(--n-x, 0) + var(--n-tankx, 0)) * var(--u)) calc((0 + var(--n-tanky, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] { translate: calc((0 + var(--n-x, 0) + var(--n-controlsx, 0)) * var(--u)) calc((0 + var(--n-controlsy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='chart'] { translate: calc((0 + var(--n-x, 0) + var(--n-chartx, 0)) * var(--u)) calc((0 + var(--n-charty, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-part='clock'] { translate: calc((0 + var(--n-x, 0) + var(--n-clockx, 0)) * var(--u)) calc((0 + var(--n-clocky, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] { translate: 0 calc((33 + var(--n-menuy, 0)) * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='menu'] { translate: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='standby'] { left: calc(-53 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(223 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='brew'] { left: calc(184 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(221 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='manual'] { left: calc(419 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(200 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='steam'] { left: calc(627 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(208 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='water'] { left: calc(847 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(193 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-tab='grind'] { left: calc(1052 * var(--u)) !important; top: calc(70 * var(--u)) !important; width: calc(118 * var(--u)) !important; height: calc(60 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'] { left: calc(399 * var(--u)) !important; top: calc(29 * var(--u)) !important; translate: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='flow'] > [data-slot='brew'] > button { width: calc(248 * var(--u)) !important; height: calc(248 * var(--u)) !important; --gm-cup: calc(193 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='chart'] { left: calc(var(--ox) + 918 * var(--u)) !important; top: calc(var(--oy) + 726 * var(--u)) !important; width: calc(632 * var(--u)) !important; height: calc(168 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='stepper-pill'] { display: none !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-card='controls'] [data-part='pressure-row'] { top: calc(164 * var(--u)) !important; height: calc(22 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] { width: calc(232 * var(--u)) !important; margin-left: calc(26 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar'] [data-menu] > a { font-size: calc(21 * var(--u)) !important; gap: calc(12 * var(--u)) !important; }
+:root[data-holiday='pizza']:has([data-slot='manual']) [data-slot='sidebar']::before { content: ''; position: absolute; left: calc(22 * var(--u)); top: calc(248 * var(--u)); width: calc(244 * var(--u)); height: calc(450 * var(--u)); background: rgba(0, 0, 0, 0.38); border-radius: calc(6 * var(--u)); pointer-events: none; }
+}

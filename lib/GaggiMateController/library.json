@@ -1,0 +1,33 @@
+{
+  "name": "GaggiMateController",
+  "keywords": "GaggiMate Controller Lib",
+  "description": "GaggiMate Controller Lib",
+  "repository": {
+    "type": "email",
+    "url": "mail@gaggimate.eu"
+  },
+  "version": "1.0.0",
+  "exclude": "doc",
+  "frameworks": "arduino",
+  "platforms": [
+    "esp32"
+  ],
+  "dependencies": {
+    "FS": "*",
+    "SPIFFS": "*",
+    "ble_ota_dfu": "file://lib/ble_ota_dfu",
+    "NanoPbComm": "file://lib/NanoPbComm",
+    "nanopb/Nanopb": "0.4.92",
+    "overrides": "file://lib/overrides",
+    "robtillaart/MAX31855": "0.6.2",
+    "bblanchon/ArduinoJson": "7.4.3",
+    "PSM": "https://github.com/gaggimate/PSM.Library.git#ae3718cb72392ea5781fce6fe4c7cf3aa288f363",
+    "robtillaart/ADS1X15": "0.5.4",
+    "Wire": "*",
+    "NayrodPID": "file://lib/NayrodPID",
+    "lewisxhe/SensorLib": "0.2.3",
+    "adafruit/Adafruit MAX31865 library": "1.6.2",
+    "adafruit/Adafruit BusIO": "1.17.4",
+    "SPI": "*"
+  }
+}

@@ -1,0 +1,20 @@
+.pio
+env/
+pcb/**/Gaggimate-backups
+pcb/**/*.kicad_sch_old
+.vscode
+.idea
+node_modules/
+__pycache__
+data/w
+.codebuddy
+src/version.h
+src/display/ui/default/lvgl/project.info
+# Generated web UI bundle embedded into firmware flash (scripts/embed_webui.py)
+# src/display/webassets/ is committed (2026-10-22, build 969): without it a clone builds a firmware with an empty web page
+# Desktop simulator runtime data (settings/profiles/shots) and screenshots
+sim_data/
+*.bmp
+# Scale simulator run log (tools/scale_sim.py)
+tools/sim_out.txt
+compile_commands.json

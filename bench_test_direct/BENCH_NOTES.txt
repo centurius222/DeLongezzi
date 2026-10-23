@@ -1,0 +1,31 @@
+================================================================
+DE'LONGEZZI BENCH TEST — STANDALONE (no GaggiMate code)
+================================================================
+Purpose: pure hardware truth for pump dimmer + heater SSR.
+Isolates firmware (my side) from wiring (board side). Any result
+here is definitive about the hardware path.
+
+RUNS ON: the same ESP32-S3 N16R8 currently running De'longezzi.
+Flash: pio run -e bench-standalone -t upload
+Then on phone/laptop: join WiFi "BenchTest" (open, no password),
+open http://192.168.4.1
+
+PINS (identical to pins.txt / delongezzi-single):
+  Pump DIM        GPIO21  (PSM output)
+  Dimmer ZC sense GPIO9   (interrupt, counted)
+  Heater SSR      GPIO14  (raw HIGH = on)
+
+LIBRARIES: ONLY PSM (gaggimate fork). No GaggiMateController,
+no sensors, no BLE, no NVS.
+
+PAGE:
+  - PUMP 100% ON/OFF button (manual latch, no timer — you control it)
+  - SSR ON/OFF button (manual latch)
+  - STOP ALL
+  - Live: ZC counter (ticks ~60/s with mains present),
+    current GPIO21 duty, GPIO14 state.
+
+SAFETY: no thermocouple, no guards — SSR test is manual but the
+page shows its state plainly; boiler must be cold. Nothing here
+can run if the ESP32 loses power (pins float low, PSM set(0)).
+================================================================

@@ -1,0 +1,8 @@
+# DeLongezzi machine, ESP32-S3 N16R8 (16 MB), no OTA (flashed by cable) - 2026-09-24.
+# nvs stays at 0x9000 so settings survive; one 4 MB app; ~11.9 MB LittleFS
+# (label "spiffs" as before, so LittleFS.begin() needs no change).
+# Name,    Type, SubType,  Offset,   Size,     Flags
+nvs,       data, nvs,      0x9000,   0x5000,
+app0,      app,  factory,  0x10000,  0x400000,
+spiffs,    data, spiffs,   0x410000, 0xBE0000,
+coredump,  data, coredump, 0xFF0000, 0x10000,

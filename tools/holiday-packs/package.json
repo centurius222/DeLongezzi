@@ -1,0 +1,6 @@
+{
+  "name": "holiday-pack-tools",
+  "private": true,
+  "description": "Helper scripts for making holiday packs (see docs/HOLIDAY_PACKS.md)",
+  "dependencies": { "playwright": "^1.50.0" }
+}

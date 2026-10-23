@@ -1,0 +1,35 @@
+{
+  "picture": "mockups/gpt/pizzafriday1610v2.png",
+  "about": "Measured 2026-10-01: this picture drifts from the template (everything ~50 px lower, smaller ring, narrower menu, less room under the controls). Offsets are picture px, relative to the custom themes' template.",
+  "nudge": {
+    "topx": -32,
+    "topy": 55,
+    "midx": -33,
+    "midy": 48,
+    "tankx": 0,
+    "tanky": 50,
+    "controlsx": -30,
+    "controlsy": 30,
+    "tarex": 6,
+    "tarey": -21,
+    "clockx": -30,
+    "menuy": 22
+  },
+  "css": [
+    "[data-slot='menu'] | translate: none !important;",
+    "[data-tab='standby'] | left: U(-53) !important; top: U(70) !important; width: U(223) !important; height: U(60) !important;",
+    "[data-tab='brew'] | left: U(184) !important; top: U(70) !important; width: U(221) !important; height: U(60) !important;",
+    "[data-tab='manual'] | left: U(419) !important; top: U(70) !important; width: U(200) !important; height: U(60) !important;",
+    "[data-tab='steam'] | left: U(627) !important; top: U(70) !important; width: U(208) !important; height: U(60) !important;",
+    "[data-tab='water'] | left: U(847) !important; top: U(70) !important; width: U(193) !important; height: U(60) !important;",
+    "[data-tab='grind'] | left: U(1052) !important; top: U(70) !important; width: U(118) !important; height: U(60) !important;",
+    "[data-card='flow'] > [data-slot='brew'] | left: U(846 - 355 + 32 - 124) !important; top: U(463 - 255 - 55 - 124) !important; translate: none !important;",
+    "[data-card='flow'] > [data-slot='brew'] > button | width: U(248) !important; height: U(248) !important; --gm-cup: U(193) !important;",
+    "[data-card='chart'] | left: PX(918) !important; top: PY(726) !important; width: U(632) !important; height: U(168) !important;",
+    "[data-card='controls'] [data-part='stepper-pill'] | display: none !important;",
+    "[data-card='controls'] [data-part='pressure-row'] | top: U(164) !important; height: U(22) !important;",
+    "[data-slot='sidebar'] [data-menu] | width: U(232) !important; margin-left: U(26) !important;",
+    "[data-slot='sidebar'] [data-menu] > a | font-size: U(21) !important; gap: U(12) !important;",
+    "[data-slot='sidebar']::before | content: ''; position: absolute; left: U(22); top: U(248); width: U(244); height: U(450); background: rgba(0, 0, 0, 0.38); border-radius: U(6); pointer-events: none;"
+  ]
+}

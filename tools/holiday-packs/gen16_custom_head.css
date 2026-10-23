@@ -1,0 +1,74 @@
+/* Custom themes (docs/MULTI_SHAPE_PLAN.txt): the master layout, the 16:10 Western's
+   (tools/holiday-packs/gen16.py custom, which writes this file). A custom theme is one picture
+   made on the same template (1587 x 991): components/Holiday.jsx CustomThemeStyles sets the
+   picture (--pack-picture), the bars' colours (--bars-lr / --bars-tb), the colours (--skin-*,
+   --color-primary, --chart-*) and the theme's nudges (--n-*), and utils/customThemeFit.js
+   themeCss() adds its colour and glow. The picture is shown whole, scaled evenly; everything live
+   is placed in picture pixels (--u). On the Manual screen in landscape; elsewhere the app's own
+   layout in the theme's colours on a plain dark page. */
+
+:root[data-custom-theme] {
+  --skin-text: #f3dcb2;
+  --skin-caption: #ecd3a4;
+  --skin-led: #ffe2b0; /* the readouts: a hot core ... */
+  --skin-led-edge: #e8891a; /* ... in an amber tube ... */
+  --skin-led-glow: 0 0 2px #ff9a1a, 0 0 7px #d86a0a, 0 0 16px rgba(220, 110, 10, 0.7); /* ... glowing */
+  --skin-red: #b8481c;
+  --chart-text: #f0e2c8;
+  --chart-grid: rgba(255, 225, 180, 0.08);
+  color-scheme: dark;
+  --color-base-100: #161616;
+  --color-base-200: #111111;
+  --color-base-300: #0b0b0b;
+  --color-base-content: var(--skin-text);
+  --color-primary: #c8702c;
+  --color-primary-content: #1a0d05;
+  --color-secondary: var(--skin-red);
+  --color-secondary-content: #ffffff;
+  --color-accent: #ffc36a;
+  --color-accent-content: #1a0d05;
+  --color-neutral: #262626;
+  --color-neutral-content: var(--skin-text);
+  --color-info: oklch(68.455% 0.148 237.251);
+  --color-info-content: oklch(0% 0 0);
+  --color-success: #ffc36a;
+  --color-success-content: #1a0d05;
+  --color-warning: oklch(83.242% 0.139 82.95);
+  --color-warning-content: oklch(16.648% 0.027 82.95);
+  --color-error: oklch(71.785% 0.17 13.118);
+  --color-error-content: oklch(14.357% 0.034 13.118);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+:root[data-custom-theme] {
+  --u: min(calc(100vw / 1587), calc(100vh / 991));
+  --ox: calc((100vw - 1587 * var(--u)) / 2);
+  --oy: calc((100vh - 991 * var(--u)) / 2);
+  --bars: var(--bars-lr, #0b0b0b); /* CustomThemeStyles: from the picture's left and right edges ... */
+  --shade: 0; /* the windows' shading behind the numbers: off unless the theme sets it (Window shading) */
+  /* the same scale as a plain number (for zoom): length / length via tan(atan2()) */
+  --s: min(tan(atan2(100vw, 1587px)), tan(atan2(100vh, 991px)));
+}
+/* phones: their address bar comes and goes, so measure the screen as it is shown right now */
+@supports (height: 100dvh) {
+  :root[data-custom-theme] {
+    --u: min(calc(100dvw / 1587), calc(100dvh / 991));
+    --ox: calc((100dvw - 1587 * var(--u)) / 2);
+    --oy: calc((100dvh - 991 * var(--u)) / 2);
+    --s: min(tan(atan2(100dvw, 1587px)), tan(atan2(100dvh, 991px)));
+  }
+}
+@media (max-aspect-ratio: 1587/991) {
+  :root[data-custom-theme] { --bars: var(--bars-tb, #0b0b0b); /* ... or top and bottom */ }
+}
+
+:root[data-custom-theme] [data-slot='page'] {
+  background: linear-gradient(#161616, #0b0b0b) !important;
+}
