@@ -70,9 +70,7 @@
 #define DEFAULT_WIFI_AP_TIMEOUT_MS 600000
 // First-start AP password (user 2026-09-24). It used to be random and visible only
 // in the serial log; a fresh board now uses this until the user sets their own.
-// 2026-10-22 (build 969): a new value for the public code on GitHub. Boards that already
-// saved one keep it: this only fills an empty setting (Controller::setupWifi).
-#define DEFAULT_WIFI_AP_PASSWORD "espresso-setup"
+#define DEFAULT_WIFI_AP_PASSWORD "delongezzi"
 #define WIFI_AP_PASSWORD_MIN_LENGTH 8 // WPA2 minimum passphrase length
 
 #endif // CONSTANTS_H

@@ -309,7 +309,7 @@ export function SystemTab() {
           </li>
           <li>
             New-board file: firmware only, about 4 MB, with empty settings and no Wi-Fi details in
-            it. A new board opens its own &quot;DeLongezzi&quot; hotspot, password <b>espresso-setup</b>:
+            it. A new board opens its own &quot;DeLongezzi&quot; hotspot, password <b>delongezzi</b>:
             join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save,
             and it restarts into your Wi-Fi.
           </li>

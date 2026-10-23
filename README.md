@@ -48,7 +48,7 @@ esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
 ```
 
 ## First start
-1. The board opens a Wi-Fi hotspot **DeLongezzi**, password **espresso-setup**.
+1. The board opens a Wi-Fi hotspot **DeLongezzi**, password **delongezzi**.
 2. Join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save. The board
    restarts into your Wi-Fi and is then at http://delongezzi.local.
 3. Change the hotspot password (Settings › Wi-Fi › Access Point Password): the default is public,
