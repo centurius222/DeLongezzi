@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeLongezzi Flasher</title>
+    <meta name="description" content="Install DeLongezzi v2.2.2 on an ESP32-S3 N16R8 board from the browser." />
+    <style>
+      :root {
+        --bg: #f6f3ef;
+        --card: #ffffff;
+        --text: #2a2420;
+        --muted: #6b625b;
+        --accent: #8b4a2b;
+        --accent-text: #ffffff;
+        --warn-bg: #fff4e5;
+        --warn-border: #e8a33d;
+        --border: #e4ddd6;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1c1916;
+          --card: #262220;
+          --text: #f1ebe5;
+          --muted: #b3a89f;
+          --accent: #d08a5f;
+          --accent-text: #1c1916;
+          --warn-bg: #3a2c1a;
+          --warn-border: #c98a2e;
+          --border: #3a3430;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      main { max-width: 680px; margin: 0 auto; padding: 32px 16px 48px; }
+      h1 { margin: 0 0 4px; font-size: 1.9rem; }
+      .sub { margin: 0 0 24px; color: var(--muted); }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      .warn { background: var(--warn-bg); border-color: var(--warn-border); }
+      .warn strong { display: block; margin-bottom: 4px; }
+      ul, ol { margin: 8px 0 0; padding-left: 22px; }
+      li { margin: 4px 0; }
+      .install { text-align: center; }
+      .btn {
+        appearance: none;
+        border: 0;
+        border-radius: 10px;
+        padding: 14px 28px;
+        font: inherit;
+        font-weight: 600;
+        background: var(--accent);
+        color: var(--accent-text);
+        cursor: pointer;
+      }
+      .btn:hover { filter: brightness(1.08); }
+      .note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
+      .unsupported { color: var(--warn-border); font-weight: 600; }
+      code {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 5px;
+        font-size: 0.92em;
+      }
+      a { color: var(--accent); }
+      footer { margin-top: 28px; color: var(--muted); font-size: 0.9rem; }
+    </style>
+    <script type="module" src="esp-web-tools/install-button.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>DeLongezzi Flasher</h1>
+      <p class="sub">Installs DeLongezzi v2.2.2 on an ESP32-S3 N16R8 board, straight from the browser.</p>
+
+      <div class="card warn">
+        <strong>Before you start</strong>
+        <ul>
+          <li><b>Turn the machine's mains power off.</b> While the board is being flashed nothing holds the
+            heater and pump outputs off. Power the board from USB only.</li>
+          <li>This <b>erases everything</b> on the board (settings, shots, profiles, themes, videos) and installs
+            the firmware with 32 themes, 18 brew-button videos and pictures, and 5 starter profiles.</li>
+          <li>Only for an ESP32-S3 <b>N16R8</b> board wired like GaggiMate's "Pro Lego Build" (see the README).</li>
+        </ul>
+      </div>
+
+      <div class="card install">
+        <esp-web-install-button manifest="manifest.json">
+          <button slot="activate" class="btn" type="button">Install DeLongezzi v2.2.2</button>
+          <span slot="unsupported" class="unsupported">This browser can't flash a board over USB. Use Chrome or
+            Edge on a desktop or laptop.</span>
+          <span slot="not-allowed" class="unsupported">Flashing only works from an https:// page or from localhost.</span>
+        </esp-web-install-button>
+        <p class="note">Plug the board in by USB, press the button and pick its port (usually
+          "USB JTAG/serial debug unit"). Flashing the 16 MB file takes a few minutes.</p>
+      </div>
+
+      <div class="card">
+        <strong>After flashing</strong>
+        <ol>
+          <li>If the flasher asks for your Wi-Fi, enter it there.</li>
+          <li>Otherwise join the board's hotspot <b>DeLongezzi</b> (password <code>delongezzi</code>), open
+            <a href="http://4.4.4.1">http://4.4.4.1</a>, enter your Wi-Fi under Settings › Wi-Fi and press Save.</li>
+          <li>The board restarts into your Wi-Fi and is then at <a href="http://delongezzi.local">http://delongezzi.local</a>.
+            Change the hotspot password there: the default is public.</li>
+          <li>The web page has no login: keep the machine on your home network.</li>
+        </ol>
+      </div>
+
+      <footer>
+        <a href="https://github.com/centurius222/DeLongezzi">Source and README</a> ·
+        <a href="https://github.com/centurius222/DeLongezzi/releases/latest">Releases</a> ·
+        Based on <a href="https://github.com/jniebuhr/gaggimate">GaggiMate</a> by Caffinnova S.r.l. ·
+        CC BY-NC-SA 4.0 · Flasher: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (Apache-2.0)
+      </footer>
+    </main>
+  </body>
+</html>
