@@ -36,19 +36,15 @@ DeLongezzi is not made or endorsed by GaggiMate.
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
 program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
 
-One file on the Releases page, `delongezzi-v2.2.2.hex` (bootloader, partition table, program), for
-new boards and updates alike. It never touches the settings or the storage with your shots,
-profiles and themes. Checksums: `SHA256SUMS.txt`.
+One file on the Releases page, `delongezzi-v2.2.2.bin`: the firmware, 32 custom themes and 5
+starter profiles, with no Wi-Fi details or passwords in it. Writing it replaces everything on the
+board (settings, shots, profiles, themes). The SHA-256 is in the release notes.
 
-With a recent [esptool](https://github.com/espressif/esptool) (tested with 4.9):
+With [esptool](https://github.com/espressif/esptool):
 
 ```sh
-# new board, or starting over: erase first (a new board starts with one "Default" profile)
 esptool.py --chip esp32s3 erase_flash
-esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.hex
-
-# update a board that already runs DeLongezzi: no erase, keeps settings, shots, profiles and themes
-esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.hex
+esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
 ```
 
 ## First start
@@ -60,9 +56,8 @@ esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.hex
 4. The web page has **no login**: keep the machine on your home network and never forward a port to it.
 
 ## Themes
-- `themes/delongezzi-themes-v2.2.2.json`: 32 custom themes. Load them under Settings › Custom themes › Restore themes,
-  then delete the ones you don't want.
-- Starter profiles: the 5 in `data/p/` can be imported one file at a time under Profiles › Import profiles.
+- The release file already has the 32 custom themes; delete any you don't want under Settings › Custom themes.
+- `themes/delongezzi-themes-v2.2.2.json`: the same 32 themes as a backup file, for Settings › Custom themes › Restore themes.
 - Theme fonts and the pizza/western packs are not inside the firmware. Upload them with
   `python3 scripts/upload_fonts.py <machine address>` and `python3 scripts/upload_holidays.py <machine address>`.
 
