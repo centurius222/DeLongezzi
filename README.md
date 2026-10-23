@@ -8,6 +8,9 @@ DeLongezzi is not made or endorsed by GaggiMate.
   firmware and talk through an in-memory link instead of Bluetooth.
 - No screen: the web page is the user interface (phone, tablet or PC on your home network).
 
+**Try it without a machine:** https://centurius222.github.io/ (the real web page with a made-up
+machine in your browser; nothing is saved).
+
 ## What is different from GaggiMate
 - Single-board build `delongezzi-single`: 16 MB flash layout (one 4 MB program, about 11.9 MB of
   storage). No over-the-air updates: the board is flashed by USB.
@@ -47,6 +50,9 @@ With [esptool](https://github.com/espressif/esptool):
 esptool.py --chip esp32s3 erase_flash
 esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
 ```
+
+Or from the browser, nothing to install (Chrome or Edge on a computer, USB cable):
+https://centurius222.github.io/DeLongezzi/flasher/
 
 ## First start
 1. The board opens a Wi-Fi hotspot **DeLongezzi**, password **delongezzi**.
