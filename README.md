@@ -36,23 +36,19 @@ DeLongezzi is not made or endorsed by GaggiMate.
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
 program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
 
-Files on the Releases page:
+One file on the Releases page, `delongezzi-v2.2.2.hex` (bootloader, partition table, program), for
+new boards and updates alike. It never touches the settings or the storage with your shots,
+profiles and themes. Checksums: `SHA256SUMS.txt`.
 
-| File | For | Write at |
-|---|---|---|
-| `delongezzi-v2.2.2-full-install.bin` | a new board, or starting over: everything, incl. 5 starter profiles. Erases all settings, shots and themes | `0x0`, after erasing the chip |
-| `delongezzi-v2.2.2-update.bin` | a board that **already runs DeLongezzi**: keeps settings, shots, profiles and themes | `0x10000` |
-| `SHA256SUMS.txt` | checksums of the two files | — |
-
-With [esptool](https://github.com/espressif/esptool):
+With a recent [esptool](https://github.com/espressif/esptool) (tested with 4.9):
 
 ```sh
-# full install
+# new board, or starting over: erase first (a new board starts with one "Default" profile)
 esptool.py --chip esp32s3 erase_flash
-esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2-full-install.bin
+esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.hex
 
-# update (only on a board that already runs DeLongezzi)
-esptool.py --chip esp32s3 write_flash 0x10000 delongezzi-v2.2.2-update.bin
+# update a board that already runs DeLongezzi: no erase, keeps settings, shots, profiles and themes
+esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.hex
 ```
 
 ## First start
@@ -64,7 +60,9 @@ esptool.py --chip esp32s3 write_flash 0x10000 delongezzi-v2.2.2-update.bin
 4. The web page has **no login**: keep the machine on your home network and never forward a port to it.
 
 ## Themes
-- `themes/delongezzi-themes-v2.2.2.json`: 32 custom themes. Load them under Settings › Custom themes › Restore themes.
+- `themes/delongezzi-themes-v2.2.2.json`: 32 custom themes. Load them under Settings › Custom themes › Restore themes,
+  then delete the ones you don't want.
+- Starter profiles: the 5 in `data/p/` can be imported one file at a time under Profiles › Import profiles.
 - Theme fonts and the pizza/western packs are not inside the firmware. Upload them with
   `python3 scripts/upload_fonts.py <machine address>` and `python3 scripts/upload_holidays.py <machine address>`.
 
