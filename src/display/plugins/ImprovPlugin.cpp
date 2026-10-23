@@ -3,6 +3,9 @@
 #include <ImprovWiFiLibrary.h>
 #include <display/core/Controller.h>
 #include <version.h>
+#if ARDUINO_USB_MODE && ARDUINO_USB_CDC_ON_BOOT
+#include <hal/usb_serial_jtag_ll.h>
+#endif
 
 static ImprovPlugin *instance = nullptr;
 
@@ -29,9 +32,21 @@ void ImprovPlugin::loop() {
     }
     // The library reads one byte per handleSerial() call; drain the RX buffer
     // each pass so a multi-byte command isn't dribbled out over many 50ms loops.
+    bool handled = false;
     while (!rebootPending && Serial.available() > 0) {
         improv->handleSerial();
+        handled = true;
     }
+#if ARDUINO_USB_MODE && ARDUINO_USB_CDC_ON_BOOT
+    // 2026-10-23 (build 970): the USB serial driver (HWCDC, Arduino-ESP32 2.0.17) can keep a reply
+    // in its send buffer when it was written while it took the PC for not listening, and sends it
+    // only with the next write. ESP Web Tools waits for the "device info" reply with no time limit,
+    // so its Wi-Fi step never came. Start the send now, as HWCDC::write() does when connected.
+    if (handled) {
+        usb_serial_jtag_ll_txfifo_flush();
+        usb_serial_jtag_ll_ena_intr_mask(USB_SERIAL_JTAG_INTR_SERIAL_IN_EMPTY);
+    }
+#endif
     if (rebootPending) {
         Serial.flush(); // let the Improv success/device-URL response drain first
         delay(200);
