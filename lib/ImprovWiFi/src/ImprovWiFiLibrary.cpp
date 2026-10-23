@@ -262,7 +262,12 @@ bool ImprovWiFi::parseImprovSerial(size_t position, uint8_t byte, const uint8_t 
   if (position == 6)
     return byte == ImprovTypes::IMPROV_SERIAL_VERSION;
 
-  if (position <= 8)
+  // DeLongezzi fix (2026-10-23, build 971): a packet longer than _buffer (128 bytes) would be
+  // written past its end; drop it at its length byte instead.
+  if (position == 8)
+    return 9 + (size_t)byte + 1 <= sizeof(_buffer);
+
+  if (position < 8)
     return true;
 
   uint8_t type = buffer[7];

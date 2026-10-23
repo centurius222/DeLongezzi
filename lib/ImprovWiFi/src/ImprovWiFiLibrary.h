@@ -163,7 +163,10 @@ public:
   bool isConnected();
 
 private:
-  OnImprovError *onImproErrorCallback;
-  OnImprovConnected *onImprovConnectedCallback;
-  CustomConnectWiFi *customConnectWiFiCallback;
+  // DeLongezzi fix (2026-10-23, build 971): start empty. The board makes this object with `new`
+  // (heap memory isn't zeroed), so an unset callback held leftover bytes and the first error
+  // ("unable to connect") jumped to them and crashed the board.
+  OnImprovError *onImproErrorCallback = nullptr;
+  OnImprovConnected *onImprovConnectedCallback = nullptr;
+  CustomConnectWiFi *customConnectWiFiCallback = nullptr;
 };
