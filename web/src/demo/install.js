@@ -5,7 +5,6 @@
 import { DemoMachine } from './machine.js';
 import { CUSTOM_THEMES, VIDEOS, DIAGNOSTICS, WATERLEVEL, SCALES_INFO } from './recorded.js';
 
-const REPO = 'https://github.com/centurius222/DeLongezzi';
 const machine = new DemoMachine();
 const themes = structuredClone(CUSTOM_THEMES);
 const videos = structuredClone(VIDEOS);
@@ -14,7 +13,7 @@ const startedAt = Date.now();
 
 // ---- demo tag and notes --------------------------------------------------------------------------
 // The page fills the screen (a custom theme lays its controls over its picture), so nothing here
-// takes room from it: a small corner tag that clicks go through, and short notes at the top.
+// takes room from it or catches a click: a small corner tag and short notes at the bottom.
 
 function addStyles() {
   const style = document.createElement('style');
@@ -22,12 +21,11 @@ function addStyles() {
     .demo-tag { position: fixed; z-index: 2147483000; top: 6px; right: 6px; padding: 1px 8px; border-radius: 999px;
       background: rgba(139, 74, 43, 0.85); color: #fff; font: 700 11px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       letter-spacing: 0.08em; pointer-events: none; }
-    .demo-note { position: fixed; z-index: 2147483001; left: 50%; top: 16px; transform: translateX(-50%);
+    .demo-note { position: fixed; z-index: 2147483001; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
       max-width: calc(100vw - 32px); padding: 9px 16px; border-radius: 10px; background: #8b4a2b; color: #fff;
       font: 500 14px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 6px 22px rgba(0,0,0,.25);
       opacity: 0; pointer-events: none; transition: opacity .3s; }
-    .demo-note.shown { opacity: 1; pointer-events: auto; }
-    .demo-note a { color: #ffd9b8; font-weight: 700; white-space: nowrap; }
+    .demo-note.shown { opacity: 1; }
   `;
   document.head.appendChild(style);
   const tag = document.createElement('div');
@@ -37,7 +35,7 @@ function addStyles() {
 }
 
 let noteTimer = 0;
-function note(text, ms = 3200, link = false) {
+function note(text) {
   let el = document.querySelector('.demo-note');
   if (!el) {
     el = document.createElement('div');
@@ -45,40 +43,14 @@ function note(text, ms = 3200, link = false) {
     document.body.appendChild(el);
   }
   el.textContent = `Demo: ${text}`;
-  if (link) {
-    const a = document.createElement('a');
-    a.href = REPO;
-    a.target = '_blank';
-    a.rel = 'noreferrer';
-    a.textContent = 'Get DeLongezzi';
-    el.append(' ', a);
-  }
   el.classList.add('shown');
   clearTimeout(noteTimer);
-  noteTimer = setTimeout(() => el.classList.remove('shown'), ms);
+  noteTimer = setTimeout(() => el.classList.remove('shown'), 3200);
 }
 machine.notice = note;
 
-// Once the page is up and its logo screen tapped away: what this is.
-function welcome() {
-  const started = Date.now();
-  const wait = setInterval(() => {
-    const ready = document.querySelector('#app > *') && !document.querySelector('[aria-label="Dismiss splash screen"]');
-    if (!ready && Date.now() - started < 30000) return;
-    clearInterval(wait);
-    note('a made-up machine in your browser. Nothing is saved; a reload starts over.', 9000, true);
-  }, 400);
-}
-
-if (document.body) {
-  addStyles();
-  welcome();
-} else {
-  document.addEventListener('DOMContentLoaded', () => {
-    addStyles();
-    welcome();
-  });
-}
+if (document.body) addStyles();
+else document.addEventListener('DOMContentLoaded', addStyles);
 
 // Download links to the machine (full backup, new-board file).
 document.addEventListener(

@@ -33,7 +33,7 @@ export class DemoMachine {
     this.settings = structuredClone(SETTINGS);
     this.profiles = structuredClone(PROFILES);
     if (!this.profiles.some(p => p.selected) && this.profiles.length) this.profiles[0].selected = true;
-    this.mode = MODE.BREW;
+    this.mode = MODE.MANUAL; // opens on the Manual screen, where the themes show
     this.ct = 92.6;
     this.pressure = 0;
     this.flow = 0;
