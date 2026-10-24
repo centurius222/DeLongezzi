@@ -10,7 +10,7 @@ simulated machine in your browser; nothing is saved).
 - **Machine always stays STOCK:** add one switch to flip between stock and DeLongezzi, handy while tinkering.
 - **One board:** a single ESP32-S3 N16R8.
 - **Headless:** no screen to wire; use an old phone, a tablet or a smart TV.
-- **PT1000 probe** instead of a thermocouple: no more grounding issues.
+- **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues
 - **Manual brew page:** easy to read, simple start/stop, and a pressure slider you can move live during the shot.
 - 🔥 **HOT** **Themes:** holiday themes, or make your own (colors and all).
 - **Quick theme picker:** press and hold the top-left corner.
