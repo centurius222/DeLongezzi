@@ -8,21 +8,16 @@ simulated machine in your browser; nothing is saved).
 
 ## Why DeLongezzi- Your Machine Your Way
 - **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
-- **One board:** a single ESP32-S3 N16R8.
-- **Headless:** no screen to wire; use an old phone, a tablet or a smart TV.
+- **One board, no screen to wire:** a single ESP32-S3 N16R8; use an old phone, a tablet or a smart TV.
 - **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues
 - **Manual brew page:** easy to read, simple start/stop, and a pressure slider you can move live during the shot.
-- 🔥 **HOT** **Themes:** holiday themes, or make your own (colors and all).
-- **Quick theme picker:** press and hold the top-left corner.
-- **Brew button:** the default, or your own picture or MP4 video.
-- **Splash screen and logo:** your own or the defaults; the splash can be turned off.
+- 🔥 **HOT** **Themes:** holiday ones or your own, colors and all; hold the top-left corner to switch.
+- **Your own look:** brew button picture or MP4 video, splash screen and logo (or the defaults).
 - **Shots to profiles:** turn manual shots from your history into profiles.
 - **Original GaggiMate pages** (profiles, brewing and the rest) still work as before.
-- **Scales** usually connect in about 8 s.
 - **Water-level sensor:** just two copper strips on the side of the tank.
 - **Diagnostics tab** for easy troubleshooting.
-- **Easy install:** web flasher, or one .bin file.
-- **Easy to extend:** an AI handover is included, so just ask Claude.
+- **Easy install:** web flasher, or one .bin file. **Easy to extend:** AI handover included, just ask Claude.
 
 Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
