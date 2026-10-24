@@ -8,8 +8,8 @@
 ## Why DeLongezzi <sub><sup><sub>YOUR MACHINE YOUR WAY</sub></sup></sub>
 - **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
 - **One board, no screen to wire:** a single ESP32-S3 N16R8; use an old phone, a tablet or a smart TV.
-- **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues
-- **Manual brew page:** easy to read, simple start/stop, and a pressure slider you can move live during the shot.
+- **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues.
+- **Manual brew page:** easy to read, simple start/stop, pressure slider you can move mid-shot.
 - 🔥 **HOT** **Themes:** holiday ones or your own, colors and all; hold the top-left corner to switch.
 - **Your own look:** brew button picture or MP4 video, splash screen and logo (or the defaults).
 - **Shots to profiles:** turn manual shots from your history into profiles.
@@ -39,12 +39,13 @@ Coming soon.
 Follow the GaggiMate guide: https://docs.gaggimate.eu/docs/community-delonghi-ecp/
 
 What I did differently:
-- **Boiler:** I drilled it. It only needs one copper washer outside and a flange nut inside: no other washers, no glue. It sounds crazy, I was sceptical too, but IT WORKS.
+- **Boiler (at your own risk):** I drilled it. It only needs one copper washer outside and a flange nut inside: no other washers, no glue. It sounds crazy, I was sceptical too, but IT WORKS.
 - **Pressure sensor:** I used a PY4 adapter instead of the T-piece; it works much better.
 - **Tubes:** you'll need at least two Teflon tubes with copper sleeves.
 
 
 ## Wiring
+Coming soon.
 
 
 
