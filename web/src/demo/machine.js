@@ -35,6 +35,9 @@ export class DemoMachine {
     // October: Halloween) locks the theme picker, so visitors couldn't try the others.
     this.settings.holidayMode = 'uchristmasday';
     this.settings.keepTheme = true;
+    // the shot timer over the chart, at 45 %
+    this.settings.chartTimer = 1;
+    this.settings.chartTimerSize = 45;
     this.profiles = structuredClone(PROFILES);
     if (!this.profiles.some(p => p.selected) && this.profiles.length) this.profiles[0].selected = true;
     this.mode = MODE.MANUAL; // opens on the Manual screen, where the themes show
@@ -45,6 +48,7 @@ export class DemoMachine {
     this.process = null;
     this.run = null;
     this.manualPressure = 9;
+    this.manualWeight = 36; // "Stop at" on: a manual shot ends at 36 g
     this.sockets = new Set();
     this.shots = [];
     this.nextId = 1;

@@ -27,15 +27,16 @@ function addStyles() {
       font: 500 14px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 6px 22px rgba(0,0,0,.25);
       opacity: 0; pointer-events: none; transition: opacity .3s; }
     .demo-note.shown { opacity: 1; }
-    .demo-hint { position: fixed; z-index: 2147482990; max-width: min(240px, calc(100vw - 16px)); padding: 7px 26px 7px 11px;
-      border-radius: 10px; background: #fff6e3; color: #3a2416; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.35);
-      font: 600 13px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
-    .demo-hint::after { content: '\\00d7'; position: absolute; top: 2px; right: 8px; font-size: 16px; font-weight: 400; opacity: .5; }
-    .demo-hint::before { content: ''; position: absolute; border: 7px solid transparent; }
-    .demo-hint[data-side='below']::before { bottom: 100%; left: var(--ax); transform: translateX(-50%); border-bottom-color: #fff6e3; }
-    .demo-hint[data-side='above']::before { top: 100%; left: var(--ax); transform: translateX(-50%); border-top-color: #fff6e3; }
-    .demo-hint[data-side='right']::before { right: 100%; top: var(--ay); transform: translateY(-50%); border-right-color: #fff6e3; }
-    .demo-hint[data-side='left']::before { left: 100%; top: var(--ay); transform: translateY(-50%); border-left-color: #fff6e3; }
+    .demo-hint { position: fixed; z-index: 2147482990; max-width: min(300px, calc(100vw - 16px)); padding: 8px 30px 8px 12px;
+      border-radius: 10px; background: #ffd60a; color: #111; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.4);
+      font: 700 16px/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; text-transform: uppercase;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+    .demo-hint::after { content: '\\00d7'; position: absolute; top: 3px; right: 9px; font-size: 18px; font-weight: 400; }
+    .demo-hint::before { content: ''; position: absolute; border: 8px solid transparent; }
+    .demo-hint[data-side='below']::before { bottom: 100%; left: var(--ax); transform: translateX(-50%); border-bottom-color: #ffd60a; }
+    .demo-hint[data-side='above']::before { top: 100%; left: var(--ax); transform: translateX(-50%); border-top-color: #ffd60a; }
+    .demo-hint[data-side='right']::before { right: 100%; top: var(--ay); transform: translateY(-50%); border-right-color: #ffd60a; }
+    .demo-hint[data-side='left']::before { left: 100%; top: var(--ay); transform: translateY(-50%); border-left-color: #ffd60a; }
   `;
   document.head.appendChild(style);
   const tag = document.createElement('div');
@@ -86,12 +87,17 @@ function hintElement(hint) {
     el = document.createElement('div');
     el.className = 'demo-hint';
     el.textContent = hint.text;
-    el.addEventListener('click', e => {
+    // Gone when it is clicked or tapped (a mouse passing over it does nothing). It goes when the
+    // press ends, so the click can't land on the control underneath; the page never sees it.
+    const close = e => {
       e.preventDefault();
       e.stopPropagation();
       dismissed.add(hint.id);
       layoutHints();
-    });
+    };
+    el.addEventListener('pointerdown', e => (e.preventDefault(), e.stopPropagation()));
+    el.addEventListener('pointerup', close);
+    el.addEventListener('click', close);
     document.body.appendChild(el);
     hintEls.set(hint, el);
   }
