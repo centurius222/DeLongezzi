@@ -28,7 +28,8 @@ function addStyles() {
       opacity: 0; pointer-events: none; transition: opacity .3s; }
     .demo-note.shown { opacity: 1; }
     .demo-hint, .demo-ring { position: fixed; z-index: 2147482990; pointer-events: none; color-scheme: only light; forced-color-adjust: none; }
-    .demo-hint { max-width: min(300px, calc(100vw - 16px)); padding: 8px 12px; border-radius: 10px; background: #ffd60a; color: #111;
+    .demo-hint { max-width: min(300px, calc(100vw - 16px)); padding: 8px 12px; border-radius: 10px;
+      background: #ffd60a !important; color: #111 !important; -webkit-text-fill-color: #111 !important;
       box-shadow: 0 4px 18px rgba(0,0,0,.45); font: 700 16px/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; text-transform: uppercase; }
     .demo-hint::before { content: ''; position: absolute; border: 11px solid transparent; }
     .demo-hint[data-side='below']::before { bottom: 100%; left: var(--ax); transform: translateX(-50%); border-bottom-color: #ffd60a; }
@@ -69,8 +70,15 @@ machine.notice = note;
 // does on a machine. A reload brings them back.
 const center = r => ({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
 const HINTS = [
-  // on the logo itself where it fits, so holding the words opens the picker too
-  { id: 'themes', anchor: "[data-slot='logo']", text: 'Hold here for themes', sides: ['inside', 'right', 'below'] },
+  // on the logo itself where it fits, so holding the words opens the picker too; it goes when
+  // the picker opens (a short press on the logo opens nothing)
+  {
+    id: 'themes',
+    anchor: "[data-slot='logo']",
+    text: 'Hold here for themes',
+    sides: ['inside', 'right', 'below'],
+    doneWhen: () => !!document.querySelector("[data-part='theme-picker']"),
+  },
   // phones: the logo is in the menu
   { id: 'menu', anchor: '.fab .btn-circle', text: 'Open the menu, then hold the logo for themes', sides: ['right', 'above'] },
   {
@@ -178,6 +186,7 @@ function placeLabel(el, r, spot, sides, taken, avoid) {
 }
 
 function layoutHints() {
+  for (const hint of HINTS) if (hint.doneWhen?.()) dismissed.add(hint.id);
   const ready = document.querySelector("[data-slot='manual']") && !document.querySelector('[aria-label="Dismiss splash screen"]');
   const taken = [];
   for (const hint of HINTS) {
@@ -198,11 +207,11 @@ function layoutHints() {
   }
 }
 
-// A hint goes once its control is pressed.
+// A hint goes once its control is pressed (or, with doneWhen, once that has happened).
 addEventListener(
   'pointerdown',
   e => {
-    for (const hint of HINTS) if (e.target.closest?.(hint.anchor)) dismissed.add(hint.id);
+    for (const hint of HINTS) if (!hint.doneWhen && e.target.closest?.(hint.anchor)) dismissed.add(hint.id);
   },
   true,
 );
