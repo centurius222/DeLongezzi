@@ -3,7 +3,7 @@
   <img src="docs/logo-light.png" alt="DeLongezzi" width="468">
 </picture>
 
-**Try it live, no machine needed:** https://centurius222.github.io/ (the real web page with a
+**Try it** ${\color{red}\textbf{LIVE}}$**, no machine needed:** https://centurius222.github.io/ (the real web page with a
 simulated machine in your browser; nothing is saved).
 
 ## Why DeLongezzi
