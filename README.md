@@ -3,8 +3,7 @@
   <img src="docs/logo-light.png" alt="DeLongezzi" width="468">
 </picture>
 
-**Try it** [![LIVE](docs/live.svg)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the real web page with a
-simulated machine in your browser; nothing is saved).
+**Try it** [![LIVE](docs/live.svg)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the firmware's real interface with a simulated machine in your browser; nothing is saved).
 
 ## Why DeLongezzi <sub><sup><sub>YOUR MACHINE YOUR WAY</sub></sup></sub>
 - **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
