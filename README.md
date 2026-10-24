@@ -6,7 +6,7 @@
 **Try it** [![LIVE](docs/live.svg)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the real web page with a
 simulated machine in your browser; nothing is saved).
 
-## Why DeLongezzi <sub><sup>YOUR MACHINE YOUR WAY</sup></sub>
+## Why DeLongezzi <sub><sup><sub>YOUR MACHINE YOUR WAY</sub></sup></sub>
 - **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
 - **One board, no screen to wire:** a single ESP32-S3 N16R8; use an old phone, a tablet or a smart TV.
 - **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues
