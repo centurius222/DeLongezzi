@@ -3,7 +3,7 @@
   <img src="docs/logo-light.png" alt="DeLongezzi" width="468">
 </picture>
 
-**Try it** [![LIVE](https://img.shields.io/badge/LIVE-ff2a1a?style=flat-square)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the real web page with a
+**Try it** [![LIVE](docs/live.svg)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the real web page with a
 simulated machine in your browser; nothing is saved).
 
 ## Why DeLongezzi
