@@ -1,4 +1,7 @@
-# DeLongezzi
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.png">
+  <img src="docs/logo-light.png" alt="DeLongezzi" width="468">
+</picture>
 
 Espresso-machine firmware for a single **ESP32-S3 N16R8** board, based on
 [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
