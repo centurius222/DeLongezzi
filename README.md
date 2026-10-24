@@ -27,6 +27,23 @@ simulated machine in your browser; nothing is saved).
 Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
 
+## Requirements
+- **Machine:** best with DeLonghi ECP, EC and Stilosa; adaptable to any simple machine.
+- **2.4 GHz Wi-Fi:** the N16R8 board works on 2.4 GHz only; it will NOT work on 5 GHz.
+- **A screen:** tablet, old phone or smart TV.
+- **Browser:** Chrome or Brave.
+
+## Bill of Materials
+Coming soon.
+
+## Plumbing
+Follow the GaggiMate guide: https://docs.gaggimate.eu/docs/community-delonghi-ecp/
+
+What I did differently:
+- **Boiler:** I drilled it. It only needs one copper washer outside and a flange nut inside: no other washers, no glue. It sounds crazy, I was sceptical too, but IT WORKS.
+- **Pressure sensor:** on a PY4 adapter instead of the T-piece; it works much better.
+- **Tubes:** you'll need at least two Teflon tubes with copper sleeves.
+
 ## Hardware
 - ESP32-S3 **N16R8** (16 MB flash, 8 MB octal PSRAM). Other boards are not supported.
 - Wired like GaggiMate's "Pro Lego Build" (`GM_PRO_LEGO` in `lib/GaggiMateController/src/ControllerConfig.h`):
