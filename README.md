@@ -7,7 +7,7 @@
 simulated machine in your browser; nothing is saved).
 
 ## Why DeLongezzi- Your Machine Your Way
-- **Machine always stays STOCK:** add one switch to flip between stock and DeLongezzi, handy while tinkering.
+- **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
 - **One board:** a single ESP32-S3 N16R8.
 - **Headless:** no screen to wire; use an old phone, a tablet or a smart TV.
 - **PT1000A (Class A high accuracy) probe** instead of a thermocouple: no more grounding issues
