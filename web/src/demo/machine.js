@@ -35,6 +35,8 @@ export class DemoMachine {
     // October: Halloween) locks the theme picker, so visitors couldn't try the others.
     this.settings.holidayMode = 'uchristmasday';
     this.settings.keepTheme = true;
+    // the brew button for the plain page and themes without their own video: "Default1"
+    this.settings.brewVideo = 'vyubdtmnquk';
     // the shot timer over the chart, at 45 %
     this.settings.chartTimer = 1;
     this.settings.chartTimerSize = 45;
