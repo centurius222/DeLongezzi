@@ -41,7 +41,7 @@ Follow the GaggiMate guide: https://docs.gaggimate.eu/docs/community-delonghi-ec
 
 What I did differently:
 - **Boiler:** I drilled it. It only needs one copper washer outside and a flange nut inside: no other washers, no glue. It sounds crazy, I was sceptical too, but IT WORKS.
-- **Pressure sensor:** on a PY4 adapter instead of the T-piece; it works much better.
+- **Pressure sensor:** I used a PY4 adapter instead of the T-piece; it works much better.
 - **Tubes:** you'll need at least two Teflon tubes with copper sleeves.
 
 
