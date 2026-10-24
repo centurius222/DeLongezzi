@@ -1,7 +1,8 @@
 // Turns the real web page into the demo site (web/src/demo): before the page's own code runs,
 // its WebSocket, its /api requests and its uploads are pointed at a fake machine (machine.js) in
-// the browser. A banner says it is a demo; anything that would change a real machine shows a
-// short note. Nothing is sent anywhere; a reload starts over.
+// the browser. A small tag says it is a demo, hints on the first screen show what to try, and
+// anything that would change a real machine shows a short note. Nothing is sent anywhere; a
+// reload starts over.
 import { DemoMachine } from './machine.js';
 import { CUSTOM_THEMES, VIDEOS, DIAGNOSTICS, WATERLEVEL, SCALES_INFO } from './recorded.js';
 
@@ -26,6 +27,15 @@ function addStyles() {
       font: 500 14px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 6px 22px rgba(0,0,0,.25);
       opacity: 0; pointer-events: none; transition: opacity .3s; }
     .demo-note.shown { opacity: 1; }
+    .demo-hint { position: fixed; z-index: 2147482990; max-width: min(240px, calc(100vw - 16px)); padding: 7px 26px 7px 11px;
+      border-radius: 10px; background: #fff6e3; color: #3a2416; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.35);
+      font: 600 13px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .demo-hint::after { content: '\\00d7'; position: absolute; top: 2px; right: 8px; font-size: 16px; font-weight: 400; opacity: .5; }
+    .demo-hint::before { content: ''; position: absolute; border: 7px solid transparent; }
+    .demo-hint[data-side='below']::before { bottom: 100%; left: var(--ax); transform: translateX(-50%); border-bottom-color: #fff6e3; }
+    .demo-hint[data-side='above']::before { top: 100%; left: var(--ax); transform: translateX(-50%); border-top-color: #fff6e3; }
+    .demo-hint[data-side='right']::before { right: 100%; top: var(--ay); transform: translateY(-50%); border-right-color: #fff6e3; }
+    .demo-hint[data-side='left']::before { left: 100%; top: var(--ay); transform: translateY(-50%); border-left-color: #fff6e3; }
   `;
   document.head.appendChild(style);
   const tag = document.createElement('div');
@@ -49,8 +59,116 @@ function note(text) {
 }
 machine.notice = note;
 
-if (document.body) addStyles();
-else document.addEventListener('DOMContentLoaded', addStyles);
+// ---- hints on the Manual screen ------------------------------------------------------------------
+// The first screen points out what isn't obvious. A hint stays until it is tapped, and shows only
+// while its control is on screen and on top (not under the menu, the theme picker or another
+// page), so every other page looks as it does on a machine. A reload brings them back.
+const HINTS = [
+  { id: 'themes', anchor: "[data-slot='logo']", text: 'Hold here for themes', sides: ['right', 'below'] },
+  // phones: the logo is in the menu
+  { id: 'themes', anchor: '.fab .btn-circle', text: 'Open the menu, then hold the logo for themes', sides: ['right', 'above'] },
+  {
+    id: 'brew',
+    anchor: "[data-slot='manual'] [data-slot='brew']",
+    text: "Press to brew. You can change the number's colour, opacity and size in Settings.",
+    sides: ['below', 'above', 'right', 'left'],
+  },
+  { id: 'weight', anchor: "[data-slot='manual'] [aria-label='Weight: tap to tare']", text: 'Tap to zero the scale', sides: ['below', 'above'] },
+  { id: 'pressure', anchor: "[data-slot='manual'] [data-part='pressure-row']", text: 'Slide to change pressure, even mid-shot', sides: ['below', 'above'] },
+  { id: 'chart', anchor: "[data-slot='manual'] [data-card='chart']", text: 'Tap to enlarge', sides: ['inside'] },
+];
+const dismissed = new Set();
+const hintEls = new Map();
+
+function hintElement(hint) {
+  let el = hintEls.get(hint);
+  if (!el) {
+    el = document.createElement('div');
+    el.className = 'demo-hint';
+    el.textContent = hint.text;
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      dismissed.add(hint.id);
+      layoutHints();
+    });
+    document.body.appendChild(el);
+    hintEls.set(hint, el);
+  }
+  return el;
+}
+
+// The control's box when it is on screen and on top, else null.
+function onTop(anchor) {
+  const r = anchor.getBoundingClientRect();
+  if (r.width < 4 || r.height < 4 || r.bottom < 0 || r.right < 0 || r.top > innerHeight || r.left > innerWidth) return null;
+  const x = Math.min(Math.max(r.left + r.width / 2, 0), innerWidth - 1);
+  const y = Math.min(Math.max(r.top + r.height / 2, 0), innerHeight - 1);
+  // what's there under the hints (one may sit on its own control)
+  const hit = document.elementsFromPoint(x, y).find(e => !e.closest('.demo-hint'));
+  return hit && anchor.contains(hit) ? r : null;
+}
+
+// Beside the control, on the first side that fits on screen without covering another hint;
+// the arrow points at the control's middle.
+function placeHint(el, r, sides, taken) {
+  const gap = 10;
+  const m = 8;
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+  const cx = r.left + r.width / 2;
+  const cy = r.top + r.height / 2;
+  const clampX = x => Math.min(Math.max(x, m), innerWidth - w - m);
+  const clampY = y => Math.min(Math.max(y, m), innerHeight - h - m);
+  for (const side of sides) {
+    let x = clampX(cx - w / 2);
+    let y = clampY(cy - h / 2);
+    if (side === 'below') y = r.bottom + gap;
+    else if (side === 'above') y = r.top - gap - h;
+    else if (side === 'right') x = r.right + gap;
+    else if (side === 'left') x = r.left - gap - w;
+    const box = { left: x, top: y, right: x + w, bottom: y + h };
+    const fits = x >= m && y >= m && box.right <= innerWidth - m && box.bottom <= innerHeight - m;
+    if (!fits || taken.some(t => t.left < box.right && box.left < t.right && t.top < box.bottom && box.top < t.bottom)) continue;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.dataset.side = side;
+    el.style.setProperty('--ax', `${Math.min(Math.max(cx - x, 14), w - 14)}px`);
+    el.style.setProperty('--ay', `${Math.min(Math.max(cy - y, 12), h - 12)}px`);
+    taken.push(box);
+    return true;
+  }
+  return false;
+}
+
+function layoutHints() {
+  const ready = document.querySelector("[data-slot='manual']") && !document.querySelector('[aria-label="Dismiss splash screen"]');
+  const taken = [];
+  const shown = new Set();
+  for (const hint of HINTS) {
+    const anchor = ready && !dismissed.has(hint.id) && !shown.has(hint.id) && document.querySelector(hint.anchor);
+    const r = anchor && onTop(anchor);
+    if (!r) {
+      if (hintEls.has(hint)) hintEls.get(hint).hidden = true;
+      continue;
+    }
+    const el = hintElement(hint);
+    el.hidden = false;
+    if (placeHint(el, r, hint.sides, taken)) shown.add(hint.id);
+    else el.hidden = true;
+  }
+}
+
+function start() {
+  addStyles();
+  const timer = setInterval(() => {
+    layoutHints();
+    if (HINTS.every(h => dismissed.has(h.id))) clearInterval(timer);
+  }, 250);
+  addEventListener('resize', layoutHints);
+}
+if (document.body) start();
+else document.addEventListener('DOMContentLoaded', start);
 
 // Download links to the machine (full backup, new-board file).
 document.addEventListener(

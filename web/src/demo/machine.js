@@ -31,6 +31,10 @@ function volumeTarget(profile) {
 export class DemoMachine {
   constructor() {
     this.settings = structuredClone(SETTINGS);
+    // Opens with Christmas and "Auto themes by date" off: with it on, a dated theme (all of
+    // October: Halloween) locks the theme picker, so visitors couldn't try the others.
+    this.settings.holidayMode = 'uchristmasday';
+    this.settings.keepTheme = true;
     this.profiles = structuredClone(PROFILES);
     if (!this.profiles.some(p => p.selected) && this.profiles.length) this.profiles[0].selected = true;
     this.mode = MODE.MANUAL; // opens on the Manual screen, where the themes show
