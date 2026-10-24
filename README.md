@@ -3,16 +3,29 @@
   <img src="docs/logo-light.png" alt="DeLongezzi" width="468">
 </picture>
 
-Espresso-machine firmware for a single **ESP32-S3 N16R8** board, based on
-[GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
+**Try it live, no machine needed:** https://centurius222.github.io/ (the real web page with a
+simulated machine in your browser; nothing is saved).
+
+## Why DeLongezzi
+- **Machine stays stock:** add one switch to flip between stock and DeLongezzi, handy while tinkering.
+- **One board:** a single ESP32-S3 N16R8.
+- **Headless:** no screen to wire; use an old phone, a tablet or a smart TV.
+- **PT1000 probe** instead of a thermocouple: no more grounding issues.
+- **Manual brew page:** easy to read, simple start/stop, and a pressure slider you can move live during the shot.
+- **Themes:** holiday themes, or make your own (colors and all).
+- **Quick theme picker:** press and hold the top-left corner.
+- **Brew button:** the default, or your own picture or MP4 video.
+- **Splash screen and logo:** your own or the defaults; the splash can be turned off.
+- **Shots to profiles:** turn manual shots from your history into profiles.
+- **Original GaggiMate pages** (profiles, brewing and the rest) still work as before.
+- **Scales** usually connect in about 8 s.
+- **Water-level sensor:** just two copper strips on the side of the tank.
+- **Diagnostics tab** for easy troubleshooting.
+- **Easy install:** web flasher, or one .bin file.
+- **Easy to extend:** an AI handover is included, so just ask Claude.
+
+Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
-
-- One board runs everything: GaggiMate's display half and controller half are merged into one
-  firmware and talk through an in-memory link instead of Bluetooth.
-- No screen: the web page is the user interface (phone, tablet or PC on your home network).
-
-**Try it without a machine:** https://centurius222.github.io/ (the real web page with a made-up
-machine in your browser; nothing is saved).
 
 ## What is different from GaggiMate
 - Single-board build `delongezzi-single`: 16 MB flash layout (one 4 MB program, about 11.9 MB of
