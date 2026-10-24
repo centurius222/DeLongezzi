@@ -43,9 +43,13 @@ What I did differently:
 - **Pressure sensor:** I used a PY4 adapter instead of the T-piece; it works much better.
 - **Tubes:** you'll need at least two Teflon tubes with copper sleeves.
 
+**Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
+
 
 ## Wiring
 Coming soon.
+
+**Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
 
 
