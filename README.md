@@ -27,13 +27,6 @@ simulated machine in your browser; nothing is saved).
 Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
 
-## What is different from GaggiMate
-- Single-board build `delongezzi-single`: 16 MB flash layout (one 4 MB program, about 11.9 MB of
-  storage). No over-the-air updates: the board is flashed by USB.
-- Custom themes with your own pictures, brew-button videos and theme fonts; holiday packs.
-- Water-level touch sensor, a Diagnostics page and a permanent log (`/api/log`).
-- Setup hotspot with a captive page, and Improv Wi-Fi over USB.
-
 ## Hardware
 - ESP32-S3 **N16R8** (16 MB flash, 8 MB octal PSRAM). Other boards are not supported.
 - Wired like GaggiMate's "Pro Lego Build" (`GM_PRO_LEGO` in `lib/GaggiMateController/src/ControllerConfig.h`):
