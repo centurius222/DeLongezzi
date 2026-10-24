@@ -27,16 +27,17 @@ function addStyles() {
       font: 500 14px/1.35 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 6px 22px rgba(0,0,0,.25);
       opacity: 0; pointer-events: none; transition: opacity .3s; }
     .demo-note.shown { opacity: 1; }
-    .demo-hint { position: fixed; z-index: 2147482990; max-width: min(300px, calc(100vw - 16px)); padding: 8px 30px 8px 12px;
-      border-radius: 10px; background: #ffd60a; color: #111; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,.4);
-      font: 700 16px/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; text-transform: uppercase;
-      user-select: none; -webkit-user-select: none; touch-action: manipulation; }
-    .demo-hint::after { content: '\\00d7'; position: absolute; top: 3px; right: 9px; font-size: 18px; font-weight: 400; }
-    .demo-hint::before { content: ''; position: absolute; border: 8px solid transparent; }
+    .demo-hint, .demo-ring { position: fixed; z-index: 2147482990; pointer-events: none; color-scheme: only light; forced-color-adjust: none; }
+    .demo-hint { max-width: min(300px, calc(100vw - 16px)); padding: 8px 12px; border-radius: 10px; background: #ffd60a; color: #111;
+      box-shadow: 0 4px 18px rgba(0,0,0,.45); font: 700 16px/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; text-transform: uppercase; }
+    .demo-hint::before { content: ''; position: absolute; border: 11px solid transparent; }
     .demo-hint[data-side='below']::before { bottom: 100%; left: var(--ax); transform: translateX(-50%); border-bottom-color: #ffd60a; }
     .demo-hint[data-side='above']::before { top: 100%; left: var(--ax); transform: translateX(-50%); border-top-color: #ffd60a; }
     .demo-hint[data-side='right']::before { right: 100%; top: var(--ay); transform: translateY(-50%); border-right-color: #ffd60a; }
     .demo-hint[data-side='left']::before { left: 100%; top: var(--ay); transform: translateY(-50%); border-left-color: #ffd60a; }
+    .demo-ring { width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; border: 4px solid #ffd60a;
+      box-shadow: 0 0 0 2px rgba(0,0,0,.45), 0 0 14px #ffd60a; animation: demo-ring 1.4s ease-out infinite; }
+    @keyframes demo-ring { 0% { transform: scale(.75); opacity: 1; } 100% { transform: scale(1.35); opacity: .35; } }
   `;
   document.head.appendChild(style);
   const tag = document.createElement('div');
@@ -61,109 +62,150 @@ function note(text) {
 machine.notice = note;
 
 // ---- hints on the Manual screen ------------------------------------------------------------------
-// The first screen points out what isn't obvious. A hint stays until it is tapped, and shows only
-// while its control is on screen and on top (not under the menu, the theme picker or another
-// page), so every other page looks as it does on a machine. A reload brings them back.
+// The first screen points out what isn't obvious: a pulsing ring on the spot to press and a label
+// beside it. Neither catches a press (a press on them reaches the control underneath), and a
+// hint goes once its control is pressed. They show only while the control is on screen and on
+// top (not under the menu, the theme picker or another page), so every other page looks as it
+// does on a machine. A reload brings them back.
+const center = r => ({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
 const HINTS = [
-  { id: 'themes', anchor: "[data-slot='logo']", text: 'Hold here for themes', sides: ['right', 'below'] },
+  // on the logo itself where it fits, so holding the words opens the picker too
+  { id: 'themes', anchor: "[data-slot='logo']", text: 'Hold here for themes', sides: ['inside', 'right', 'below'] },
   // phones: the logo is in the menu
-  { id: 'themes', anchor: '.fab .btn-circle', text: 'Open the menu, then hold the logo for themes', sides: ['right', 'above'] },
+  { id: 'menu', anchor: '.fab .btn-circle', text: 'Open the menu, then hold the logo for themes', sides: ['right', 'above'] },
   {
     id: 'brew',
     anchor: "[data-slot='manual'] [data-slot='brew']",
     text: "Press to brew. You can change the number's colour, opacity and size in Settings.",
     sides: ['below', 'above', 'right', 'left'],
   },
-  { id: 'weight', anchor: "[data-slot='manual'] [aria-label='Weight: tap to tare']", text: 'Tap to zero the scale', sides: ['below', 'above'] },
-  { id: 'pressure', anchor: "[data-slot='manual'] [data-part='pressure-row']", text: 'Slide to change pressure, even mid-shot', sides: ['below', 'above'] },
-  { id: 'chart', anchor: "[data-slot='manual'] [data-card='chart']", text: 'Tap to enlarge', sides: ['inside'] },
+  { id: 'weight', anchor: "[data-slot='manual'] [aria-label='Weight: tap to tare']", text: 'Tap to zero the scale', sides: ['below', 'above', 'left', 'right'] },
+  {
+    id: 'pressure',
+    anchor: "[data-slot='manual'] [data-part='pressure-row']",
+    text: 'Slide to change pressure, even mid-shot',
+    sides: ['below', 'above'],
+    // the slider's knob
+    spot: el => {
+      const input = el.querySelector('input[type=range]');
+      if (!input) return center(el.getBoundingClientRect());
+      const r = input.getBoundingClientRect();
+      const min = Number(input.min || 0);
+      const span = Number(input.max || 100) - min || 1;
+      const knob = Math.min(r.height, 32) / 2;
+      return { x: r.left + knob + ((Number(input.value) - min) / span) * (r.width - 2 * knob), y: r.top + r.height / 2 };
+    },
+  },
+  // the label goes right under the ring, inside the chart
+  { id: 'chart', anchor: "[data-slot='manual'] [data-card='chart']", text: 'Tap to enlarge', sides: ['below', 'above'], nearSpot: true },
 ];
 const dismissed = new Set();
-const hintEls = new Map();
+const shown = new Map(); // hint -> { label, ring }
 
-function hintElement(hint) {
-  let el = hintEls.get(hint);
-  if (!el) {
-    el = document.createElement('div');
-    el.className = 'demo-hint';
-    el.textContent = hint.text;
-    // Gone when it is clicked or tapped (a mouse passing over it does nothing). It goes when the
-    // press ends, so the click can't land on the control underneath; the page never sees it.
-    const close = e => {
-      e.preventDefault();
-      e.stopPropagation();
-      dismissed.add(hint.id);
-      layoutHints();
-    };
-    el.addEventListener('pointerdown', e => (e.preventDefault(), e.stopPropagation()));
-    el.addEventListener('pointerup', close);
-    el.addEventListener('click', close);
-    document.body.appendChild(el);
-    hintEls.set(hint, el);
+function elementsFor(hint) {
+  let els = shown.get(hint);
+  if (!els) {
+    const label = document.createElement('div');
+    label.className = 'demo-hint';
+    label.textContent = hint.text;
+    const ring = document.createElement('div');
+    ring.className = 'demo-ring';
+    document.body.append(ring, label);
+    els = { label, ring };
+    shown.set(hint, els);
   }
-  return el;
+  return els;
 }
 
-// The control's box when it is on screen and on top, else null.
-function onTop(anchor) {
+// The control's box when it is on screen and on top at its spot, else null.
+function onTop(anchor, spot) {
   const r = anchor.getBoundingClientRect();
-  if (r.width < 4 || r.height < 4 || r.bottom < 0 || r.right < 0 || r.top > innerHeight || r.left > innerWidth) return null;
-  const x = Math.min(Math.max(r.left + r.width / 2, 0), innerWidth - 1);
-  const y = Math.min(Math.max(r.top + r.height / 2, 0), innerHeight - 1);
-  // what's there under the hints (one may sit on its own control)
-  const hit = document.elementsFromPoint(x, y).find(e => !e.closest('.demo-hint'));
+  if (r.width < 4 || r.height < 4 || spot.x < 0 || spot.y < 0 || spot.x >= innerWidth || spot.y >= innerHeight) return null;
+  const hit = document.elementFromPoint(spot.x, spot.y);
   return hit && anchor.contains(hit) ? r : null;
 }
 
-// Beside the control, on the first side that fits on screen without covering another hint;
-// the arrow points at the control's middle.
-function placeHint(el, r, sides, taken) {
-  const gap = 10;
+// Anything a press could land on, to keep the labels off them where there is room.
+function controls(except) {
+  return [...document.querySelectorAll("button, a[href], input, select, [role='button'], [data-slot='logo']")]
+    .filter(el => !except.contains(el) && !el.contains(except))
+    .map(el => el.getBoundingClientRect())
+    .filter(r => r.width > 0 && r.height > 0);
+}
+
+const overlap = (a, b) =>
+  Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+
+// Beside the control: of the sides that fit on screen without covering another label, the one
+// covering the fewest other controls. The arrow points at the spot.
+function placeLabel(el, r, spot, sides, taken, avoid) {
+  const gap = 14;
   const m = 8;
   const w = el.offsetWidth;
   const h = el.offsetHeight;
-  const cx = r.left + r.width / 2;
-  const cy = r.top + r.height / 2;
   const clampX = x => Math.min(Math.max(x, m), innerWidth - w - m);
   const clampY = y => Math.min(Math.max(y, m), innerHeight - h - m);
+  let best = null;
   for (const side of sides) {
-    let x = clampX(cx - w / 2);
-    let y = clampY(cy - h / 2);
+    let x = clampX(spot.x - w / 2);
+    let y = clampY(spot.y - h / 2);
     if (side === 'below') y = r.bottom + gap;
     else if (side === 'above') y = r.top - gap - h;
     else if (side === 'right') x = r.right + gap;
     else if (side === 'left') x = r.left - gap - w;
+    else {
+      // inside the control, under its ring
+      if (r.height < h + 64 || r.width < w + 8) continue;
+      x = Math.min(Math.max(spot.x - w / 2, r.left + 4), r.right - w - 4);
+      y = r.bottom - h - 8;
+    }
     const box = { left: x, top: y, right: x + w, bottom: y + h };
-    const fits = x >= m && y >= m && box.right <= innerWidth - m && box.bottom <= innerHeight - m;
-    if (!fits || taken.some(t => t.left < box.right && box.left < t.right && t.top < box.bottom && box.top < t.bottom)) continue;
-    el.style.left = `${x}px`;
-    el.style.top = `${y}px`;
-    el.dataset.side = side;
-    el.style.setProperty('--ax', `${Math.min(Math.max(cx - x, 14), w - 14)}px`);
-    el.style.setProperty('--ay', `${Math.min(Math.max(cy - y, 12), h - 12)}px`);
-    taken.push(box);
-    return true;
+    if (x < m || y < m || box.right > innerWidth - m || box.bottom > innerHeight - m) continue;
+    if (taken.some(t => overlap(t, box) > 0)) continue;
+    const cost = avoid.reduce((sum, c) => sum + overlap(c, box), 0);
+    if (!best || cost < best.cost) best = { side, box, cost };
+    if (cost === 0) break;
   }
-  return false;
+  if (!best) return false;
+  const { side, box } = best;
+  el.style.left = `${box.left}px`;
+  el.style.top = `${box.top}px`;
+  el.dataset.side = side === 'inside' ? 'below' : side; // inside: the arrow points up at the ring
+  el.style.setProperty('--ax', `${Math.min(Math.max(spot.x - box.left, 16), w - 16)}px`);
+  el.style.setProperty('--ay', `${Math.min(Math.max(spot.y - box.top, 14), h - 14)}px`);
+  taken.push(box);
+  return true;
 }
 
 function layoutHints() {
   const ready = document.querySelector("[data-slot='manual']") && !document.querySelector('[aria-label="Dismiss splash screen"]');
   const taken = [];
-  const shown = new Set();
   for (const hint of HINTS) {
-    const anchor = ready && !dismissed.has(hint.id) && !shown.has(hint.id) && document.querySelector(hint.anchor);
-    const r = anchor && onTop(anchor);
+    const anchor = ready && !dismissed.has(hint.id) && document.querySelector(hint.anchor);
+    const spot = anchor && (hint.spot ? hint.spot(anchor) : center(anchor.getBoundingClientRect()));
+    const r = anchor && onTop(anchor, spot);
+    const els = shown.get(hint);
     if (!r) {
-      if (hintEls.has(hint)) hintEls.get(hint).hidden = true;
+      if (els) els.label.hidden = els.ring.hidden = true;
       continue;
     }
-    const el = hintElement(hint);
-    el.hidden = false;
-    if (placeHint(el, r, hint.sides, taken)) shown.add(hint.id);
-    else el.hidden = true;
+    const { label, ring } = elementsFor(hint);
+    label.hidden = ring.hidden = false;
+    ring.style.left = `${spot.x}px`;
+    ring.style.top = `${spot.y}px`;
+    const near = hint.nearSpot ? { left: spot.x - 24, right: spot.x + 24, top: spot.y - 24, bottom: spot.y + 24 } : r;
+    if (!placeLabel(label, near, spot, hint.sides, taken, controls(anchor))) label.hidden = true;
   }
 }
+
+// A hint goes once its control is pressed.
+addEventListener(
+  'pointerdown',
+  e => {
+    for (const hint of HINTS) if (e.target.closest?.(hint.anchor)) dismissed.add(hint.id);
+  },
+  true,
+);
 
 function start() {
   addStyles();
