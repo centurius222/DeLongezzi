@@ -29,9 +29,11 @@ DeLongezzi is not made or endorsed by GaggiMate.
 
 ## Requirements
 - **Machine:** best with DeLonghi ECP, EC and Stilosa; adaptable to any simple machine.
+- **Board:** ESP32-S3 N16R8 (16 MB flash, 8 MB PSRAM); for another board, ask Claude to adapt the build.
 - **2.4 GHz Wi-Fi:** the N16R8 board works on 2.4 GHz only; it will NOT work on 5 GHz.
 - **A screen:** tablet, old phone or smart TV.
 - **Browser:** Chrome or Brave.
+- **To install:** a computer with Chrome or Edge, and a USB data cable (charge-only cables don't work).
 
 ## Bill of Materials
 Coming soon.
