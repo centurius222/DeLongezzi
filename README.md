@@ -12,7 +12,7 @@ simulated machine in your browser; nothing is saved).
 - **Headless:** no screen to wire; use an old phone, a tablet or a smart TV.
 - **PT1000 probe** instead of a thermocouple: no more grounding issues.
 - **Manual brew page:** easy to read, simple start/stop, and a pressure slider you can move live during the shot.
-- **Themes:** holiday themes, or make your own (colors and all).
+- 🔥 **HOT** **Themes:** holiday themes, or make your own (colors and all).
 - **Quick theme picker:** press and hold the top-left corner.
 - **Brew button:** the default, or your own picture or MP4 video.
 - **Splash screen and logo:** your own or the defaults; the splash can be turned off.
