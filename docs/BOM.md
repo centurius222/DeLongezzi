@@ -2,8 +2,8 @@
 
 [← Back to the README](../README.md)
 
-The parts I used: about **$86** in total (AliExpress US prices, Oct 2026; prices change). Not counted: wire,
-crimp terminals and shipping.
+The parts I used: about **$100** in total (AliExpress and Amazon US prices, Oct 2026; prices change). Not counted:
+shipping.
 
 ## Electronics
 | Part | Select | Price | Notes |
@@ -18,7 +18,6 @@ crimp terminals and shipping.
 | [AC dimmer module](https://www.aliexpress.us/item/2251832615710334.html) | 4A Standard | $4.14 |  |
 | [TXS0102 level shifter (2-bit)](https://www.aliexpress.us/item/3256806645215203.html) |  | $1.60 |  |
 | [E-TEN rocker switch](https://www.aliexpress.us/item/3256801537983239.html) | 303 ON-OFF-ON (9 pins) | $4.48 |  |
-| [Terminal block](https://www.aliexpress.us/item/3256805905106307.html) | 12P white strip, 20A | $1.75 | Up to you, everyone does it differently. |
 
 ## Plumbing
 | Part | Select | Price | Notes |
@@ -32,9 +31,14 @@ crimp terminals and shipping.
 | [Copper washers M6 × 12 × 1](https://www.aliexpress.us/item/3256809079827189.html) | 10 pcs | $2.80 | You need one on the outside of the temperature probe. |
 | [Flange lock nut M6](https://www.aliexpress.us/item/2255800062569581.html) | M6, serrated bottom | $1.78 | One, for the temperature probe, inside the boiler. |
 | [Stainless hose clamps](https://www.aliexpress.us/item/3256807093035944.html) | 8–12 mm (10 pcs) | $1.79 | To replace the steam wand clips. |
+| [Teflon (plumber's) tape](https://www.aliexpress.us/item/3256807483217539.html) |  | $1.16 |  |
 
 ## Wiring
-- Silicone wire rated to 200 °C; use the wire gauges from the original GaggiMate docs.
-- A cold-pressed (crimp) terminal kit is recommended.
+| Part | Select | Price | Notes |
+|---|---|---|---|
+| [Silicone wire](https://www.aliexpress.us/item/2255801097491499.html) | 18 AWG | $3.20 | Rated to 200 °C. 18 AWG is what GaggiMate uses; 16 AWG is safer. |
+| [Cold-pressed terminal kit](https://www.aliexpress.us/item/3256812100899843.html) | 280 pcs | $5.15 |  |
+| [Power cord, 3-prong](https://www.amazon.com/dp/B07BQCMPF2) | 13 A rated | $4.61 | To ground the boiler. |
+| [Wago connectors](https://www.aliexpress.us/w/wholesale-wago-connectors.html) or [terminal block](https://www.aliexpress.us/item/3256805905106307.html) | 12P white strip, 20A | $1.34 | Up to you, everyone does it differently. |
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
