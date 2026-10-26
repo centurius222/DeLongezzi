@@ -38,15 +38,11 @@ DeLongezzi is not made or endorsed by GaggiMate.
 - **Browser:** Chrome (using other browsers might not work).
 - **To install:** a computer with Chrome, and a USB data cable (charge-only cables don't work).
 
-<br>
-
 ## Bill of Materials
 About $86 in parts: **[full parts list →](docs/BOM.md)**
 
 
 
-
-<br>
 
 ## Plumbing
 Follow the GaggiMate guide: https://docs.gaggimate.eu/docs/community-delonghi-ecp/
@@ -58,8 +54,6 @@ What I did differently:
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
-
-<br>
 
 ## Wiring
 Coming soon.
