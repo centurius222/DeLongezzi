@@ -28,6 +28,8 @@ DeLongezzi is not made or endorsed by GaggiMate.
 **Test drive, no machine needed:** [try it LIVE](https://centurius222.github.io/) in your browser, or [flash a bare N16R8 board](https://centurius222.github.io/DeLongezzi/flasher/) and explore it from your phone, tablet or PC.
 [<img src="docs/no-sensors.svg" align="absbottom" alt="With no sensors attached a heater warning shows; everything else works.">](https://centurius222.github.io/DeLongezzi/flasher/)
 
+<br>
+
 ## Requirements
 - **Machine:** best with DeLonghi ECP, EC and Stilosa; adaptable to any simple machine.
 - **Board:** ESP32-S3 N16R8 (16 MB flash, 8 MB PSRAM); for another board, ask Claude to adapt the build.
@@ -36,11 +38,15 @@ DeLongezzi is not made or endorsed by GaggiMate.
 - **Browser:** Chrome or Brave.
 - **To install:** a computer with Chrome or Edge, and a USB data cable (charge-only cables don't work).
 
+<br>
+
 ## Bill of Materials
 About $86 in parts: **[full parts list →](docs/BOM.md)**
 
 
 
+
+<br>
 
 ## Plumbing
 Follow the GaggiMate guide: https://docs.gaggimate.eu/docs/community-delonghi-ecp/
@@ -52,6 +58,8 @@ What I did differently:
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
+
+<br>
 
 ## Wiring
 Coming soon.
