@@ -2,7 +2,7 @@
 
 [← Back to the README](../README.md)
 
-The parts I used: about **$104** in total (AliExpress and Amazon US prices, Oct 2026; prices change).
+The parts I used: about **$105** in total (AliExpress and Amazon US prices, Oct 2026; prices change).
 
 ## Electronics
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Part | Select | Price | Notes |
@@ -19,6 +19,7 @@ The parts I used: about **$104** in total (AliExpress and Amazon US prices, Oct 
 | [<img src="bom/txs0102.jpg" width="120" alt="TXS0102 level shifter (2-bit)">](https://www.aliexpress.us/item/3256806645215203.html) | [TXS0102 level shifter (2-bit)](https://www.aliexpress.us/item/3256806645215203.html) |  | $1.60 | Converts the ADS1115's 5 V signals to 3.3 V for the board. |
 | [<img src="bom/rocker-switch.jpg" width="120" alt="E-TEN rocker switch">](https://www.aliexpress.us/item/3256801537983239.html) | [E-TEN rocker switch](https://www.aliexpress.us/item/3256801537983239.html) | 303 ON-OFF-ON (9 pins) | $4.48 | Switches from standard to DeLongezzi mode. |
 | [<img src="bom/copper-tape.jpg" width="120" alt="Copper tape">](https://www.aliexpress.us/item/3256804011875638.html) | [Copper tape](https://www.aliexpress.us/item/3256804011875638.html) | 10 mm | $1.93 | For the water-level sensor on the tank. |
+| [<img src="bom/pcb-board.jpg" width="120" alt="Prototype PCB board">](https://www.aliexpress.us/item/3256806837949674.html) | [Prototype PCB board](https://www.aliexpress.us/item/3256806837949674.html) | 3 × 7 cm or 5 × 7 cm | $1.54 | Holds and connects the small modules. |
 |  | Box for the electronics | 3D print or buy one | — | Everything goes in one box: board, modules and SSR. |
 
 ## Plumbing
