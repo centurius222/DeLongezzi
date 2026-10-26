@@ -36,7 +36,7 @@ DeLongezzi is not made or endorsed by GaggiMate.
 - **2.4 GHz Wi-Fi:** the N16R8 board works on 2.4 GHz only; it will NOT work on 5 GHz.
 - **A screen:** tablet, old phone or smart TV.
 - **Browser:** Chrome or Brave.
-- **To install:** a computer with Chrome or Edge, and a USB data cable (charge-only cables don't work).
+- **To install:** a computer with Chrome, and a USB data cable (charge-only cables don't work).
 
 <br>
 
