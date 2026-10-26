@@ -21,6 +21,10 @@
 Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
 
+<p align="center">
+  <img src="docs/gaggimate_1.jpg" alt="DeLongezzi on a DeLonghi"> <img src="docs/gaggimate_2.jpg" alt="The theme picker"> <img src="docs/gaggimate_3.jpg" alt="Tiki theme">
+</p>
+
 ## Requirements
 - **Machine:** best with DeLonghi ECP, EC and Stilosa; adaptable to any simple machine.
 - **Board:** ESP32-S3 N16R8 (16 MB flash, 8 MB PSRAM); for another board, ask Claude to adapt the build.
