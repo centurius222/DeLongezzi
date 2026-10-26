@@ -83,7 +83,7 @@ sdkconfig can't be changed), Node 20.19 or newer, Python 3.
   Same with esptool: `esptool.py --chip esp32s3 --port <board> write_flash 0x10000 firmware.bin`.
 - **Fresh install, wipes everything:**
   `esptool.py --chip esp32s3 erase_flash && esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin`.
-- Or from Chrome/Edge: https://centurius222.github.io/DeLongezzi/flasher/ (erase offered, then
+- Or from Chrome: https://centurius222.github.io/DeLongezzi/flasher/ (erase offered, then
   Wi-Fi over USB with Improv).
 
 ## 6. Flash layout and the release file
