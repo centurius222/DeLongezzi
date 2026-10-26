@@ -9,6 +9,6 @@ in one program, no screen, the web page served from flash.
 - Before changing anything, read "Traps and what they cost" in the handover below: each line
   there cost hours or data.
 
-The full handover (HANDOVER.md, the one copy to keep up to date):
+The full handover (docs/HANDOVER.md, the one copy to keep up to date):
 
-@HANDOVER.md
+@docs/HANDOVER.md
