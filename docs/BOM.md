@@ -2,7 +2,7 @@
 
 [← Back to the README](../README.md)
 
-The parts I used: about **$100** in total (AliExpress and Amazon US prices, Oct 2026; prices change). Not counted:
+The parts I used: about **$104** in total (AliExpress and Amazon US prices, Oct 2026; prices change). Not counted:
 shipping.
 
 ## Electronics
@@ -14,10 +14,13 @@ shipping.
 | [MAX31865 temperature module](https://www.aliexpress.us/item/3256804375058159.html) | the module only | $3.75 |  |
 | [Precision resistor 0805, 0.1 %, 25 ppm](https://www.aliexpress.us/item/3256811650089060.html) | 4.3K | $3.87 | Must be high precision. |
 | [Pressure sensor transmitter](https://www.aliexpress.us/item/3256806962465167.html) | 5 V, out 0.5–4.5 V, 0–1.6 MPa | $16.58 | Make sure you select exactly this. |
+| [ADS1115 module](https://www.aliexpress.us/item/3256807720160490.html) | purple | $1.85 | Reads the pressure sensor. |
 | [SSR-40DA](https://www.aliexpress.us/item/3256805757594761.html) |  | $3.45 |  |
 | [AC dimmer module](https://www.aliexpress.us/item/2251832615710334.html) | 4A Standard | $4.14 |  |
 | [TXS0102 level shifter (2-bit)](https://www.aliexpress.us/item/3256806645215203.html) |  | $1.60 |  |
 | [E-TEN rocker switch](https://www.aliexpress.us/item/3256801537983239.html) | 303 ON-OFF-ON (9 pins) | $4.48 |  |
+| [Copper tape](https://www.aliexpress.us/item/3256804011875638.html) | 10 mm | $1.93 | For the water-level sensor on the tank. |
+| Box for the electronics | 3D print or buy one | — | Everything goes in one box: board, modules and SSR. |
 
 ## Plumbing
 | Part | Select | Price | Notes |
