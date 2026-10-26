@@ -25,6 +25,8 @@ DeLongezzi is not made or endorsed by GaggiMate.
   <img src="docs/gaggimate_1.jpg" alt="DeLongezzi on a DeLonghi" width="272">&nbsp; <img src="docs/gaggimate_2.jpg" alt="The theme picker" width="272">&nbsp; <img src="docs/gaggimate_3.jpg" alt="Tiki theme" width="272">
 </p>
 
+**Test drive, no machine needed:** [try it LIVE](https://centurius222.github.io/) in your browser, or [flash a bare N16R8 board](https://centurius222.github.io/DeLongezzi/flasher/) and explore it from your phone, tablet or PC. With no sensors attached a heater warning shows; everything else works.
+
 ## Requirements
 - **Machine:** best with DeLonghi ECP, EC and Stilosa; adaptable to any simple machine.
 - **Board:** ESP32-S3 N16R8 (16 MB flash, 8 MB PSRAM); for another board, ask Claude to adapt the build.
