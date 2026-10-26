@@ -6,7 +6,7 @@ The parts I used: about **$104** in total (AliExpress and Amazon US prices, Oct 
 shipping.
 
 ## Electronics
-|  | Part | Select | Price | Notes |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Part | Select | Price | Notes |
 |---|---|---|---|---|
 | [<img src="bom/esp32-s3.jpg" width="120" alt="ESP32-S3 N16R8">](https://www.aliexpress.us/item/3256804864979510.html) | [ESP32-S3 N16R8](https://www.aliexpress.us/item/3256804864979510.html) | ESP32-S3 N16R8; add the green expansion board (+$2.78) | $7.89 | The expansion board is highly recommended. |
 | [<img src="bom/power-supply.jpg" width="120" alt="Power supply 5 V, 2 A">](https://www.aliexpress.us/item/3256801318040083.html) | [Power supply 5 V, 2 A](https://www.aliexpress.us/item/3256801318040083.html) | 5V2A | $3.34 | Any power supply with 5 V and at least 2 A works. |
@@ -23,7 +23,7 @@ shipping.
 |  | Box for the electronics | 3D print or buy one | — | Everything goes in one box: board, modules and SSR. |
 
 ## Plumbing
-|  | Part | Select | Price | Notes |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Part | Select | Price | Notes |
 |---|---|---|---|---|
 | [<img src="bom/py4.jpg" width="120" alt="PY4 Y connector">](https://www.aliexpress.us/item/3256807742393521.html) | [PY4 Y connector](https://www.aliexpress.us/item/3256807742393521.html) |  | $4.52 | Joins the pressure sensor and the pump. |
 | [<img src="bom/pcf-4-02.jpg" width="120" alt="Pressure sensor adapter PCF 4-02">](https://www.aliexpress.us/item/3256810136023717.html) | [Pressure sensor adapter PCF 4-02](https://www.aliexpress.us/item/3256810136023717.html) | 4 mm – 1/4" | $2.72 | PCF: don't forget it. |
@@ -37,7 +37,7 @@ shipping.
 | [<img src="bom/teflon-tape.jpg" width="120" alt="Teflon (plumber's) tape">](https://www.aliexpress.us/item/3256807483217539.html) | [Teflon (plumber's) tape](https://www.aliexpress.us/item/3256807483217539.html) |  | $1.16 |  |
 
 ## Wiring
-|  | Part | Select | Price | Notes |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Part | Select | Price | Notes |
 |---|---|---|---|---|
 | [<img src="bom/silicone-wire.jpg" width="120" alt="Silicone wire">](https://www.aliexpress.us/item/2255801097491499.html) | [Silicone wire](https://www.aliexpress.us/item/2255801097491499.html) | 18 AWG | $3.20 | Rated to 200 °C. 18 AWG is what GaggiMate uses; 16 AWG is safer. |
 | [<img src="bom/terminal-kit.jpg" width="120" alt="Cold-pressed terminal kit">](https://www.aliexpress.us/item/3256812100899843.html) | [Cold-pressed terminal kit](https://www.aliexpress.us/item/3256812100899843.html) | 280 pcs | $5.15 |  |
