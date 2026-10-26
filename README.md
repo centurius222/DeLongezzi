@@ -22,7 +22,7 @@ Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
 
 <p align="center">
-  <img src="docs/gaggimate_1.jpg" alt="DeLongezzi on a DeLonghi" width="279"><img src="docs/gaggimate_2.jpg" alt="The theme picker" width="279"><img src="docs/gaggimate_3.jpg" alt="Tiki theme" width="279">
+  <img src="docs/gaggimate_1.jpg" alt="DeLongezzi on a DeLonghi" width="272">&nbsp; <img src="docs/gaggimate_2.jpg" alt="The theme picker" width="272">&nbsp; <img src="docs/gaggimate_3.jpg" alt="Tiki theme" width="272">
 </p>
 
 ## Requirements
