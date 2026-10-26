@@ -39,7 +39,7 @@ shipping.
 ## Wiring
 | Part | Select | Price | Notes |
 |---|---|---|---|
-| [Silicone wire](https://www.aliexpress.us/item/2255801097491499.html) | 18 AWG | $3.20 | Rated to 200 °C. I used 18 AWG for everything, low-voltage too: simpler and safer. 16 AWG is safer still on the mains side. |
+| [Silicone wire](https://www.aliexpress.us/item/2255801097491499.html) | 18 AWG | $3.20 | Rated to 200 °C. 18 AWG is what GaggiMate uses; 16 AWG is safer. |
 | [Cold-pressed terminal kit](https://www.aliexpress.us/item/3256812100899843.html) | 280 pcs | $5.15 |  |
 | [Power cord, 3-prong](https://www.amazon.com/dp/B07BQCMPF2) | 13 A rated | $4.61 | To ground the boiler. |
 | [Wago connectors](https://www.aliexpress.us/w/wholesale-wago-connectors.html) or [terminal block](https://www.aliexpress.us/item/3256805905106307.html) | 12P white strip, 20A | $1.34 | Up to you, everyone does it differently. |
