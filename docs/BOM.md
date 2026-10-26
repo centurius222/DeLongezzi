@@ -45,3 +45,7 @@ The parts I used: about **$105** in total (AliExpress and Amazon US prices, Oct 
 | [<img src="bom/terminal-block.jpg" width="120" alt="Wago connectors">](https://www.aliexpress.us/item/3256805905106307.html) | [Wago connectors](https://www.aliexpress.us/w/wholesale-wago-connectors.html) or [terminal block](https://www.aliexpress.us/item/3256805905106307.html) | 12P white strip, 20A | $1.34 | Joins wires. Up to you, everyone does it differently. |
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
+
+> [!CAUTION]
+> BUY EXACTLY THESE PARTS. A DIFFERENT PROBE, MODULE OR SENSOR MAY NOT WORK WITH THIS BUILD.
+> NOT SURE? GIVE CLAUDE THIS REPO'S LINK (github.com/centurius222/DeLongezzi) AND ASK BEFORE YOU BUY.
