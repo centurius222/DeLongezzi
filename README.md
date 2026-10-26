@@ -49,15 +49,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Wiring
-Coming soon.
-
-**Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
-
-
-
-## Hardware
-- ESP32-S3 **N16R8** (16 MB flash, 8 MB octal PSRAM). Other boards are not supported.
-- Wired like GaggiMate's "Pro Lego Build" (`GM_PRO_LEGO` in `lib/GaggiMateController/src/ControllerConfig.h`):
+Coming soon. Until then, which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
 
 | Function | GPIO |
 |---|---|
@@ -70,7 +62,9 @@ Coming soon.
 | Water-level touch | 12 |
 | 4-pin port (LED / distance sensor, I2C) | SDA 43, SCL 44 |
 
-- Bluetooth scales through `lib/esp-arduino-ble-scales`.
+**Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
+
+
 
 ## Install
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
