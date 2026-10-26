@@ -40,10 +40,10 @@ They differ only in baskets and steam wand. The GaggiMate community guide covers
   The GaggiMate community guide names it as compatible.
 - **Other EC models** (like the EC155 or the Dedica line): not tested.
 
-More detail, with photos: [Tom's Coffee Corner](https://tomscoffeecorner.com/delonghi-ecp-whats-the-difference/).
-
 ## Videos
 - [DeLonghi's best budget machines: Stilosa vs Dedica vs ECP3420](https://www.youtube.com/watch?v=1pp8XMwr6iw), Tom's Coffee Corner
 - [$99 DeLonghi teardown: how good are the parts?](https://www.youtube.com/watch?v=paImrXJvxlg), Tom's Coffee Corner
+
+More detail, with photos: [Tom's Coffee Corner](https://tomscoffeecorner.com/delonghi-ecp-whats-the-difference/).
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
