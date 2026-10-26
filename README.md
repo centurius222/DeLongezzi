@@ -62,6 +62,8 @@ Coming soon. Until then, which GPIO each part connects to (GaggiMate's "Pro Lego
 | Water-level touch | 12 |
 | 4-pin port (LED / distance sensor, I2C) | SDA 43, SCL 44 |
 
+**Temperature probe:** prepare the MAX31865 and connect the PT1000A with the [MAX31865 guide](docs/max31865.md).
+
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
 
