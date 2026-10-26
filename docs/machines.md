@@ -27,7 +27,8 @@ and body shape. Only the finish and the steam wand differ, so the cheapest one d
 ## Stilosa and EC
 - **Stilosa (EC260 in the US):** a different body, but also a stainless steel boiler and a 51 mm
   portafilter. The GaggiMate community guide covers it too.
-- **EC702:** the GaggiMate community guide names it as compatible.
+- **EC702:** preferred by the community: it's bigger, so there's more room inside for the parts.
+  The GaggiMate community guide names it as compatible.
 - **Other EC models** (like the EC155 or the Dedica line): not tested.
 
 More detail, with photos: [Tom's Coffee Corner](https://tomscoffeecorner.com/delonghi-ecp-whats-the-difference/).
