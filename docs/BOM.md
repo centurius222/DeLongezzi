@@ -2,7 +2,11 @@
 
 [← Back to the README](../README.md)
 
-The parts I used: about **$105** in total (AliExpress and Amazon US prices, Oct 2026; prices change).
+> [!CAUTION]
+> BUY EXACTLY THESE PARTS. A DIFFERENT PROBE, MODULE OR SENSOR MAY NOT WORK WITH THIS BUILD.
+> NOT SURE? GIVE CLAUDE THIS REPO'S LINK (github.com/centurius222/DeLongezzi) AND ASK BEFORE YOU BUY.
+
+US prices, Oct 2026; prices change.
 
 ## Electronics
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Part | Select | Price | Notes |
