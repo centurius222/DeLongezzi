@@ -101,7 +101,7 @@ esptool.py --chip esp32s3 erase_flash
 esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
 ```
 
-Or from the browser, nothing to install (Chrome or Edge on a computer, USB cable):
+Or from the browser, nothing to install (Chrome on a computer, USB cable):
 https://centurius222.github.io/DeLongezzi/flasher/
 
 ## First start
