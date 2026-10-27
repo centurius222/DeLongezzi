@@ -45,7 +45,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Plumbing
-<img src="docs/plumbing.jpg" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside">
+<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing.jpg"><img src="docs/plumbing.jpg" width="400" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside"></a>
 
 Click the picture to see it full size.
 
