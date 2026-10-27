@@ -78,28 +78,30 @@ Coming soon. Until then, which GPIO each part connects to (GaggiMate's "Pro Lego
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
 program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
 
-One file on the Releases page, `delongezzi-v2.2.2.bin`: the firmware, 32 custom themes, 18 brew-button
-videos and pictures, and 5 starter profiles, with no Wi-Fi details or passwords in it. Writing it
-replaces everything on the board (settings, shots, profiles, themes, videos). The SHA-256 is in the
-release notes.
+**Easiest:** the [web flasher](https://centurius222.github.io/DeLongezzi/flasher/), nothing to install
+(Chrome on a computer, USB cable).
 
-With [esptool](https://github.com/espressif/esptool):
+**Or by hand:** download `delongezzi-v2.2.2.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
+and write it with [esptool](https://github.com/espressif/esptool):
 
 ```sh
 esptool.py --chip esp32s3 erase_flash
 esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
 ```
 
-Or from the browser, nothing to install (Chrome on a computer, USB cable):
-https://centurius222.github.io/DeLongezzi/flasher/
+The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures, and 5 starter
+profiles, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
+(settings, shots, profiles, themes, videos). The SHA-256 is in the release notes.
 
 ## First start
-1. The board opens a Wi-Fi hotspot **DeLongezzi**, password **delongezzi**.
-2. Join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save. The board
-   restarts into your Wi-Fi and is then at http://delongezzi.local.
-3. Change the hotspot password (Settings › Wi-Fi › Access Point Password): the default is public,
+1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
+   **DeLongezzi**, password **delongezzi**.
+2. Join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save.
+3. The board restarts into your Wi-Fi and is at http://delongezzi.local. If that doesn't open, find its
+   address in your router's device list.
+4. Change the hotspot password (Settings › Wi-Fi › Access Point Password): the default is public,
    and the hotspot comes back whenever your router can't be reached at start-up.
-4. The web page has **no login**: keep the machine on your home network and never forward a port to it.
+5. The web page has **no login**: keep the machine on your home network and never forward a port to it.
 
 ## Themes
 - The release file already has the 32 custom themes and 18 brew-button videos and pictures; delete any you
