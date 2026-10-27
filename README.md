@@ -39,6 +39,8 @@ DeLongezzi is not made or endorsed by GaggiMate.
 - **To install:** a computer with Chrome, and a USB data cable (charge-only cables don't work).
 
 ## Bill of Materials
+<a href="docs/BOM.md"><img src="docs/bill.jpg" alt="Open the parts list"></a>
+
 Everything this build uses, 28 parts with pictures and shop links: **[parts list](docs/BOM.md)**.
 
 
