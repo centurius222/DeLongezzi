@@ -47,11 +47,13 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Plumbing
+**1. Open the machine:** [DeLonghi teardown video](https://www.youtube.com/watch?v=paImrXJvxlg) (Tom's Coffee Corner).
+
+**2. Plumb it:** follow the diagram and the photos.
+
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing.jpg"><img src="docs/plumbing.jpg" width="340" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-1.jpg"><img src="docs/plumbing-1.jpg" width="152" alt="Pressure sensor held by a 3D-printed clip"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-2.jpg"><img src="docs/plumbing-2.jpg" width="152" alt="PY4 Y connector and tubes next to the boiler"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-3.jpg"><img src="docs/plumbing-3.jpg" width="152" alt="PT1000A probe in the boiler top with its copper washer"></a>
 
 Click any picture to see it full size. Photos, left to right: pressure sensor position, held by a 3D-printed clip; position of the PY4 and tubes; probe in the boiler top with its copper washer.
-
-**Taking the machine apart:** [DeLonghi teardown video](https://www.youtube.com/watch?v=paImrXJvxlg) (Tom's Coffee Corner).
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
