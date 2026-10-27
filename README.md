@@ -45,6 +45,10 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Plumbing
+<img src="docs/plumbing.jpg" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside">
+
+Click the picture to see it full size.
+
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
 
