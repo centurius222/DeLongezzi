@@ -49,6 +49,8 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 Click any picture to see it full size. Photos, left to right: pressure sensor and pump outlet; PY4 and tubes; probe in the boiler top with its copper washer.
 
+**Taking the machine apart:** [DeLonghi teardown video](https://www.youtube.com/watch?v=paImrXJvxlg) (Tom's Coffee Corner).
+
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
 
