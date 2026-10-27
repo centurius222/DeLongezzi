@@ -1,6 +1,6 @@
 # Bill of Materials
 
-[← Back to the README](../README.md)
+[← Back to the README](https://github.com/centurius222/DeLongezzi#bill-of-materials)
 
 > [!CAUTION]
 > THESE ARE THE PARTS THIS BUILD USES. A DIFFERENT PROBE, MODULE OR SENSOR MAY NOT WORK WITH THIS BUILD.

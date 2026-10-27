@@ -1,6 +1,6 @@
 # Which DeLonghi?
 
-[← Back to the README](../README.md)
+[← Back to the README](https://github.com/centurius222/DeLongezzi#requirements)
 
 DeLongezzi was built and tested on a **DeLonghi ECP3220**.
 
