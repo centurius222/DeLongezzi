@@ -45,13 +45,9 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Plumbing
-<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing.jpg"><img src="docs/plumbing.jpg" width="400" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside"></a>
+<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing.jpg"><img src="docs/plumbing.jpg" width="340" alt="Plumbing: pump and pressure sensor joined to the boiler with a PY4 Y connector; PT1000A probe in the boiler with one copper washer outside and the serrated flange nut inside"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-1.jpg"><img src="docs/plumbing-1.jpg" width="152" alt="Inside the machine: pressure sensor on its adapter and the pump outlet"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-2.jpg"><img src="docs/plumbing-2.jpg" width="152" alt="PY4 Y connector and tubes next to the boiler"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-3.jpg"><img src="docs/plumbing-3.jpg" width="152" alt="PT1000A probe in the boiler top with its copper washer"></a>
 
-Click the picture to see it full size.
-
-<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-1.jpg"><img src="docs/plumbing-1.jpg" width="200" alt="Inside the machine: pressure sensor on its adapter and the pump outlet"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-2.jpg"><img src="docs/plumbing-2.jpg" width="200" alt="PY4 Y connector and tubes next to the boiler"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/plumbing-3.jpg"><img src="docs/plumbing-3.jpg" width="200" alt="PT1000A probe in the boiler top with its copper washer"></a>
-
-Left to right: pressure sensor and pump outlet; PY4 and tubes; probe in the boiler top with its copper washer.
+Click any picture to see it full size. Photos, left to right: pressure sensor and pump outlet; PY4 and tubes; probe in the boiler top with its copper washer.
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
