@@ -59,7 +59,9 @@ Click any picture to see it full size. Photos, left to right: pressure sensor po
 
 
 ## Wiring
-Coming soon. Until then, which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
+<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring.jpg"><img src="docs/wiring.jpg" width="340" alt="De'Longezzi wiring, mains side"></a>
+
+Click the picture to see it full size. Low-voltage side, which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
 
 | Function | GPIO |
 |---|---|
