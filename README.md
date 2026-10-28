@@ -72,9 +72,9 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 5. The water-level sensor plug (wires to the copper strips)
 6. Two copper strips on the outside of the tank
 
-**Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png).
-
 **MAX31865 tweak (required):** for the PT1000A, swap one resistor, add two solder bridges and cut one trace: [MAX31865 guide](docs/max31865.md).
+
+**Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png).
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
