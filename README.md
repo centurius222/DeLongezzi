@@ -53,9 +53,9 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 2. Position of the PY4 and tubes
 3. Probe in the boiler top with its copper washer
 
-**1. Open the machine:** [DeLonghi teardown video](https://www.youtube.com/watch?v=paImrXJvxlg) (Tom's Coffee Corner).
+**Step 1. Open the machine:** [DeLonghi teardown video](https://www.youtube.com/watch?v=paImrXJvxlg) (Tom's Coffee Corner).
 
-**2. Plumb it:** follow the diagram and the photos above.
+**Step 2. Plumb it:** follow the diagram and the photos above.
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
