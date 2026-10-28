@@ -59,13 +59,13 @@ Click any picture to see it full size. Photos, left to right: pressure sensor po
 
 
 ## Wiring
-<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring.jpg"><img src="docs/wiring.jpg" width="340" alt="De'Longezzi wiring, mains side"></a>
+<a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring.jpg"><img src="docs/wiring.jpg" width="322" alt="De'Longezzi wiring, mains side"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-low-voltage.png"><img src="docs/wiring-low-voltage.png" width="500" alt="De'Longezzi wiring, low-voltage side (coming soon)"></a>
 
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-1.jpg"><img src="docs/wiring-1.jpg" width="132" alt="The ON-OFF-ON switch, wired"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-2.jpg"><img src="docs/wiring-2.jpg" width="132" alt="The switch and LEDs from behind"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-3.jpg"><img src="docs/wiring-3.jpg" width="132" alt="The front panel from inside: knob, LEDs and the new switch"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-4.jpg"><img src="docs/wiring-4.jpg" width="132" alt="The wiring inside, from above"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-5.jpg"><img src="docs/wiring-5.jpg" width="132" alt="The plug wire for the tank"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-6.jpg"><img src="docs/wiring-6.jpg" width="132" alt="Two copper strips on the outside of the tank"></a>
 
-Click any picture to see it full size. Photos, left to right: the ON-OFF-ON switch, wired; the switch and LEDs from behind; the front panel from inside (knob, LEDs and the new switch); the wiring inside, from above; the plug wire for the tank; two copper strips on the outside of the tank.
+Click any picture to see it full size. Left: mains side; right: low-voltage side. Photos, left to right: the ON-OFF-ON switch, wired; the switch and LEDs from behind; the front panel from inside (knob, LEDs and the new switch); the wiring inside, from above; the plug wire for the tank; two copper strips on the outside of the tank.
 
-Low-voltage side, which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
+Which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
 
 | Function | GPIO |
 |---|---|
