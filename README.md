@@ -74,7 +74,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 **Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png).
 
-**Temperature probe:** prepare the MAX31865 and connect the PT1000A with the [MAX31865 guide](docs/max31865.md).
+**MAX31865 tweak (required):** for the PT1000A, swap one resistor, add two solder bridges and cut one trace: [MAX31865 guide](docs/max31865.md).
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
