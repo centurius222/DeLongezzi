@@ -120,24 +120,98 @@ def esp_pins():
     text(BX1 + 20, PY[0] + 4, '← all GND pins are joined: use any', 14, '700', 'start', '#24292f')
 
 # ---------------------------------------------------------------- MAX31865 + probe
-MXB = (470, 280, 680, 540)
-MH = {'VIN': 330, 'GND': 356, '3V3': 382, 'CLK': 408, 'SDO': 434, 'SDI': 460, 'CS': 486, 'RDY': 512}
-MT = {'F−': 340, 'RTD−': 370, 'RTD+': 400, 'F+': 430}
+# The real board (docs/max31865-board.jpg) turned 90 degrees to the left, so the screw terminals face the
+# probe and the header faces the ESP32: F+ on top of the terminals, RDY on top of the header.
+MXB = (411, 262, 680, 510)
+MH = {'RDY': 299, 'CS': 324, 'SDI': 350, 'SDO': 375, 'CLK': 400, '3V3': 425, 'GND': 450, 'VIN': 475}
+MT = {'F+': 334, 'RTD+': 369, 'RTD−': 404, 'F−': 439}
+SCREW_X = 444
+def cap(x0, y0, x1, y1):
+    # SMD capacitor standing on end: tin ends, tan body
+    add(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" rx="2" fill="#c9a27a" stroke="#8b6a45" stroke-width="1"/>')
+    for ya, yb in ((y0, y0 + 6), (y1 - 6, y1)):
+        add(f'<rect x="{x0}" y="{ya}" width="{x1 - x0}" height="{yb - ya}" rx="1.5" fill="#d9dde3" stroke="#8b939e" stroke-width="1"/>')
 def max_board():
     x0, y0, x1, y1 = MXB
-    add(f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" rx="10" fill="#8b2d93" stroke="#5c1b62" stroke-width="2"/>')
-    text((x0 + x1) / 2 + 20, y0 + 26, 'MAX31865', 15, '700', 'middle', '#ffffff')
-    add(f'<rect x="{x0 + 8}" y="{MT["F−"] - 16}" width="34" height="122" rx="4" fill="#3ccf5c" stroke="#1f8a37"/>')
-    add(f'<rect x="{x0 + 92}" y="{y0 + 170}" width="40" height="40" rx="3" fill="#1b1b1b"/>')
+    add(f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" rx="14" fill="#8b2d93" stroke="#5c1b62" stroke-width="2"/>')
+    for cx, cy in ((434, 287), (434, 487)):                       # mounting holes
+        add(f'<circle cx="{cx}" cy="{cy}" r="19" fill="#ecd7ee" stroke="#c9a6cc" stroke-width="1.5"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="13" fill="#ffffff" stroke="#b98fbd" stroke-width="1.5"/>')
+    for cx, cy in ((468, 276), (646, 499)):                       # small gold pads
+        add(f'<circle cx="{cx}" cy="{cy}" r="8" fill="#d4a72c" stroke="#8a6d1a"/><circle cx="{cx}" cy="{cy}" r="3.5" fill="#f1d58a"/>')
+    add(f'<rect x="414" y="318" width="58" height="139" rx="4" fill="#3ccf5c" stroke="#1f8a37"/>')   # screw terminal
+    add(f'<rect x="538" y="366" width="52" height="51" rx="4" fill="#1b1b1b"/>')                      # chip
+    for i in range(5):                                                    # chip pads on all four sides
+        tx, ty = 543 + i * 10, 371 + i * 10
+        add(f'<rect x="{tx - 1.5}" y="362.5" width="3" height="3" fill="#9aa3ad"/><rect x="{tx - 1.5}" y="417.5" width="3" height="3" fill="#9aa3ad"/>'
+            f'<rect x="534.5" y="{ty - 1.5}" width="3" height="3" fill="#9aa3ad"/><rect x="590.5" y="{ty - 1.5}" width="3" height="3" fill="#9aa3ad"/>')
+    add('<circle cx="544" cy="372" r="2" fill="#6e7781"/>')
+    cap(515, 370, 529, 404); cap(578, 325, 591, 357); cap(524, 451, 538, 483); cap(549, 451, 563, 483)
+    add('<rect x="579" y="458" width="19" height="22" rx="2" fill="#1b1b1b"/>'                        # regulator
+        '<rect x="574" y="461" width="6" height="5" fill="#d9dde3"/><rect x="574" y="472" width="6" height="5" fill="#d9dde3"/>'
+        '<rect x="597" y="466" width="6" height="6" fill="#d9dde3"/>')
+    text(521, 467, 'MAX31865', 11, '700', 'middle', '#ffffff', SANS, -90)
 def max_pins():
     x0, y0, x1, y1 = MXB
     used = {'VIN', 'GND', 'CLK', 'SDO', 'SDI', 'CS'}
     for n, y in MH.items():
         text(x1 - 34, y + 4.5, n, 12.5, '700' if n in used else '400', 'end', '#ffffff' if n in used else '#e3c8e6', MONO)
         pin(x1 - 20, y)
-    for n, y in MT.items():
-        screw(x0 + 25, y, 8)
-        text(x0 + 52, y + 4.5, n, 12.5, '700' if n != 'F−' else '400', 'start', '#ffffff', MONO)
+    for y in MT.values():
+        add(f'<rect x="414" y="{y - 5}" width="8" height="10" fill="#1f8a37"/>')
+        screw(SCREW_X, y, 9)
+    # terminal names where the real board prints them
+    text(463, 313, 'F+', 10.5, '700', 'middle', '#ffffff')
+    text(463, 477, 'F−', 10.5, '700', 'middle', '#ffffff')
+    text(495, 383, 'RTD+', 9.5, '700', 'middle', '#ffffff')
+    text(495, 399, 'RTD−', 9.5, '700', 'middle', '#ffffff')
+
+
+def max_tweak():
+    # the PT1000A tweak, at the real positions; numbers as in docs/max31865.md
+    PAD, PADS, SILK, INK = '#d9dde3', '#8b939e', '#f4e9f5', '#24292f'
+    def pad(x0, y0, x1, y1):
+        add(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" rx="2" fill="{PAD}" stroke="{PADS}" stroke-width="1"/>')
+    def outline(x0, y0, x1, y1):
+        add(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" rx="3" fill="none" stroke="{SILK}" stroke-width="1.3"/>')
+    # "2 Wire" and "2/3 Wire" jumpers (2 Wire stays open)
+    outline(481, 330, 508, 367); pad(486, 334, 503, 346.5); pad(486, 350.7, 503, 363.3)
+    text(498, 309, '2 Wire', 9.5, '700', 'middle', '#ffffff', SANS, -90)
+    outline(481, 403, 508, 440); pad(486, 407.4, 503, 420); pad(486, 423.6, 503, 436.2)
+    text(498, 469, '2/3 Wire', 9.5, '700', 'middle', '#ffffff', SANS, -90)
+    # 24 / middle / 3 pads, factory trace from 24 to the middle pad
+    outline(514, 307, 534, 354)
+    pad(517.7, 313.8, 531.2, 323.7); pad(517.7, 327.3, 531.2, 336.3); pad(517.7, 339.4, 531.2, 348.9)
+    add('<rect x="523" y="336.3" width="3" height="3.1" fill="#d08a3a"/>')
+    add('<rect x="515.4" y="311.2" width="18.2" height="24.7" rx="3" fill="none" stroke="#ffd60a" stroke-width="1.8"/>')
+    text(543, 321.5, '3', 9.5, '700', 'middle', '#ffffff')
+    text(543.5, 351.5, '24', 9.5, '700', 'middle', '#ffffff')
+    add('<line x1="511" y1="337.9" x2="537" y2="337.9" stroke="#eb1e1e" stroke-width="2.5" stroke-linecap="round"/>')
+    # reference resistor
+    outline(551, 287, 576, 358)
+    text(563.5, 314, 'Rref', 9.5, '700', 'middle', '#ffffff')
+    add('<rect x="556" y="322" width="16" height="33" rx="2" fill="#1b1b1b"/>'
+        '<rect x="556" y="322" width="16" height="6" rx="1.5" fill="#c8ccd2" stroke="#8b939e"/>'
+        '<rect x="556" y="349" width="16" height="6" rx="1.5" fill="#c8ccd2" stroke="#8b939e"/>')
+    # numbered markers next to each spot, like the guide
+    def badge(x, y, n, bg, fg, r=7):
+        add(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{bg}" stroke="#111111" stroke-width="1.3"/>')
+        text(x, y + 3.6, n, 10, '700', 'middle', fg)
+    badge(589, 305, '1', '#ffd60a', '#111111')
+    badge(517, 422, '2', '#ffd60a', '#111111')
+    badge(544, 336, '3', '#eb1e1e', '#ffffff')
+    badge(524.5, 299, '4', '#ffd60a', '#111111')
+    # the steps, outside the board
+    text(470, 534, 'MAX31865 TWEAK (REQUIRED)', 12.5, '700', 'start', INK)
+    steps = (('1', '#ffd60a', '#111111', 'Swap Rref for 4.3 kΩ, 0.1 %'),
+             ('2', '#ffd60a', '#111111', 'Solder-bridge "2/3 Wire"'),
+             ('3', '#eb1e1e', '#ffffff', 'Cut the trace to 24'),
+             ('4', '#ffd60a', '#111111', 'Solder-bridge the two pads in the yellow box'))
+    for i, (n, bg, fg, label) in enumerate(steps):
+        y = 556 + i * 22
+        badge(478, y, n, bg, fg, 8)
+        text(492, y + 4.3, label, 12, '700', 'start', INK)
+    text(470, 652, 'See README for more detail in the Wiring section', 11.5, '400', 'start', '#59636e')
 
 def probe():
     # PT1000A probe lying left of the terminal block: thread, hex, body, cable, three wires
@@ -150,9 +224,8 @@ def probe():
     add(f'<rect x="272" y="395" width="70" height="10" rx="5" fill="#d8dee4" stroke="#9aa3ae"/>')
     text(196, 445, 'PT1000A probe', 13, '700', 'middle', '#3b4250')
     text(196, 462, '(M6, 3 wires)', 12, '400', 'middle', '#59636e')
-    x0 = MXB[0]
     for y_end, col in ((MT['RTD−'], '#2f6fdd'), (MT['RTD+'], '#d92d20'), (MT['F+'], '#d92d20')):
-        add(f'<path d="M342 400 C 400 400, 400 {y_end}, {x0 + 25} {y_end}" fill="none" stroke="{col}" stroke-width="4"/>')
+        add(f'<path d="M342 400 C 385 400, 385 {y_end}, {SCREW_X} {y_end}" fill="none" stroke="{col}" stroke-width="4"/>')
 
 # ---------------------------------------------------------------- water strips
 def water():
@@ -294,9 +367,9 @@ sxw, syw = pressure()
 # signal wires (all routes orthogonal; PY index = ESP row)
 mx1 = MXB[2] - 20
 wire([(mx1, MH['SDO']), (720, MH['SDO']), (720, PY[3]), (LPX, PY[3])], GREEN)
-wire([(mx1, MH['SDI']), (740, MH['SDI']), (740, PY[4]), (LPX, PY[4])], GREEN)
-wire([(mx1, MH['CLK']), (760, MH['CLK']), (760, PY[5]), (LPX, PY[5])], GREEN)
-wire([(mx1, MH['CS']), (790, MH['CS']), (790, PY[11]), (LPX, PY[11])], GREEN)
+wire([(mx1, MH['SDI']), (760, MH['SDI']), (760, PY[4]), (LPX, PY[4])], GREEN)
+wire([(mx1, MH['CLK']), (740, MH['CLK']), (740, PY[5]), (LPX, PY[5])], GREEN)
+wire([(mx1, MH['CS']), (848, MH['CS']), (848, PY[11]), (LPX, PY[11])], GREEN)
 wire([(LPX, PY[14]), (770, PY[14]), (770, DM['Z-C']), (DMB[0] + 18, DM['Z-C'])], PURPLE)
 wire([(462, PY[17]), (LPX, PY[17])], CYAN, trim0=0)
 wire([(SSRB[2] - 30, PY[19]), (LPX, PY[19])], HEAT, trim0=40)
@@ -308,7 +381,7 @@ wire([(TXB[2] - 18, TB['B2']), (1500, TB['B2']), (1560, AD['SCL']), (ADB[0] + 18
 wire([(sxw, syw), (sxw, 712), (1600, 712), (1600, AD['A0']), (ADB[0] + 18, AD['A0'])], TEAL)
 draw_wires()
 
-esp_pins(); max_pins(); ssr_pins(); supply_pins(); txs_pins(); ads_pins(); dimmer_pins()
+esp_pins(); max_pins(); max_tweak(); ssr_pins(); supply_pins(); txs_pins(); ads_pins(); dimmer_pins()
 
 # power and mains tags: short stub + named tag (same name = same wire)
 def ptag(x_pin, y, x_end, colour, s, side, w=None, fg='#ffffff'):
@@ -317,8 +390,8 @@ def ptag(x_pin, y, x_end, colour, s, side, w=None, fg='#ffffff'):
 ptag(LPX, PY[0], 858, AMBER, '+3.3V · EITHER PIN', 'L', w=159)
 ptag(LPX, PY[20], 836, RED, '+5V', 'L')
 ptag(LPX, PY[21], 836, BLACK, 'GND', 'L')
-ptag(mx1, MH['VIN'], 696, AMBER, '+3.3V', 'R')
-ptag(mx1, MH['GND'], 696, BLACK, 'GND', 'R')
+ptag(mx1, MH['VIN'], 676, AMBER, '+3.3V', 'R')
+ptag(mx1, MH['GND'], 676, BLACK, 'GND', 'R')
 nc(mx1 + 14, MH['3V3']); nc(mx1 + 14, MH['RDY'])
 ptag(SSRB[2] - 30, SSRB[3] - 30, 690, BLACK, 'GND', 'R')
 for y, s in ((PY[19], 'CONTINUES IN HIGH-VOLTAGE DIAGRAM'), (SSRB[3] - 30, 'CONTINUES IN HIGH-VOLTAGE DIAGRAM')):
