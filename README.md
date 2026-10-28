@@ -74,19 +74,6 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 **Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png).
 
-Which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
-
-| Function | GPIO |
-|---|---|
-| Heater (SSR) | 14 |
-| Pump (dimmer) | 21, zero-cross sense 9 |
-| Valve / second relay | 10 / 47 |
-| Temperature (MAX31865, SPI) | SCK 6, CS 8, MISO 4, MOSI 5 |
-| Pressure (ADS1115, I2C) | SDA 42, SCL 41 |
-| Brew / steam button | 38 / 48 |
-| Water-level touch | 12 |
-| 4-pin port (LED / distance sensor, I2C) | SDA 43, SCL 44 |
-
 **Temperature probe:** prepare the MAX31865 and connect the PT1000A with the [MAX31865 guide](docs/max31865.md).
 
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
