@@ -1,11 +1,14 @@
 # Wiring diagrams
 
-`lowvoltage.py` draws the low-voltage wiring diagram (`docs/wiring-low-voltage.png`) as an SVG, and
-`render.cjs` turns the SVG into the PNG at 2x (4000 × 2828).
+`lowvoltage.py` draws the low-voltage wiring diagram (`docs/wiring-low-voltage.png`) and `stock.py` the
+stock machine's wiring in its four switch positions (`docs/stock-wiring.png`), both as SVG.
+`render.cjs` turns an SVG into the PNG at 2x.
 
 ```bash
 python3 tools/diagrams/lowvoltage.py /tmp/wiring-low-voltage.svg
 node tools/diagrams/render.cjs /tmp/wiring-low-voltage.svg docs/wiring-low-voltage.png
+python3 tools/diagrams/stock.py /tmp/stock-wiring.svg
+node tools/diagrams/render.cjs /tmp/stock-wiring.svg docs/stock-wiring.png
 ```
 
 - Playwright comes from `tools/holiday-packs`: run `npm install` and `npx playwright install chromium` there once.

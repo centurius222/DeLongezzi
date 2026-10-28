@@ -72,7 +72,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 5. The water-level sensor plug (wires to the copper strips)
 6. Two copper strips on the outside of the tank
 
-**Original wiring:** the stock ECP3630 wiring in all four modes, drawn by [u/Apprehensive_Sir_202](https://www.reddit.com/user/Apprehensive_Sir_202/) on Reddit.
+**Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png), redrawn from [u/Apprehensive_Sir_202](https://www.reddit.com/user/Apprehensive_Sir_202/)'s schematic on Reddit.
 
 Which GPIO each part connects to (GaggiMate's "Pro Lego Build" pins):
 
