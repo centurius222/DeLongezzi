@@ -73,8 +73,6 @@ sdkconfig can't be changed), Node 20.19 or newer, Python 3.
   is used, anything else (or no git) gives an empty version.
 
 ## 5. Flash
-- **Mains off, board on USB only.** While flashing no program runs, so nothing holds the heater
-  and pump outputs off.
 - Find the board: `ls /dev/serial/by-id/` shows `usb-Espressif_USB_JTAG_serial_debug_unit_<MAC>-if00`.
   Always pass that full path.
 - **Update, keeping settings, Wi-Fi, shots, profiles, themes and videos:**

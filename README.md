@@ -87,9 +87,6 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 <h2></h2>
 
 ## Flash the firmware
-**Turn the machine's mains power off before flashing.** While the board is being flashed no
-program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
-
 **Easiest:** the [web flasher](https://centurius222.github.io/DeLongezzi/flasher/), nothing to install
 (Chrome on a computer, USB cable). Pick the port named USB JTAG/serial debug unit. Flashing takes a few minutes (16 MB file).
 
