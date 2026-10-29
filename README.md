@@ -128,6 +128,9 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 - The firmware version comes from the git tag: a build at tag `vX.Y.Z` shows that version, any
   other build shows none.
 
+## Disclaimer
+By proceeding with this project, you acknowledge and agree that you perform these modifications at your own risk. The author of this guide assumes no liability for any damage to your equipment, property, or injury to yourself or others. If you are unsure about any step, consult a qualified electrician or professional technician.
+
 ## License
 [CC BY-NC-SA 4.0](LICENSE), the same as GaggiMate: free for non-commercial use, with credit, and
 changes shared under the same license. Third-party libraries in `lib/` keep their own licenses.
