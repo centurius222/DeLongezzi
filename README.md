@@ -80,7 +80,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 
-## Install
+## Flash the firmware
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
 program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
 
@@ -99,7 +99,7 @@ The file holds the firmware, 32 custom themes, 18 brew-button videos and picture
 profiles, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
 (settings, shots, profiles, themes, videos). The SHA-256 is in the release notes.
 
-## First start
+## First start (Wi-Fi)
 1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
    **DeLongezzi**, password **delongezzi**.
 2. Join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save.
