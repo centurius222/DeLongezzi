@@ -123,12 +123,11 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 <h2></h2>
 
 ## Optional extras
-- **Theme fonts and the pizza and western theme packs** are not in the release file (the 32 themes in it
-  don't need them). To add them, download this repo and run, with Python 3 and nothing else to install:
+- **Theme fonts** are not in the release file (none of its 32 themes needs them). To use them in your own
+  themes, download this repo and run, with Python 3 and nothing else to install:
 
   ```sh
   python3 scripts/upload_fonts.py delongezzi.local
-  python3 scripts/upload_holidays.py delongezzi.local
   ```
 
   If `delongezzi.local` doesn't work, use the machine's IP address instead.
