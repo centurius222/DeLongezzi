@@ -63,7 +63,8 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 **Step 1. Install the 9-pin switch first:** in stock mode it works as before.
 
-**Step 2. After the switch is wired you can keep brewing:** stock mode works as normal, so add the electronics at your own pace.
+**Step 2. After the switch is wired you can keep brewing:** stock mode works as normal, so add the electronics at<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;your own pace.
 
 **MAX31865 tweak (required):** for the PT1000A, swap one resistor, add two solder bridges and cut one trace: [MAX31865 guide](docs/max31865.md).
 
