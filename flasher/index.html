@@ -65,7 +65,7 @@
       }
       .btn:hover { filter: brightness(1.08); }
       .btn-small { padding: 6px 14px; font-size: 0.92rem; background: transparent; color: var(--accent);
-        border: 1.5px solid var(--accent); border-radius: 8px; margin-left: 4px; }
+        border: 1.5px solid var(--accent); border-radius: 8px; }
       .note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
       .unsupported { color: var(--warn-border); font-weight: 600; }
       code {
@@ -113,12 +113,14 @@
         <ol>
           <li>The flasher asks for your Wi-Fi, enter it there.</li>
           <li>Run the water and PID calibration under Settings › Calibration.</li>
-          <li>To change the Wi-Fi later, plug the board in by USB and press
-            <esp-web-install-button manifest="manifest.json" wifi-only>
-              <button slot="activate" class="btn btn-small" type="button">Change Wi-Fi</button>
-              <span slot="unsupported"></span><span slot="not-allowed"></span>
-            </esp-web-install-button></li>
+          <li>To change the Wi-Fi later, plug the board in by USB and press</li>
         </ol>
+        <div style="text-align:center;margin-top:10px">
+          <esp-web-install-button manifest="manifest.json" wifi-only>
+            <button slot="activate" class="btn btn-small" type="button">Change Wi-Fi</button>
+            <span slot="unsupported"></span><span slot="not-allowed"></span>
+          </esp-web-install-button>
+        </div>
       </div>
 
       <footer>
