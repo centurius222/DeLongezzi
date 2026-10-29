@@ -104,12 +104,13 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 ## First start (Wi-Fi)
 1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
    **DeLongezzi**, password **delongezzi**.
-2. Join it, open http://4.4.4.1, enter your Wi-Fi under Settings › Wi-Fi and press Save.
+2. Join it, open http://4.4.4.1, enter your Wi-Fi name and password and press Save & restart.
 3. The board restarts into your Wi-Fi and is at http://delongezzi.local. If that doesn't open, find its
    address in your router's device list.
 4. Change the hotspot password (Settings › Wi-Fi › Access Point Password): the default is public,
    and the hotspot comes back whenever your router can't be reached at start-up.
 5. The web page has **no login**: keep the machine on your home network and never forward a port to it.
+6. Set the water levels under Settings › Calibration: empty the tank and press Set Empty, then fill it and press Set Full.
 
 ## Themes
 - The release file already has the 32 custom themes and 18 brew-button videos and pictures; delete any you
