@@ -7,7 +7,7 @@ Every GPIO comes from the firmware: GM_PRO_LEGO in lib/GaggiMateController/src/C
 and TOUCH_PIN in src/display/plugins/WaterLevelPlugin.cpp. Check them there before changing a pin.
 The text is sized for the DejaVu Sans fonts; other fonts may not fit the tags.
 """
-import math, sys
+import base64, math, os, sys
 
 out = sys.argv[1]
 W, H = 2000, 1414
@@ -61,7 +61,11 @@ def draw_wires():
         add(f'<polyline points="{p}" fill="none" stroke="{colour}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>')
 
 # ---------------------------------------------------------------- title
-text(60, 66, "DE'LONGEZZI WIRING (LOW-VOLTAGE SIDE)", 30, '700')
+# title: the logo with dark letters (logo-light.png is the one for white backgrounds), same as the high-voltage diagram
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+LOGO = base64.b64encode(open(os.path.join(REPO, 'docs', 'logo-light.png'), 'rb').read()).decode()
+add(f'<image href="data:image/png;base64,{LOGO}" x="48" y="22" width="235" height="65"/>')
+text(294, 67, 'WIRING (LOW-VOLTAGE SIDE)', 30, '700')
 text(60, 96, 'ESP32-S3 N16R8 · every pin from the firmware · tags with the same name are the same wire', 16, '400', 'start', '#59636e')
 
 # ---------------------------------------------------------------- ESP32-S3 board
