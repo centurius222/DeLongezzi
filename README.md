@@ -112,18 +112,26 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 5. The web page has **no login**: keep the machine on your home network and never forward a port to it.
 6. Set the water levels under Settings › Calibration: empty the tank and press Set Empty, then fill it and press Set Full.
 
-## Themes
-- The release file already has the 32 custom themes and 18 brew-button videos and pictures; delete any you
-  don't want under Settings › Custom themes and Settings › Pictures.
-- `themes/delongezzi-themes-v2.2.2.json`: the same 32 themes as a backup file, for Settings › Custom themes › Restore themes.
-- Theme fonts and the pizza/western packs are not inside the firmware. Upload them with
-  `python3 scripts/upload_fonts.py <machine address>` and `python3 scripts/upload_holidays.py <machine address>`.
+## Optional extras
+- **Theme fonts and the pizza and western theme packs** are not in the release file (the 32 themes in it
+  don't need them). To add them, download this repo and run, with Python 3 and nothing else to install:
 
-## Build
+  ```sh
+  python3 scripts/upload_fonts.py delongezzi.local
+  python3 scripts/upload_holidays.py delongezzi.local
+  ```
+
+  If `delongezzi.local` doesn't work, use the machine's IP address instead.
+- **Theme backup:** `themes/delongezzi-themes-v2.2.2.json` holds the same 32 themes. Restore it under
+  Settings › General › Web Settings › Custom Themes › Restore themes.
+- **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›
+  Web Settings (Custom Themes, Pictures).
+
+## Build from source
 - [PlatformIO](https://platformio.org): `pio run` builds `delongezzi-single`; `pio run -t upload`
   flashes the program only (keeps the data).
 - The web page is committed ready-built in `src/display/webassets/`. After changing `web/`, run
-  `scripts/build_webui.sh` (Node 22 with npm); the next `pio run` builds the new page in (the page's
+  `scripts/build_webui.sh` (Node 20.19 or newer, with npm); the next `pio run` builds the new page in (the page's
   checksum is written into `web_ui_blob.S`).
 - Libraries are pinned to exact versions. NimBLE-Arduino 1.4.3 is kept in `lib/NimBLE-Arduino` with
   4 memory settings changed (listed at the top of its `nimconfig.h`), and Improv WiFi Library 0.0.4 in
