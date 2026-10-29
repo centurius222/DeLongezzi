@@ -157,7 +157,7 @@ def max_board():
     text(521, 467, 'MAX31865', 11, '700', 'middle', '#ffffff', SANS, -90)
 def max_pins():
     x0, y0, x1, y1 = MXB
-    used = {'VIN', 'GND', 'CLK', 'SDO', 'SDI', 'CS'}
+    used = {'3V3', 'GND', 'CLK', 'SDO', 'SDI', 'CS'}
     for n, y in MH.items():
         text(x1 - 34, y + 4.5, n, 12.5, '700' if n in used else '400', 'end', '#ffffff' if n in used else '#e3c8e6', MONO)
         pin(x1 - 20, y)
@@ -425,9 +425,9 @@ def ptag(x_pin, y, x_end, colour, s, side, w=None, fg='#ffffff'):
 ptag(LPX, PY[0], 858, AMBER, '+3.3V · EITHER PIN', 'L', w=159)
 ptag(LPX, PY[20], 836, RED, '+5V', 'L')
 ptag(LPX, PY[21], 836, BLACK, 'GND', 'L')
-ptag(mx1, MH['VIN'], 676, AMBER, '+3.3V', 'R')
+ptag(mx1, MH['3V3'], 676, AMBER, '+3.3V', 'R', w=52)        # the builder feeds the 3V3 pin, VIN stays empty
 ptag(mx1, MH['GND'], 676, BLACK, 'GND', 'R')
-nc(mx1 + 14, MH['3V3']); nc(mx1 + 14, MH['RDY'])
+nc(mx1 + 14, MH['VIN']); nc(mx1 + 14, MH['RDY'])
 ptag(SSRB[2] - 30, SSRB[3] - 30, 690, BLACK, 'GND', 'R')
 for y, s in ((PY[19], 'CONTINUES IN HIGH-VOLTAGE DIAGRAM'), (SSRB[3] - 30, 'CONTINUES IN HIGH-VOLTAGE DIAGRAM')):
     ptag(SSRB[0] + 30, y, 430, MAINS, s, 'L', w=306)
@@ -466,7 +466,7 @@ pill(PX0 + 20, PY0b + 56, RED, '+5V')
 text(PX0 + 104, PY0b + 61, 'from the 5 V supply, powers almost everything: ESP32 5V pin, dimmer, ADS1115,', 13, '400', 'start', '#3b4250')
 text(PX0 + 104, PY0b + 78, 'TXS0102 VB and the pressure sensor', 13, '400', 'start', '#3b4250')
 pill(PX0 + 20, PY0b + 104, AMBER, '+3.3V')
-text(PX0 + 104, PY0b + 109, 'comes out of the ESP32 board (either 3V3 pin): MAX31865 VIN, TXS0102 VA and OE', 13, '400', 'start', '#3b4250')
+text(PX0 + 104, PY0b + 109, 'comes out of the ESP32 board (either 3V3 pin): MAX31865 3V3, TXS0102 VA and OE', 13, '400', 'start', '#3b4250')
 # legend
 LX0, LY0 = 1530, 105
 add(f'<rect x="{LX0}" y="{LY0}" width="430" height="220" rx="12" fill="#f6f8fa" stroke="#d1d9e0"/>')
