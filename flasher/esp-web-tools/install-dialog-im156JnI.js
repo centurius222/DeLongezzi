@@ -733,7 +733,7 @@ import{e,_ as t,o as i,i as r,x as s,a as o,n as a,t as n,m as l,b as d,E as c,c
           <ewt-page-message
             .icon=${"🎉"}
             label="Device connected to the network!"
-          ></ewt-page-message>${void 0===this._client.nextUrl?"":s`<p style="text-align:center;margin:0 0 8px">Visit it and bookmark the address: <b>${this._client.nextUrl}</b></p>`}
+          ></ewt-page-message>${void 0===this._client.nextUrl?"":s`<p style="text-align:center;margin:0 0 8px">Bookmark the address: <b>${this._client.nextUrl}</b></p>`}
           ${e?s`
                 <ew-list>
                   ${void 0===this._client.nextUrl?"":s`
