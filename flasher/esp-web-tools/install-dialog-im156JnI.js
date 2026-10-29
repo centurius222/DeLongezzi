@@ -811,7 +811,7 @@ import{e,_ as t,o as i,i as r,x as s,a as o,n as a,t as n,m as l,b as d,E as c,c
             Erase User Data
           </ew-text-button>
         </div>
-      `;else if(this._installConfirmed)if(this._installState&&"initializing"!==this._installState.state&&"preparing"!==this._installState.state)if("erasing"===this._installState.state)e="Installing",t=this._renderProgress("Erasing");else if("writing"===this._installState.state||"finished"===this._installState.state&&void 0===this._client){let i,r;e="Installing","finished"===this._installState.state?r="Wrapping up":this._installState.details.percentage<4?r="Installing":i=this._installState.details.percentage,t=this._renderProgress(s`
+      `;else if(this._installConfirmed)if(this._installState&&"initializing"!==this._installState.state&&"preparing"!==this._installState.state)if("erasing"===this._installState.state)e="Installing",t=this._renderProgress(s`Erasing<br /><br />This might take 1 minute.`);else if("writing"===this._installState.state||"finished"===this._installState.state&&void 0===this._client){let i,r;e="Installing","finished"===this._installState.state?r="Wrapping up":this._installState.details.percentage<4?r="Installing":i=this._installState.details.percentage,t=this._renderProgress(s`
           ${r?s`${r}<br />`:""}
           <br />
           This will take
