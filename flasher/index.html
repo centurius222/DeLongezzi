@@ -68,6 +68,9 @@
         border: 1.5px solid var(--accent); border-radius: 8px; }
       .note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
       .unsupported { color: var(--warn-border); font-weight: 600; }
+      .phones { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92rem; }
+      .phones th, .phones td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
+      .phones th { background: var(--bg); }
       code {
         background: var(--bg);
         border: 1px solid var(--border);
@@ -121,6 +124,27 @@
             <span slot="unsupported"></span><span slot="not-allowed"></span>
           </esp-web-install-button>
         </div>
+      </div>
+
+      <div class="card">
+        <strong>Having trouble?</strong>
+        <ul>
+          <li><b>No port in the list:</b> use a USB data cable, or hold BOOT while you plug the board in.</li>
+          <li><b>Flasher can't connect:</b> hold BOOT while you plug the board in, then press Install again.</li>
+          <li><b>Skipped the Wi-Fi question:</b> press Change Wi-Fi above.</li>
+          <li><b>New router or Wi-Fi password:</b> press Change Wi-Fi above, or set it from your phone through the board's
+            hotspot <b>DeLongezzi</b>, which turns on by itself when the board can't reach your Wi-Fi.</li>
+          <li><b>Lost the board's address:</b> find DeLongezzi in your router's device list.</li>
+        </ul>
+        <table class="phones">
+          <tr><th>Phone</th><th>Android</th><th>iPhone</th></tr>
+          <tr><td>Hotspot setup page</td><td>tap the "Sign in to network" notification</td>
+            <td>pops up by itself; if you close it, pick "Use Without Internet"</td></tr>
+          <tr><td>Typing <a href="http://4.4.4.1">http://4.4.4.1</a></td>
+            <td>may not open while mobile data is on: turn mobile data off</td><td>works</td></tr>
+          <tr><td><a href="http://delongezzi.local">http://delongezzi.local</a></td>
+            <td>often doesn't open: use the board's IP</td><td>works (also on Mac and PC)</td></tr>
+        </table>
       </div>
 
       <footer>
