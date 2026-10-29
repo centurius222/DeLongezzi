@@ -629,7 +629,7 @@ import{e,_ as t,o as i,i as r,x as s,a as o,n as a,t as n,m as l,b as d,E as c,c
                   @click=${()=>this._startInstall(!0)}
                 >
                   ${ca}
-                  <div slot="headline">Erase User Data</div>
+                  <div slot="headline">Erase and reflash</div>
                 </ew-list-item>
               `:""}
         </ew-list>
