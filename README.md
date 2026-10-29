@@ -107,6 +107,8 @@ profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing i
 <h2></h2>
 
 ## First start (Wi-Fi)
+$\color{red}\textsf{YOUR WI-FI MUST BE 2.4 GHZ: THE ESP32-S3 BOARD CAN'T CONNECT TO 5 GHZ.}$
+
 1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
    **DeLongezzi**, password **delongezzi**.
 2. Join it, open http://4.4.4.1, enter your Wi-Fi name and password and press Save & restart.
