@@ -58,6 +58,8 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 **Need more help?** Ask in the [GaggiMate Discord](https://delta2.eu/discord).
 
 
+<h2></h2>
+
 ## Wiring
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-high-voltage.png"><img src="docs/wiring-high-voltage.png" width="287" alt="De'Longezzi wiring, high-voltage side"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-low-voltage.png"><img src="docs/wiring-low-voltage.png" width="287" alt="De'Longezzi wiring, low-voltage side"></a>
 
