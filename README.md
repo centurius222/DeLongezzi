@@ -61,9 +61,6 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 ## Wiring
-> [!CAUTION]
-> UNPLUG THE MACHINE BEFORE YOU OPEN IT: MAINS VOLTAGE CAN KILL.
-
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-high-voltage.png"><img src="docs/wiring-high-voltage.png" width="287" alt="De'Longezzi wiring, high-voltage side"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-low-voltage.png"><img src="docs/wiring-low-voltage.png" width="287" alt="De'Longezzi wiring, low-voltage side"></a>
 
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-1.jpg"><img src="docs/wiring-1.jpg" width="132" alt="The ON-OFF-ON switch, wired"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-2.jpg"><img src="docs/wiring-2.jpg" width="132" alt="The switch position, inside"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-3.jpg"><img src="docs/wiring-3.jpg" width="132" alt="The switch position, from the front"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-4.jpg"><img src="docs/wiring-4.jpg" width="132" alt="The finished wiring inside, from above"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-5.jpg"><img src="docs/wiring-5.jpg" width="132" alt="The water-level sensor plug (wires to the copper strips)"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-6.jpg"><img src="docs/wiring-6.jpg" width="132" alt="The water-level sensor: two copper strips on the outside of the tank"></a>
