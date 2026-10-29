@@ -289,19 +289,50 @@ def ssr_pins():
         text(sx, sy - 18, n, 12, '700', 'middle', '#57606a', MONO)
 
 # ---------------------------------------------------------------- 5 V supply
-PSB = (380, 1110, 640, 1290)
+PSB = (380, 1105, 720, 1265)          # the real board, same drawing as psu() in hv_parts/parts.py (340 x 160)
+PSU_DEFS = '<defs><linearGradient id="psu-pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2466b3"/><stop offset="1" stop-color="#174b8c"/></linearGradient><linearGradient id="psu-xcap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ee5b4f"/><stop offset="1" stop-color="#a8261d"/></linearGradient><linearGradient id="psu-copper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b27a"/><stop offset="0.5" stop-color="#c9773a"/><stop offset="1" stop-color="#8a4b1c"/></linearGradient><linearGradient id="psu-ecapG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fbf74"/><stop offset="1" stop-color="#17643a"/></linearGradient><radialGradient id="psu-chrome" cx="0.38" cy="0.32" r="0.75"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c9ced4"/><stop offset="1" stop-color="#6e7781"/></radialGradient><linearGradient id="psu-ecapK" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a616b"/><stop offset="1" stop-color="#14171b"/></linearGradient><linearGradient id="psu-ytape" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8de62"/><stop offset="1" stop-color="#cfa520"/></linearGradient><linearGradient id="psu-bobbin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f4fb8"/><stop offset="0.45" stop-color="#4d82ef"/><stop offset="1" stop-color="#1a43a0"/></linearGradient></defs>'
 def supply():
     x0, y0, x1, y1 = PSB
-    add(f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" rx="8" fill="#c62828" stroke="#8e1b1b" stroke-width="2"/>')
-    add(f'<rect x="{x0 + 96}" y="{y0 + 50}" width="68" height="62" rx="4" fill="#f2c94c" stroke="#9a7b1c"/><rect x="{x0 + 110}" y="{y0 + 64}" width="40" height="34" rx="3" fill="#2f6fdd"/>')
-    text((x0 + x1) / 2, y0 + 26, '5 V 2 A SUPPLY (120/230 V in)', 12, '700', 'middle', '#ffffff')
-    text((x0 + x1) / 2, y1 - 14, 'feeds every +5V and GND tag', 11, '400', 'middle', '#ffe1e1')
+    add(PSU_DEFS)
+    add(f'<g transform="translate({x0} {y0})">')
+    add('<rect x="0" y="0" width="340" height="160" rx="6" fill="url(#psu-pcb)" stroke="#0f3566" stroke-width="1.5"/>')
+    for hx, hy in ((14, 14), (326, 14), (14, 146), (326, 146)):
+        add(f'<circle cx="{hx}" cy="{hy}" r="8" fill="#d9dde3" stroke="#8b939e" stroke-width="1"/><circle cx="{hx}" cy="{hy}" r="4" fill="#ffffff"/>')
+    for (px, py, n, anchor, dx) in ((16, 62, 'L', 'start', 12), (16, 98, 'N', 'start', 12), (324, 62, '+5V', 'end', -12), (324, 98, 'GND', 'end', -12)):
+        add(f'<circle cx="{px}" cy="{py}" r="7" fill="#d9dde3" stroke="#8b939e" stroke-width="1"/><circle cx="{px}" cy="{py}" r="3" fill="#5a616b"/>')
+        text(px + dx, py + 3.5, n, 9, '700', anchor, '#ffffff')
+    # input: X2 capacitor and the common-mode choke
+    add('<rect x="44" y="102" width="44" height="30" rx="3" fill="url(#psu-xcap)" stroke="#7a1a13" stroke-width="1"/>')
+    add('<rect x="44" y="18" width="50" height="48" rx="6" fill="#2a2d31" stroke="#111" stroke-width="1"/>')
+    for i in range(7):
+        add(f'<rect x="{50 + i * 6}" y="24" width="3.5" height="36" rx="1.5" fill="url(#psu-copper)"/>')
+    add('<rect x="48" y="40" width="42" height="4" fill="#2a2d31"/>')
+    # bulk capacitor (green) seen from the top
+    add('<circle cx="124" cy="44" r="27" fill="url(#psu-ecapG)" stroke="#0f4a29" stroke-width="1.2"/>')
+    add('<circle cx="124" cy="44" r="20" fill="url(#psu-chrome)" stroke="#7d8590" stroke-width="1"/>')
+    add('<path d="M124 28 V60 M110 36 L138 52 M110 52 L138 36" stroke="#8b939e" stroke-width="1.6"/>')
+    add('<path d="M100 32 A27 27 0 0 1 112 19" fill="none" stroke="#cfe9d8" stroke-width="5" opacity="0.7"/>')
+    add('<circle cx="124" cy="112" r="14" fill="url(#psu-ecapK)" stroke="#000" stroke-width="1"/><circle cx="124" cy="112" r="10" fill="url(#psu-chrome)"/>')
+    # transformer: yellow tape, black ferrite core, blue bobbin
+    add('<rect x="160" y="24" width="88" height="112" rx="4" fill="#24272c" stroke="#0d0f11" stroke-width="1"/>')
+    add('<rect x="168" y="38" width="72" height="84" rx="3" fill="url(#psu-ytape)" stroke="#a8850f" stroke-width="1"/>')
+    add('<rect x="186" y="38" width="36" height="84" rx="4" fill="url(#psu-bobbin)" stroke="#123c8a" stroke-width="1"/>')
+    for y in (30, 130):
+        add(f'<rect x="164" y="{y - 3}" width="80" height="6" rx="2" fill="#3a3e44"/>')
+    # output side: caps, diode, small parts
+    add('<circle cx="268" cy="38" r="15" fill="url(#psu-ecapK)" stroke="#000" stroke-width="1"/><circle cx="268" cy="38" r="10.5" fill="url(#psu-chrome)"/>')
+    add('<circle cx="268" cy="124" r="14" fill="url(#psu-ecapK)" stroke="#000" stroke-width="1"/><circle cx="268" cy="124" r="9.5" fill="url(#psu-chrome)"/>')
+    add('<rect x="254" y="72" width="28" height="16" rx="2" fill="#1b1b1b"/><rect x="282" y="76" width="7" height="8" fill="#c8ccd2"/>')
+    for x, y in ((104, 140), (140, 140), (304, 80), (230, 142)):
+        add(f'<rect x="{x}" y="{y}" width="14" height="8" rx="1" fill="#1b1b1b"/><rect x="{x}" y="{y}" width="3" height="8" fill="#c8ccd2"/><rect x="{x + 11}" y="{y}" width="3" height="8" fill="#c8ccd2"/>')
+    text(170, 152, '5V 2A', 8, '700', 'middle', '#cfe0f5')
+    add('</g>')
+    text((x0 + x1) / 2, y1 + 22, '5 V 2 A SUPPLY (120/230 V in)', 12, '700', 'middle', '#1f2328')
+    text((x0 + x1) / 2, y1 + 38, 'feeds every +5V and GND tag', 11, '400', 'middle', '#59636e')
 def supply_pins():
     x0, y0, x1, y1 = PSB
-    for n, y in (('L', 1160), ('N', 1210)):
-        pin(x0 + 18, y); text(x0 + 32, y + 4.5, n, 12.5, '700', 'start', '#ffffff', MONO)
-    for n, y in (('+5V', 1160), ('GND', 1210)):
-        pin(x1 - 18, y); text(x1 - 32, y + 4.5, n, 12.5, '700', 'end', '#ffffff', MONO)
+    for y in (y0 + 62, y0 + 98):                     # L, N on the left; +5V, GND on the right
+        pin(x0 + 16, y); pin(x1 - 16, y)
 
 # ---------------------------------------------------------------- TXS0102 + ADS1115 + pressure sensor
 TXB = (1300, 330, 1440, 500)
@@ -400,11 +431,11 @@ nc(mx1 + 14, MH['3V3']); nc(mx1 + 14, MH['RDY'])
 ptag(SSRB[2] - 30, SSRB[3] - 30, 690, BLACK, 'GND', 'R')
 for y, s in ((PY[19], 'CONTINUES IN HIGH-VOLTAGE DIAGRAM'), (SSRB[3] - 30, 'CONTINUES IN HIGH-VOLTAGE DIAGRAM')):
     ptag(SSRB[0] + 30, y, 430, MAINS, s, 'L', w=306)
-ptag(PSB[0] + 18, 1160, 366, '#d92d20', 'CONTINUES IN HIGH-VOLTAGE DIAGRAM', 'L', w=306)
-ptag(PSB[0] + 18, 1210, 366, '#2b2b2b', 'CONTINUES IN HIGH-VOLTAGE DIAGRAM', 'L', w=306)
-text(211, 1190, '120 / 230 V', 12, '700', 'middle', '#1f2328')
-ptag(PSB[2] - 18, 1160, 672, RED, '+5V', 'R')
-ptag(PSB[2] - 18, 1210, 672, BLACK, 'GND', 'R')
+ptag(PSB[0] + 16, PSB[1] + 62, 366, '#d92d20', 'CONTINUES IN HIGH-VOLTAGE DIAGRAM', 'L', w=306)
+ptag(PSB[0] + 16, PSB[1] + 98, 366, '#2b2b2b', 'CONTINUES IN HIGH-VOLTAGE DIAGRAM', 'L', w=306)
+text(211, PSB[1] + 84, '120 / 230 V', 12, '700', 'middle', '#1f2328')
+ptag(PSB[2] - 16, PSB[1] + 62, 736, RED, '+5V', 'R')
+ptag(PSB[2] - 16, PSB[1] + 98, 736, BLACK, 'GND', 'R')
 ptag(TXB[0] + 18, TA['GND'], 1278, BLACK, 'GND', 'L')
 ptag(TXB[0] + 18, TA['OE'], 1278, AMBER, '+3.3V', 'L')
 ptag(TXB[0] + 18, TA['VA'], 1278, AMBER, '+3.3V', 'L')
