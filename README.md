@@ -61,9 +61,9 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-1.jpg"><img src="docs/wiring-1.jpg" width="132" alt="The ON-OFF-ON switch, wired"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-2.jpg"><img src="docs/wiring-2.jpg" width="132" alt="The switch position, inside"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-3.jpg"><img src="docs/wiring-3.jpg" width="132" alt="The switch position, from the front"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-4.jpg"><img src="docs/wiring-4.jpg" width="132" alt="The finished wiring inside, from above"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-5.jpg"><img src="docs/wiring-5.jpg" width="132" alt="The water-level sensor plug (wires to the copper strips)"></a>&nbsp; <a href="https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/wiring-6.jpg"><img src="docs/wiring-6.jpg" width="132" alt="The water-level sensor: two copper strips on the outside of the tank"></a>
 
-**Step 1. Install the 9-pin switch first:** in stock mode it works as before, add the rest at your own pace.
+**Step 1. Install the 9-pin switch first:** in stock mode it works as before.
 
-**Step 2. Wire the rest:** follow the diagrams and the photos above.
+**Step 2. After the switch is wired you can keep brewing:** stock mode works as normal, so add the electronics at your own pace.
 
 **MAX31865 tweak (required):** for the PT1000A, swap one resistor, add two solder bridges and cut one trace: [MAX31865 guide](docs/max31865.md).
 
