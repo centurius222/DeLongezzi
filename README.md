@@ -72,6 +72,10 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 5. The water-level sensor plug (wires to the copper strips)
 6. The water-level sensor: two copper strips on the outside of the tank
 
+**Step 1. Install the 9-pin switch first:** in stock mode the machine works as before, so you can add the rest at your own pace.
+
+**Step 2. Wire the rest:** follow the diagrams and the photos above.
+
 **MAX31865 tweak (required):** for the PT1000A, swap one resistor, add two solder bridges and cut one trace: [MAX31865 guide](docs/max31865.md).
 
 **Original wiring:** [stock ECP wiring in all four switch positions](https://raw.githubusercontent.com/centurius222/DeLongezzi/main/docs/stock-wiring.png).
