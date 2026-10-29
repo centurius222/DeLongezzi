@@ -93,18 +93,18 @@ program runs, so nothing holds the heater and pump outputs off. Flash with the b
 **Easiest:** the [web flasher](https://centurius222.github.io/DeLongezzi/flasher/), nothing to install
 (Chrome on a computer, USB cable). Pick the port named USB JTAG/serial debug unit. Flashing takes a few minutes (16 MB file).
 
-**Or by hand:** download `delongezzi-v2.2.2.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
+**Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
 and write it with [esptool](https://github.com/espressif/esptool):
 
 ```sh
 esptool.py --chip esp32s3 erase_flash
-esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin
+esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
 ```
 
 If no port shows up, hold BOOT while you plug in the USB cable.
 
-The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures, and 5 starter
-profiles, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
+The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures, 5 starter
+profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
 (settings, shots, profiles, themes, videos). The SHA-256 is in the release notes.
 
 <h2></h2>
