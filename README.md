@@ -123,14 +123,6 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 <h2></h2>
 
 ## Optional extras
-- **Theme fonts** are not in the release file (none of its 32 themes needs them). To use them in your own
-  themes, download this repo and run, with Python 3 and nothing else to install:
-
-  ```sh
-  python3 scripts/upload_fonts.py delongezzi.local
-  ```
-
-  If `delongezzi.local` doesn't work, use the machine's IP address instead.
 - **Theme backup:** `themes/delongezzi-themes-v2.2.2.json` holds the same 32 themes. Restore it under
   Settings › General › Web Settings › Custom Themes › Restore themes.
 - **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›
