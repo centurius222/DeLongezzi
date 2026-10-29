@@ -5,6 +5,8 @@
 
 **Try it** [![LIVE](docs/live.svg)](https://centurius222.github.io/)**, no machine needed:** https://centurius222.github.io/ (the firmware's real interface with a simulated machine in your browser; nothing is saved).
 
+<h2></h2>
+
 ## Why DeLongezzi <sub><sup><sub>YOUR MACHINE YOUR WAY</sub></sup></sub>
 - **Stock functions stay STOCK:** brew and steam knobs work as always; one switch flips to DeLongezzi.
 - **One board, no screen to wire:** a single ESP32-S3 N16R8; use an old phone, a tablet or a smart TV.
@@ -30,6 +32,8 @@ DeLongezzi is not made or endorsed by GaggiMate.
 
 <br>
 
+<h2></h2>
+
 ## Requirements
 - **Machine:** best with DeLonghi ECP, EC and Stilosa ([which model?](docs/machines.md)); adaptable to any simple machine.
 - **Single Board:** ESP32-S3 N16R8 (16 MB flash, 8 MB PSRAM); for another board, ask Claude to adapt the build.
@@ -37,6 +41,8 @@ DeLongezzi is not made or endorsed by GaggiMate.
 - **A screen:** tablet, phone, PC or smart TV.
 - **Browser:** Chrome (using other browsers might not work).
 - **To install:** a computer with Chrome, and a USB data cable (charge-only cables don't work).
+
+<h2></h2>
 
 ## Bill of Materials
 <a href="docs/BOM.md"><img src="docs/bom-banner.jpg" alt="De'Longezzi bill of materials: open the parts list"></a>
@@ -78,6 +84,8 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 
 
+<h2></h2>
+
 ## Flash the firmware
 **Turn the machine's mains power off before flashing.** While the board is being flashed no
 program runs, so nothing holds the heater and pump outputs off. Flash with the board on USB only.
@@ -99,6 +107,8 @@ The file holds the firmware, 32 custom themes, 18 brew-button videos and picture
 profiles, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
 (settings, shots, profiles, themes, videos). The SHA-256 is in the release notes.
 
+<h2></h2>
+
 ## First start (Wi-Fi)
 1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
    **DeLongezzi**, password **delongezzi**.
@@ -109,6 +119,8 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
    and the hotspot comes back whenever your router can't be reached at start-up.
 5. The web page has **no login**: keep the machine on your home network and never forward a port to it.
 6. Set the water levels under Settings › Calibration: empty the tank and press Set Empty, then fill it and press Set Full.
+
+<h2></h2>
 
 ## Optional extras
 - **Theme fonts and the pizza and western theme packs** are not in the release file (the 32 themes in it
@@ -125,6 +137,8 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 - **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›
   Web Settings (Custom Themes, Pictures).
 
+<h2></h2>
+
 ## Build from source
 - [PlatformIO](https://platformio.org): `pio run` builds `delongezzi-single`; `pio run -t upload`
   flashes the program only (keeps the data).
@@ -137,12 +151,18 @@ profiles, with no Wi-Fi details or passwords in it. Writing it replaces everythi
 - The firmware version comes from the git tag: a build at tag `vX.Y.Z` shows that version, any
   other build shows none.
 
+<h2></h2>
+
 ## Disclaimer
 By proceeding with this project, you acknowledge and agree that you perform these modifications at your own risk. The author of this guide assumes no liability for any damage to your equipment, property, or injury to yourself or others. If you are unsure about any step, consult a qualified electrician or professional technician.
+
+<h2></h2>
 
 ## License
 [CC BY-NC-SA 4.0](LICENSE), the same as GaggiMate: free for non-commercial use, with credit, and
 changes shared under the same license. Third-party libraries in `lib/` keep their own licenses.
+
+<h2></h2>
 
 ## Credits
 - [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l., the original.
