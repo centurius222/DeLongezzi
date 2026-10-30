@@ -128,8 +128,10 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 - [PlatformIO](https://platformio.org): `pio run` builds `delongezzi-single`; `pio run -t upload`
   flashes the program only (keeps the data).
 - **Don't use PlatformIO's "Upload Filesystem Image"** (`-t uploadfs`): it replaces the whole storage
-  (themes, videos, shots) with only the 5 starter profiles. On a blank board, flash the release file once
-  first; `pio run -t upload` then updates the program on top.
+  (themes, videos, fonts, your own profiles and shots) with only the 5 starter profiles. On a blank board, flash
+  the release file once first; `pio run -t upload` then updates the program on top.
+- A source build makes the program only. The full 16 MB release file also holds the storage (themes, videos,
+  fonts), which can't be rebuilt from the repo, so get that from the release.
 - The web page is committed ready-built in `src/display/webassets/`. After changing `web/`, run
   `scripts/build_webui.sh` (bash, Node 20.19 or newer with npm, gzip and python3; on Windows use WSL); the next `pio run` builds the new page in (the page's
   checksum is written into `web_ui_blob.S`).
