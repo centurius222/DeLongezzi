@@ -107,10 +107,18 @@ mklittlefs -c data -b 4096 -p 256 -s 0xBE0000 storage_all.bin
 esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin --flash_mode dio --flash_freq 80m --flash_size 16MB \
   0x0 bootloader.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 firmware.bin 0x410000 storage_all.bin
 ```
-`boot_app0.bin` is in `~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. The
-theme pictures and videos are not in the repo; to reuse them, cut 0x410000–0xFF0000 out of the
-v2.2.3 release file (fonts included) and unpack it with `mklittlefs -u` (works for images mklittlefs
-made).
+The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`,
+`esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
+`~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. The theme pictures and
+videos are not in the repo; to reuse them, take the storage out of the last release file (v2.2.3,
+fonts included) and unpack it (works for images mklittlefs made):
+```sh
+dd if=delongezzi-v2.2.3.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count=$((0xBE0000/4096))
+mklittlefs -u data -b 4096 -p 256 -s 0xBE0000 storage.bin
+```
+Tested 2026-10-30: a fresh clone at `v2.2.3` built with these steps gives a file with the same
+bootloader, partition table and boot_app0 byte for byte, the same code (identical symbol table)
+and the same 217 storage files as the published v2.2.3.
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
