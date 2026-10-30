@@ -116,7 +116,7 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 <h2></h2>
 
 ## Optional extras
-- **Theme backup:** `themes/delongezzi-themes-v2.2.2.json` holds the same 32 themes. Restore it under
+- **Theme backup:** [delongezzi-themes-v2.2.2.json](https://github.com/centurius222/DeLongezzi/raw/v2.2.3/themes/delongezzi-themes-v2.2.2.json) holds the same 32 themes. Restore it under
   Settings › General › Web Settings › Custom Themes › Restore themes. Videos are not included; if you want
   the videos, reflash the full 16 MB file.
 - **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›

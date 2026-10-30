@@ -36,8 +36,7 @@ v2.2.3). If this file and the code disagree, the code is right: fix this file.
 | `web/fonts/` | the 10 optional theme fonts (in the release file's storage since v2.2.3, not in the program; see traps) |
 | `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload), `build_release.sh` (the full release file) |
 | `data/p/` | the 5 starter profiles |
-| `storage/` | the rest of the release file's storage: the 32 themes (`ct/`) and the 18 brew-button videos (`vid/`); their cache tags are made by `build_release.sh` |
-| `themes/` | the 32 custom themes in one file (videos left out) |
+| `storage/` | the rest of the release file's storage: the 32 themes (`ct/`) and the 18 brew-button videos (`vid/`); their cache tags and the theme backup JSON are made by `build_release.sh` |
 | `partitions_16mb.csv` | flash layout |
 
 ## 3. How the parts talk
@@ -115,6 +114,10 @@ Cache tags: the board sends a folder's `tag` file as the ETag of its pictures, v
 the page puts a video's tag in its link), and a browser keeps its copy until the tag changes. So
 the script makes every tag from the folder's files (`"h-<16 hex>"`): a changed file always gets a
 new tag. Uploads on the board write their own (`"<millis>-<size>"`).
+The script also writes the theme backup `delongezzi-themes-vX.Y.Z.json` from `storage/ct` (the
+format of Settings › Custom Themes › Restore themes, themes in name order, no videos); it goes on
+the release next to the .bin. Until v2.2.3 it was a second copy in git (`themes/`, now removed;
+the README links the copy at tag v2.2.3 until v2.2.4 is out).
 The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`
 (PlatformIO installs it only for `pio run -t buildfs`; the script runs that when it's missing),
 `esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
@@ -171,10 +174,10 @@ part and unpack the storage (above).
 - **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) at the tag on a clean tree,
   run `bash scripts/build_release.sh` (section 6), note its SHA-256; (3) create the
   GitHub release by hand in the browser (no GitHub token on the build PC): the notes with the
-  SHA-256, the `.bin` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
+  SHA-256, the `.bin` and `delongezzi-themes-vX.Y.Z.json` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
   old one, update the version and file name in `manifest.json`, the version in
   `flasher/index.html` (title line, button, description) and on the landing page `index.html`,
-  push; (5) README: the file name in Flash the firmware; (6) this file: the "Released" line in
+  push; (5) README: the file name in Flash the firmware and the theme backup link in Optional extras; (6) this file: the "Released" line in
   section 1.
 - **Demo, repo `centurius222/centurius222.github.io`:** it must sit at a site root, because the
   app's addresses all start with `/`. Build with

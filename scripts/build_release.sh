@@ -9,7 +9,8 @@ set -euo pipefail
 # Needs PlatformIO (pio); on Windows use WSL. Details: docs/HANDOVER.md section 6.
 #
 # Usage (plain terminal):
-#   bash scripts/build_release.sh    # -> delongezzi-<version>.bin in the repo folder
+#   bash scripts/build_release.sh    # -> delongezzi-<version>.bin and the theme backup
+#                                    #    delongezzi-themes-<version>.json in the repo folder
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
@@ -76,5 +77,25 @@ echo ">> Merging the release file..."
   0x0 "$BUILD/bootloader.bin" 0x8000 "$BUILD/partitions.bin" 0xe000 "$BOOT_APP0" \
   0x10000 "$BUILD/firmware.bin" 0x410000 "$TMP/storage.bin"
 
-echo ">> Done: $OUT ($(wc -c < "$OUT") bytes)"
-sha256sum "$OUT" 2>/dev/null || shasum -a 256 "$OUT"
+echo ">> Making the theme backup..."
+# For Settings > Custom Themes > Restore themes (the page's own backup format), made from
+# storage/ct and attached to the release next to the .bin, instead of a second copy in git.
+THEMES="delongezzi-themes-$VERSION.json"
+b64() { base64 | tr -d '\n'; }
+{
+  printf '{"format":"delongezzi-custom-themes","version":2,"themes":['
+  for d in storage/ct/*/; do
+    printf '%s\t%s\n' "$(sed -n 's/^{"name":"\([^"]*\)".*/\1/p' "$d/meta.json")" "$(basename "$d")"
+  done | LC_ALL=C sort | {
+    sep=""
+    while IFS="$(printf '\t')" read -r _name id; do
+      printf '%s{"id":"%s","meta":%s,"picture":"%s"}' "$sep" "$id" "$(cat "storage/ct/$id/meta.json")" \
+        "$(b64 < "storage/ct/$id/page.webp")"
+      sep=","
+    done
+  }
+  printf '],"videos":[]}'
+} > "$THEMES"
+
+echo ">> Done: $OUT ($(wc -c < "$OUT") bytes) and $THEMES"
+sha256sum "$OUT" "$THEMES" 2>/dev/null || shasum -a 256 "$OUT" "$THEMES"

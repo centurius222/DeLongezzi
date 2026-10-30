@@ -20,3 +20,4 @@ tools/sim_out.txt
 compile_commands.json
 # Made by scripts/build_release.sh
 /delongezzi-*.bin
+/delongezzi-themes-*.json
