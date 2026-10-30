@@ -87,17 +87,17 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 <h2></h2>
 
 ## Flash the firmware
-**Easiest:** the ⚡ <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
-(Chrome on a computer, USB data cable). When flashing, pick the port named USB JTAG/serial debug unit; if no port shows up,
-hold BOOT while you plug it in, then let go. Flashing takes a few minutes (16 MB file).
-
-**Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
-and write it with [esptool](https://github.com/espressif/esptool):
-
-```sh
-esptool.py --chip esp32s3 erase_flash
-esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
-```
+1. **Easiest:** the ⚡ <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
+   (Chrome on a computer, USB data cable). When flashing, pick the port named USB JTAG/serial debug unit; if no port shows up,
+   hold BOOT while you plug it in, then let go. Flashing takes a few minutes (16 MB file).
+2. **Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
+   and write it with [esptool](https://github.com/espressif/esptool):
+   ```sh
+   esptool.py --chip esp32s3 erase_flash
+   esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
+   ```
+3. **Or build it yourself:** see [Build from source](#build-from-source) below (program only; themes and
+   videos come from the release file).
 
 The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures,
 with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
