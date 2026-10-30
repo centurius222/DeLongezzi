@@ -183,10 +183,17 @@ part and unpack the storage (above).
   - Texts: "Erasing / This might take 1 minute.", the same-version menu item "Erase and reflash",
     "Update DeLongezzi (erases everything)" (the release file also overwrites NVS and storage),
     and "Bookmark the address: http://IP/" after Wi-Fi setup.
-- **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) at the tag on a clean tree,
+- **Commits:** author e-mail `234994531+centurius222@users.noreply.github.com` (GitHub's no-reply
+  address, so no private e-mail ends up in the history); commits written with Claude end with a
+  `Co-Authored-By: Claude …` line.
+- **Version numbers:** `vX.Y.Z`, the last number for fixes (v2.2.5), the middle one for new
+  features (v2.3.0). Only a plain `vX.Y.Z` tag gives the firmware a version (section 6).
+- **New release:** (1) tag `vX.Y.Z` on `main` (annotated: `git tag -a vX.Y.Z -m "DeLongezzi
+  vX.Y.Z: <what changed>"`), not pushed yet; (2) at the tag on a clean tree,
   run `bash scripts/build_release.sh` (section 6), note its SHA-256; (3) flash the file to a test
   board, not a machine in use (erase first, as the Web Flasher does), and check: it boots as
-  vX.Y.Z, the Web Flasher's Wi-Fi setup works, the themes and brew-button videos show; (4) create the
+  vX.Y.Z, the Web Flasher's Wi-Fi setup works, the themes and brew-button videos show; then push
+  the tag (if the test fails, only the local tag has to go); (4) create the
   GitHub release by hand in the browser (no GitHub token on the build PC): the notes with the
   SHA-256, the `.bin` and `delongezzi-themes-vX.Y.Z.json` attached; (5) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
   old one, update the version and file name in `manifest.json`, the version in
