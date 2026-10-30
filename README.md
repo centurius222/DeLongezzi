@@ -87,7 +87,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 <h2></h2>
 
 ## Flash the firmware
-**Easiest:** the <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
+**Easiest:** the ⚡ <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
 (Chrome on a computer, USB cable). Pick the port named USB JTAG/serial debug unit. Flashing takes a few minutes (16 MB file).
 
 **Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
