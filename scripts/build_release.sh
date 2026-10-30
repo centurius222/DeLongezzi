@@ -4,8 +4,8 @@ set -euo pipefail
 # written at 0x0 (like delongezzi-vX.Y.Z.bin on the Releases page). NVS is left blank, so the file
 # carries no Wi-Fi details or passwords. Writing it to a board replaces everything on it.
 #
-# The storage is storage/ (the 32 themes in ct/, the 18 brew-button videos in vid/, the fonts' tag
-# file in hol/fonts/) plus the starter profiles from data/p and the 10 fonts from web/fonts.
+# The storage is storage/ (the 32 themes in ct/, the 18 brew-button videos in vid/) plus the
+# starter profiles from data/p and the 10 fonts from web/fonts; the cache tags are made here.
 # Needs PlatformIO (pio); on Windows use WSL. Details: docs/HANDOVER.md section 6.
 #
 # Usage (plain terminal):
@@ -51,10 +51,17 @@ pio run -e "$ENV"
 echo ">> Making the storage..."
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-mkdir -p "$TMP/data"
+mkdir -p "$TMP/data/hol/fonts"
 cp -R storage/. "$TMP/data/"
 cp -R data/p "$TMP/data/p"
 cp web/fonts/*.ttf web/fonts/*.otf "$TMP/data/hol/fonts/"
+# Cache tags: the board sends each theme, video and font folder's tag as the ETag, and a browser
+# keeps its copy until the tag changes, so every tag is made here from the folder's files.
+sha256() { if command -v sha256sum > /dev/null; then sha256sum; else shasum -a 256; fi; }
+for d in "$TMP"/data/ct/*/ "$TMP"/data/vid/*/ "$TMP"/data/hol/fonts/; do
+  hash="$(cd "$d" && LC_ALL=C ls -A | grep -vx tag | while read -r f; do echo "$f"; cat "$f"; done | sha256 | cut -c1-16)"
+  printf '"h-%s"' "$hash" > "$d/tag"
+done
 # mklittlefs stores each file's time: the commit's, not the checkout's.
 "$PY" -c 'import os, sys
 t = int(sys.argv[1])

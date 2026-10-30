@@ -36,7 +36,7 @@ v2.2.3). If this file and the code disagree, the code is right: fix this file.
 | `web/fonts/` | the 10 optional theme fonts (in the release file's storage since v2.2.3, not in the program; see traps) |
 | `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload), `build_release.sh` (the full release file) |
 | `data/p/` | the 5 starter profiles |
-| `storage/` | the rest of the release file's storage: the 32 themes (`ct/`), the 18 brew-button videos (`vid/`), the fonts' tag file (`hol/fonts/tag`) |
+| `storage/` | the rest of the release file's storage: the 32 themes (`ct/`) and the 18 brew-button videos (`vid/`); their cache tags are made by `build_release.sh` |
 | `themes/` | the 32 custom themes in one file (videos left out) |
 | `partitions_16mb.csv` | flash layout |
 
@@ -105,18 +105,22 @@ The release file `delongezzi-vX.Y.Z.bin` (16,711,680 bytes, written at 0x0) hold
 the end of LittleFS. NVS is left blank, so it carries no Wi-Fi details or passwords.
 `bash scripts/build_release.sh` makes it from the repo alone: `pio run`, then these two steps:
 ```sh
-# data/ = storage/ (ct/<theme id>/, vid/<video id>/, hol/fonts/tag) + p/ (= data/p from the repo)
-# + the 10 fonts from web/fonts in hol/fonts/ (tag is the file the firmware writes when they are uploaded)
+# data/ = storage/ (ct/<theme id>/, vid/<video id>/) + p/ (= data/p from the repo)
+# + the 10 fonts from web/fonts in hol/fonts/, and a cache tag in every theme, video and font folder
 mklittlefs -c data -b 4096 -p 256 -s 0xBE0000 storage_all.bin
 esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin --flash_mode dio --flash_freq 80m --flash_size 16MB \
   0x0 bootloader.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 firmware.bin 0x410000 storage_all.bin
 ```
+Cache tags: the board sends a folder's `tag` file as the ETag of its pictures, video or fonts (and
+the page puts a video's tag in its link), and a browser keeps its copy until the tag changes. So
+the script makes every tag from the folder's files (`"h-<16 hex>"`): a changed file always gets a
+new tag. Uploads on the board write their own (`"<millis>-<size>"`).
 The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`
 (PlatformIO installs it only for `pio run -t buildfs`; the script runs that when it's missing),
 `esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
 `~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. `storage/` was taken out of
 the v2.2.3 release file. To take a release file's storage out again (to check it, or to start from
-it), unpack it (works for images mklittlefs made):
+it; leave out its `tag` files, the script makes them), unpack it (works for images mklittlefs made):
 ```sh
 dd if=delongezzi-v2.2.3.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count=$((0xBE0000/4096))
 mklittlefs -u data -b 4096 -p 256 -s 0xBE0000 storage.bin
