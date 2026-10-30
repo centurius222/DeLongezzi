@@ -1,8 +1,7 @@
 # DeLongezzi: handover
 
-For whoever picks this project up, person or AI. Checked against the code on 2026-10-23 (release
-v2.2.2); release, flasher and build notes updated 2026-10-30 (v2.2.3). If this file and the code
-disagree, the code is right: fix this file.
+For whoever picks this project up, person or AI. Checked against the code on 2026-10-30 (release
+v2.2.3). If this file and the code disagree, the code is right: fix this file.
 
 ## 1. What it is
 - Espresso-machine firmware forked from [GaggiMate](https://github.com/jniebuhr/gaggimate)
@@ -33,7 +32,7 @@ disagree, the code is right: fix this file.
 | `lib/DlzLog` | the permanent log behind `/api/log` |
 | `web/` | the web app (Preact, Vite, Tailwind 4, daisyUI 5, Chart.js) |
 | `web/src/demo/`, `web/demo.html`, `web/vite.demo.config.js` | the demo site: the same page with a fake machine in the browser |
-| `web/fonts/` | the 10 optional theme fonts (not in the firmware, see traps) |
+| `web/fonts/` | the 10 optional theme fonts (in the release file's storage since v2.2.3, not in the program; see traps) |
 | `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload) |
 | `data/p/` | the 5 starter profiles |
 | `themes/` | the 32 custom themes in one file (videos left out) |
@@ -58,8 +57,9 @@ Back:  sensor frames ─► Controller callbacks ─► PluginManager events
 Scale: BLE (NimBLE) ─► BLEScalePlugin ─► Controller::onVolumetricMeasurement ─► stop by weight
 ```
 - Storage: LittleFS holds shots `/h`, profiles `/p`, custom themes `/ct`, videos `/vid`, holiday
-  files and fonts `/hol`, saved lists `/lists`, earlier runs' logs `/dlzlog`. NVS holds settings
-  and Wi-Fi.
+  files and fonts `/hol`, saved lists `/lists`, earlier runs' logs `/dlzlog`, the bean list
+  `/beans.json` and the custom splash and logo pictures (`/splash.img`, `/logo.img`). NVS holds
+  settings and Wi-Fi.
 - Web state: the `machine` signal is fed by `evt:status`; the settings cache is dropped on
   `evt:changed`.
 
@@ -85,7 +85,7 @@ sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and 
   partition table (0x8000), boot_app0 (0xe000) and program (0x10000), nothing else.
   Same with esptool: `esptool.py --chip esp32s3 --port <board> write_flash 0x10000 firmware.bin`.
 - **Fresh install, wipes everything:**
-  `esptool.py --chip esp32s3 erase_flash && esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin`.
+  `esptool.py --chip esp32s3 --port <board> erase_flash && esptool.py --chip esp32s3 --port <board> write_flash 0x0 delongezzi-v2.2.3.bin`.
 - Or from Chrome: https://centurius222.github.io/DeLongezzi/flasher/ (erase offered, then
   Wi-Fi over USB with Improv; our changes to the flasher are in section 7).
 
@@ -94,7 +94,7 @@ sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and 
 |---|---|---|---|
 | nvs | 0x9000 | 0x5000 | settings, Wi-Fi |
 | app0 | 0x10000 | 4 MB | the program (no OTA: flashed by cable) |
-| spiffs (LittleFS) | 0x410000 | 0xBE0000 | shots, profiles, themes, videos, logs |
+| spiffs (LittleFS) | 0x410000 | 0xBE0000 | shots, profiles, themes, videos, fonts, logs and more (section 3) |
 | coredump | 0xFF0000 | 64 KB | the last crash |
 
 The release file `delongezzi-vX.Y.Z.bin` (16,711,680 bytes, written at 0x0) holds everything up to
@@ -142,7 +142,8 @@ and the same 217 storage files as the published v2.2.3.
   SHA-256, the `.bin` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
   old one, update the version and file name in `manifest.json`, the version in
   `flasher/index.html` (title line, button, description) and on the landing page `index.html`,
-  push; (5) README: the file name in Flash the firmware.
+  push; (5) README: the file name in Flash the firmware; (6) this file: the "Released" line in
+  section 1.
 - **Demo, repo `centurius222/centurius222.github.io`:** it must sit at a site root, because the
   app's addresses all start with `/`. Build with
   `cd web && npx vite build --config vite.demo.config.js` (output `web/dist-demo/`), then copy it
@@ -178,7 +179,7 @@ and the same 217 storage files as the published v2.2.3.
 | The demo under `/<repo>/demo/` instead of a site root | every `/assets`, `/api` and page address breaks | its own `<user>.github.io` repo |
 | `/api/settings` and full flash backups contain the Wi-Fi and Home Assistant passwords | leaked credentials | never print, log, commit or publish them |
 | A crash dump needs that build's exact `firmware.elf` | an undecodable dump | keep the `.elf` of every build you flash; PlatformIO's gdb needs libpython2.7 (else use esp-coredump and addr2line) |
-| An unknown page address | blank page (a stray `{' '}` inside `<Router>` in `web/src/index.jsx`), also on the machine | known bug, not fixed in v2.2.2 |
+| An unknown page address | blank page (a stray `{' '}` inside `<Router>` in `web/src/index.jsx`), also on the machine | known bug, still in v2.2.3 |
 | A machine flashed with v2.2.2 or older has no theme fonts | a theme set to one of them shows the default font | reflash v2.2.3 or later, or `python3 scripts/upload_fonts.py <machine address>` |
 | Hotspot password `delongezzi` is public, and the web page has no login | anyone nearby, or on the network, can run the machine | change the hotspot password; never forward a port to it |
 
@@ -200,6 +201,10 @@ and the same 217 storage files as the published v2.2.3.
   | ShotHistoryPlugin::loop | 0 | 1 | min × 6 |
   | BLEScaleTask | 1 | 1 | 4608 |
   | Settings::loop | any | 1 | 3072 |
+
+  Not in the table: the controller's sensor and pump tasks (`ADSAdc::loop`, `DimmedPump::loop`,
+  `DigitalInput::loop` and others: priority 1, any core, min × 4) and two one-shot tasks
+  (`settingsRestart`, the history rebuild).
 - **Web limits:** at most 6 WebSocket clients (`DEFAULT_MAX_WS_CLIENTS`); `OPEN_LIMIT` 4 open
   requests, then `503` with `Retry-After: 1`; `HEAVY_LANES` 2 big responses; `HEAVY_STUCK_MS` 5000.
 - **Storage walk** (`LittleFS.usedBytes()`, about 5 s): at start, when asked, and every 15 min in
@@ -251,7 +256,8 @@ appears when there is a current or last process:
 | `GET /api/log`, `/api/log?prev=1..3` | permanent log of this run and the three before |
 | `GET /api/core-dump` | the last crash dump |
 | tagged picture with a matching `If-None-Match` | `304` |
-| `/generate_204`, `/hotspot-detect.html`, `/ncsi.txt`, `/connecttest.txt` | captive-portal redirect to `http://4.4.4.1/` |
+| `/generate_204`, `/hotspot-detect.html`, `/ncsi.txt`, `/canonical.html`, `/redirect` | captive-portal redirect to `http://4.4.4.1/` |
+| `/connecttest.txt` (Windows 11 workaround), `/success.txt` (Firefox) | redirect to `http://logout.net` / `200` |
 
 ## 11. Debugging
 - The USB console is silent on purpose (Improv uses it). Use `/api/log` (and `?prev=1..3`) and
