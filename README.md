@@ -107,15 +107,12 @@ profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing i
 <h2></h2>
 
 ## First start (Wi-Fi)
-1. If the web flasher asked for your Wi-Fi, skip to step 3. Otherwise the board opens a Wi-Fi hotspot
-   **DeLongezzi**, password **delongezzi**.
-2. Join it, open http://4.4.4.1, enter your Wi-Fi name and password and press Save & restart.
-3. The board restarts into your Wi-Fi and is at http://delongezzi.local. If that doesn't open, find its
-   address in your router's device list.
-4. Change the hotspot password (Settings › Wi-Fi › Access Point Password): the default is public,
-   and the hotspot comes back whenever your router can't be reached at start-up.
-5. The web page has **no login**: keep the machine on your home network and never forward a port to it.
-6. Set the water levels under Settings › Calibration: empty the tank and press Set Empty, then fill it and press Set Full.
+1. The web flasher asks for your Wi-Fi: enter it, then press **Visit Device** to open the web UI and bookmark its address.
+2. Flashed with esptool, or skipped the question? Plug the board in by USB and press **Change Wi-Fi** on the
+   [web flasher](https://centurius222.github.io/DeLongezzi/flasher/).
+3. Run the water and PID calibration under Settings › Calibration.
+4. Problems? See [Having trouble?](https://centurius222.github.io/DeLongezzi/flasher/#trouble) on the flasher page
+   (hotspot, phones, lost address).
 
 <h2></h2>
 
