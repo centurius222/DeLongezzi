@@ -90,11 +90,11 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 1. **Easiest:** the ⚡ <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
    (Chrome on a computer, USB data cable). When flashing, pick the port named USB JTAG/serial debug unit; if no port shows up,
    hold BOOT while you plug it in, then let go. Flashing takes a few minutes (16 MB file).
-2. **Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
+2. **Or by hand:** download `delongezzi-v2.2.4.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
    and write it with [esptool](https://github.com/espressif/esptool):
    ```sh
    esptool.py --chip esp32s3 erase_flash
-   esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
+   esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.4.bin
    ```
 3. **Or build it yourself:** see [Build from source](#build-from-source) below (it makes the full 16 MB file).
 
@@ -116,7 +116,7 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 <h2></h2>
 
 ## Optional extras
-- **Theme backup:** [delongezzi-themes-v2.2.2.json](https://github.com/centurius222/DeLongezzi/raw/v2.2.3/themes/delongezzi-themes-v2.2.2.json) holds the same 32 themes. Restore it under
+- **Theme backup:** [delongezzi-themes-v2.2.4.json](https://github.com/centurius222/DeLongezzi/releases/download/v2.2.4/delongezzi-themes-v2.2.4.json) holds the same 32 themes. Restore it under
   Settings › General › Web Settings › Custom Themes › Restore themes. Videos are not included; if you want
   the videos, reflash the full 16 MB file.
 - **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›

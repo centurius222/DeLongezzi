@@ -1,7 +1,7 @@
 # DeLongezzi: handover
 
 For whoever picks this project up, person or AI. Checked against the code on 2026-10-30 (release
-v2.2.3). If this file and the code disagree, the code is right: fix this file.
+v2.2.4). If this file and the code disagree, the code is right: fix this file.
 
 ## 1. What it is
 - Espresso-machine firmware forked from [GaggiMate](https://github.com/jniebuhr/gaggimate)
@@ -14,10 +14,10 @@ v2.2.3). If this file and the code disagree, the code is right: fix this file.
   `lib/GaggiMateController/src/ControllerConfig.h`). Boiler probe PT1000 through a MAX31865
   (3-wire), pressure through an ADS1115, pump dimmer with zero-cross sensing (PSM), heater SSR,
   water-level touch pin, Bluetooth scales.
-- Released: v2.2.3 (tag `v2.2.3`): the v2.2.2 program; the release file adds the 10 theme fonts.
-  Commits on `main` after the tag: docs, the demo site, `.gitattributes`, the page files rebuilt
-  with `gzip -n` (same content), and `storage/` with `scripts/build_release.sh` (the full release
-  file from the repo).
+- Released: v2.2.4 (tag `v2.2.4`): the v2.2.3 program, now built entirely from the repo with
+  `scripts/build_release.sh`; the release also has the theme backup `delongezzi-themes-v2.2.4.json`.
+  Before publishing it was flashed to the machine: it answered as v2.2.4, Wi-Fi was set through the
+  Web Flasher, and the 32 themes, 18 videos and fonts were served with the new cache tags.
 
 ## 2. Where things are
 | Path | What |
@@ -88,7 +88,7 @@ sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and 
   partition table (0x8000), boot_app0 (0xe000) and program (0x10000), nothing else.
   Same with esptool: `esptool.py --chip esp32s3 --port <board> write_flash 0x10000 firmware.bin`.
 - **Fresh install, wipes everything:**
-  `esptool.py --chip esp32s3 --port <board> erase_flash && esptool.py --chip esp32s3 --port <board> write_flash 0x0 delongezzi-v2.2.3.bin`.
+  `esptool.py --chip esp32s3 --port <board> erase_flash && esptool.py --chip esp32s3 --port <board> write_flash 0x0 delongezzi-v2.2.4.bin`.
 - Or from Chrome: https://centurius222.github.io/DeLongezzi/flasher/ (erase offered, then
   Wi-Fi over USB with Improv; our changes to the flasher are in section 7).
 
@@ -119,8 +119,8 @@ the script makes every tag from the folder's files (`"h-<16 hex>"`): a changed f
 new tag. Uploads on the board write their own (`"<millis>-<size>"`).
 The script also writes the theme backup `delongezzi-themes-vX.Y.Z.json` from `storage/ct` (the
 format of Settings › Custom Themes › Restore themes, themes in name order, no videos); it goes on
-the release next to the .bin. Until v2.2.3 it was a second copy in git (`themes/`, now removed;
-the README links the copy at tag v2.2.3 until v2.2.4 is out).
+the release next to the .bin. Up to v2.2.3 it was a second copy in git (`themes/`, now removed);
+the README links the one on the v2.2.4 release.
 The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`
 (PlatformIO installs it only for `pio run -t buildfs`; the script runs that when it's missing),
 `esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
@@ -131,7 +131,7 @@ own the plain folders, and stops with a message if one is missing. `storage/` wa
 the v2.2.3 release file. To take a release file's storage out again (to check it, or to start from
 it; leave out its `tag` files, the script makes them), unpack it (works for images mklittlefs made):
 ```sh
-dd if=delongezzi-v2.2.3.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count=$((0xBE0000/4096))
+dd if=delongezzi-v2.2.4.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count=$((0xBE0000/4096))
 mklittlefs -u data -b 4096 -p 256 -s 0xBE0000 storage.bin
 ```
 Tested 2026-10-30: a fresh clone at `v2.2.3` built with these steps gives a file with the same
