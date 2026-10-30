@@ -18,7 +18,7 @@
 - **Original GaggiMate pages** (profiles, brewing and the rest) still work as before.
 - **Water-level sensor:** just two copper strips on the side of the tank.
 - **Diagnostics tab** for easy troubleshooting.
-- **Easy install:** web flasher, or one .bin file. **Easy to extend:** AI handover included, just ask Claude.
+- **Easy install:** Web Flasher, or one .bin file. **Easy to extend:** AI handover included, just ask Claude.
 
 Based on [GaggiMate](https://github.com/jniebuhr/gaggimate) by Caffinnova S.r.l.
 DeLongezzi is not made or endorsed by GaggiMate.
@@ -107,9 +107,9 @@ profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing i
 <h2></h2>
 
 ## First start (Wi-Fi)
-1. The web flasher asks for your Wi-Fi: enter it, then press **Visit Device** to open the web UI and bookmark its address.
+1. The Web Flasher asks for your Wi-Fi: enter it, then press **Visit Device** to open the web UI and bookmark its address.
 2. Flashed with esptool, or skipped the question? Plug the board in by USB and press **Change Wi-Fi** on the
-   [web flasher](https://centurius222.github.io/DeLongezzi/flasher/).
+   [Web Flasher](https://centurius222.github.io/DeLongezzi/flasher/).
 3. Run the water and PID calibration under Settings › Calibration.
 4. Problems? See [Having trouble?](https://centurius222.github.io/DeLongezzi/flasher/#trouble) on the flasher page
    (hotspot, phones, lost address).
