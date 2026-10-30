@@ -82,3 +82,17 @@ xtensa-esp32s3-elf-gdb .pio/build/display/firmware.elf
 (gdb) info locals
 (gdb) print variable_name
 ```
+
+## Release File
+
+### `build_release.sh`
+
+Builds `delongezzi-<version>.bin` (the whole board in one 16 MB file, settings blank) and the theme
+backup `delongezzi-themes-<version>.json` from the repo alone.
+
+**Usage:**
+```bash
+bash scripts/build_release.sh
+```
+
+Details: `docs/HANDOVER.md` section 6.

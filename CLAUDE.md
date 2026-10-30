@@ -5,7 +5,9 @@ in one program, no screen, the web page served from flash.
 
 - Build: `bash scripts/build_webui.sh` after any change in `web/`, then `pio run`.
 - Update a board and keep its data: `pio run -t upload --upload-port /dev/serial/by-id/<board>`.
-  Not `scripts/flash.sh`: it erases the whole chip.
+  `bash scripts/flash.sh /dev/serial/by-id/<board>` does the same after rebuilding the page.
+- Full release file (program + themes, videos, profiles, fonts; writing it erases the board):
+  `bash scripts/build_release.sh`.
 - Before changing anything, read "Traps and what they cost" in the handover below: each line
   there cost hours or data.
 
