@@ -127,8 +127,9 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 
 ## Build from source
 - [PlatformIO](https://platformio.org): `pio run` builds `delongezzi-single`; `pio run -t upload`
-  flashes the program only (keeps the data). Only `delongezzi-single` is for this board; the other envs in
-  `platformio.ini` are GaggiMate's originals and tests. With more than one ESP32 on USB, add
+  flashes the program only (keeps the data). Only `delongezzi-single` is for this board (a single
+  ESP32-S3 N16R8 wired like GaggiMate's Pro Lego build); none of GaggiMate's boards run this build, and the
+  other envs are theirs, its building blocks and tests. With more than one ESP32 on USB, add
   `--upload-port <port>`.
 - **Don't use PlatformIO's "Upload Filesystem Image"** (`-t uploadfs`): it replaces the whole storage
   (themes, videos, fonts, your own profiles and shots) with only the 5 starter profiles. On a blank board, flash
@@ -141,7 +142,10 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 - Libraries are pinned to exact versions. NimBLE-Arduino 1.4.3 is kept in `lib/NimBLE-Arduino` with
   4 memory settings changed (listed at the top of its `nimconfig.h`), and Improv WiFi Library 0.0.4 in
   `lib/ImprovWiFi` with 2 fixes (it dropped the command that came right after a successful one,
-  and a packet over 128 bytes overran its buffer).
+  and a packet over 128 bytes overran its buffer). Also kept and changed in `lib/`: ESPAsyncWebServer 3.9.1
+  (thread-safe WebSocket client list, whole-frame sends, file buffers in fast memory),
+  esp-arduino-ble-scales (a lock against a crash) and `lib/WiFi` (a private copy of Arduino's Wi-Fi
+  library with changed buffer settings). Each change is commented where it is.
 - The firmware version comes from the git tag: a build at tag `vX.Y.Z` shows that version, any
   other build shows none.
 
