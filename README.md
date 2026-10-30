@@ -99,8 +99,8 @@ esptool.py --chip esp32s3 erase_flash
 esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
 ```
 
-The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures, 5 starter
-profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
+The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures,
+with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
 (settings, shots, profiles, themes, videos). The SHA-256 is in the release notes.
 
 <h2></h2>
