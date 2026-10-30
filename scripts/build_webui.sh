@@ -19,12 +19,13 @@ cd "$ROOT/web"
 npm ci
 npm run build
 
-# Gzip the compressible assets in place (served with Content-Encoding: gzip).
-gzip -f dist/assets/*.js
-gzip -f dist/assets/*.css
+# Gzip the compressible assets in place (served with Content-Encoding: gzip). -n leaves out the file
+# name and time, so a rebuild without web/ changes gives the same files (and a tag build keeps its version).
+gzip -nf dist/assets/*.js
+gzip -nf dist/assets/*.css
 # Holiday pictures (src/holidays/*/pieces) are built into assets as SVG files.
-find dist/assets -name '*.svg' -exec gzip -f {} +
-gzip -f dist/*.html
+find dist/assets -name '*.svg' -exec gzip -nf {} +
+gzip -nf dist/*.html
 
 # Pack the built bundle into firmware-embeddable flash artifacts.
 python3 "$ROOT/scripts/embed_webui.py" --src "$ROOT/web/dist" --out "$ROOT/src/display/webassets"

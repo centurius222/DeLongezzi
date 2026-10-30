@@ -67,8 +67,8 @@ sdkconfig can't be changed), Node 20.19 or newer, Python 3.
    the Vite build, gzips the files, and `embed_webui.py` writes `src/display/webassets/`.
 2. **Firmware:** `pio run` (default env `delongezzi-single`). Output in
    `.pio/build/delongezzi-single/`: `firmware.bin`, `firmware.elf`, `bootloader.bin`, `partitions.bin`.
-- Every library version is pinned in `platformio.ini`. A fresh clone builds the same firmware
-  (checked byte for byte, except the build time).
+- Every library version is pinned in `platformio.ini`. A fresh clone builds the same code (identical
+  symbol table); the bytes can differ in layout.
 - The version comes from the git tag through `scripts/auto_firmware_version.py`: only `vX.Y.Z`
   is used, anything else (or no git) gives an empty version.
 
