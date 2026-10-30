@@ -34,7 +34,7 @@ disagree, the code is right: fix this file.
 | `web/` | the web app (Preact, Vite, Tailwind 4, daisyUI 5, Chart.js) |
 | `web/src/demo/`, `web/demo.html`, `web/vite.demo.config.js` | the demo site: the same page with a fake machine in the browser |
 | `web/fonts/` | the 10 optional theme fonts (not in the firmware, see traps) |
-| `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (see traps) |
+| `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload) |
 | `data/p/` | the 5 starter profiles |
 | `themes/` | the 32 custom themes in one file (videos left out) |
 | `partitions_16mb.csv` | flash layout |
@@ -146,7 +146,7 @@ made).
 ## 8. Traps and what they cost
 | Trap | Cost if missed | Do this |
 |---|---|---|
-| `scripts/flash.sh` erases the whole chip before uploading | settings, Wi-Fi, shots, profiles, themes and videos gone | update with the program-only flash in section 5 |
+| A full chip erase (`pio run -t erase`, or `scripts/flash.sh` until 2026-10-30) before uploading the program | settings, Wi-Fi, shots, profiles, themes, videos and fonts gone, and nothing puts them back | update with the program-only flash in section 5 (`scripts/flash.sh` does that now); for a full install write the release file |
 | Build and flash chained with `;` | once a failed build was followed by an erase: a board with no program | chain with `&&` |
 | Two ESP32-S3 boards on USB (a DIY scale, a spare) show the same name, and `/dev/ttyACM0`/`1` swap between plug-ins | flashing the wrong board wipes it | always the full `/dev/serial/by-id/...` path; never let pio pick the port |
 | Flashing while a shot runs | the shot dies; outputs are not held while no program runs | check `evt:status` `process.a` is 0 for about 6 s (`/api/status` doesn't show it) |

@@ -127,7 +127,9 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 
 ## Build from source
 - [PlatformIO](https://platformio.org): `pio run` builds `delongezzi-single`; `pio run -t upload`
-  flashes the program only (keeps the data).
+  flashes the program only (keeps the data). Only `delongezzi-single` is for this board; the other envs in
+  `platformio.ini` are GaggiMate's originals and tests. With more than one ESP32 on USB, add
+  `--upload-port <port>`.
 - **Don't use PlatformIO's "Upload Filesystem Image"** (`-t uploadfs`): it replaces the whole storage
   (themes, videos, fonts, your own profiles and shots) with only the 5 starter profiles. On a blank board, flash
   the release file once first; `pio run -t upload` then updates the program on top.

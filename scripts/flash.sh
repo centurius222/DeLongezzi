@@ -1,33 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
-# Build the web UI, then full-erase + upload the De'longezzi single-board firmware.
-#
-# WHY erase: the web UI is embedded at the END of the firmware blob. A partial
-# `pio run -t upload` only rewrites the sectors it touches, so when the new
-# image is a different size than the previous one, STALE BYTES can remain in the
-# region where /index.html lives — the machine then serves old/garbage data and
-# the dashboard is a blank screen. Full erase + upload always writes it
-# contiguous, which is what guarantees the embedded bundle is intact.
+# Build the web page, then upload the De'longezzi program only (pio run -t upload). Settings, Wi-Fi,
+# shots, profiles, themes, videos and fonts stay. For a full install use the release file or the
+# Web Flasher. (Until 2026-10-30 this erased the whole chip first, which left an empty board.)
 #
 # Usage (plain terminal):
-#   bash scripts/flash.sh
+#   bash scripts/flash.sh                          # PlatformIO picks the port
+#   bash scripts/flash.sh /dev/serial/by-id/...    # with more than one ESP32 on USB
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-# Rebuild + re-embed the web UI from source (regenerates web_ui.bin + the .S).
+# Rebuild + re-embed the web page from source. web_ui_blob.S carries the page's checksum, so the
+# next build always links the new page.
 bash scripts/build_webui.sh
 
-# Purge the compiled blob object. PlatformIO caches web_ui_blob.S.o and links it
-# even after a web rebuild, so the embedded blob can be OLDER than the manifest
-# it's paired with — the manifest offsets then point at stale bytes and the
-# dashboard is a blank screen (served /index.html is garbage even after a full
-# erase+upload). Always rebuild the object from the fresh web_ui.bin.
-rm -f .pio/build/delongezzi-single/src/display/webassets/web_ui_blob.S.o
+echo ">> Uploading the program (keeps the data)..."
+if [ $# -ge 1 ]; then
+  pio run -e delongezzi-single -t upload --upload-port "$1"
+else
+  pio run -e delongezzi-single -t upload
+fi
 
-echo ">> Erasing flash (clears stale blob tail)..."
-~/.local/bin/pio run -e delongezzi-single -t erase
-
-echo ">> Uploading firmware..."
-~/.local/bin/pio run -e delongezzi-single -t upload
-
-echo ">> Done. Hard-refresh the browser (Ctrl+Shift+R) to drop the cached bundle."
+echo ">> Done. Hard-refresh the browser (Ctrl+Shift+R) to drop the cached page."
