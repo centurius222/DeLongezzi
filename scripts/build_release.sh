@@ -30,7 +30,15 @@ OUT="delongezzi-$VERSION.bin"
 # Reproducible: the same commit gives the same program, on any day. The program's build times
 # (scripts/auto_firmware_version.py) and the storage files' times take the commit's time; the
 # storage image still differs in a few bytes, as mklittlefs stores each folder's change time.
-export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-$(git log -1 --format=%ct 2>/dev/null || date +%s)}"
+# With uncommitted changes (or no git) it's the real time, as in a plain pio run.
+if [ -z "${SOURCE_DATE_EPOCH:-}" ]; then
+  if git diff --quiet HEAD 2>/dev/null; then
+    SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+  else
+    SOURCE_DATE_EPOCH="$(date +%s)"
+  fi
+fi
+export SOURCE_DATE_EPOCH
 
 echo ">> Building the program..."
 # From clean: parts compiled earlier would keep their old build times.

@@ -135,10 +135,18 @@ them. In a fresh clone of `main` the script runs from start to end too.
 Reproducible since 2026-10-30: the build time inside the program is the commit's time
 (`SOURCE_DATE_EPOCH`, which the compiler also uses for `__DATE__`/`__TIME__`), and the build
 folder and PlatformIO's packages folder get fixed names in the debug info, so the same commit
-gives the same program byte for byte (tested: two fresh clones in different folders). The storage
-image does not: mklittlefs stores each folder's change time, which no program can set, so about
-25 bytes differ per build while the files inside are the same. The published SHA-256 checks the
-download; to check a rebuild, compare the program part and unpack the storage (above).
+gives the same program byte for byte (tested on one PC: two fresh clones in different folders, and
+a plain `pio run` against the script). The storage image does not: mklittlefs stores each folder's
+change time, which no program can set, so about 25 bytes differ per build while the files inside
+are the same. The published SHA-256 checks the download; to check a rebuild, compare the program
+part and unpack the storage (above).
+- Only a clean build is reproducible: parts compiled earlier keep their old build times
+  (`scripts/build_release.sh` always builds from clean).
+- The permanent log's "firmware built …" line shows the commit's time, not when it was built.
+  With uncommitted changes (or without git) it's the real time.
+- The debug info names the repo `.` and PlatformIO's packages `/platformio/packages`. gdb and
+  `analyze_coredump.py` still find functions and lines; to open framework sources in gdb:
+  `set substitute-path /platformio/packages /home/<you>/.platformio/packages`.
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
