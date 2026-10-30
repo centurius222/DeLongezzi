@@ -133,7 +133,7 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 - A source build makes the program only. The full 16 MB release file also holds the storage (themes, videos,
   fonts), which can't be rebuilt from the repo, so get that from the release.
 - The web page is committed ready-built in `src/display/webassets/`. After changing `web/`, run
-  `scripts/build_webui.sh` (bash, Node 20.19 or newer with npm, gzip and python3; on Windows use WSL); the next `pio run` builds the new page in (the page's
+  `scripts/build_webui.sh` (bash, Node 20.19+ or 22.12+ with npm, gzip and python3; on Windows use WSL); the next `pio run` builds the new page in (the page's
   checksum is written into `web_ui_blob.S`).
 - Libraries are pinned to exact versions. NimBLE-Arduino 1.4.3 is kept in `lib/NimBLE-Arduino` with
   4 memory settings changed (listed at the top of its `nimconfig.h`), and Improv WiFi Library 0.0.4 in

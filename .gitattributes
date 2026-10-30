@@ -1,0 +1,2 @@
+# Shell scripts keep Linux line endings on every system, so bash (also in WSL on Windows) can run them.
+*.sh text eol=lf
