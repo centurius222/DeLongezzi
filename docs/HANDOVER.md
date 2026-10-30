@@ -148,8 +148,8 @@ them. In a fresh clone of `main` the script runs from start to end too.
 Reproducible since 2026-10-30: the build time inside the program is the commit's time
 (`SOURCE_DATE_EPOCH`, which the compiler also uses for `__DATE__`/`__TIME__`), and the build
 folder and PlatformIO's packages folder get fixed names in the debug info, so the same commit
-gives the same program byte for byte (tested on one PC: two fresh clones in different folders, and
-a plain `pio run` against the script). The storage image does not: mklittlefs stores each folder's
+gives the same program byte for byte (tested on one PC: two fresh clones in different folders, a
+plain `pio run` against the script, and a fresh PlatformIO folder with everything downloaded again). The storage image does not: mklittlefs stores each folder's
 change time, which no program can set, so about 25 bytes differ per build while the files inside
 are the same. The published SHA-256 checks the download; to check a rebuild, compare the program
 part and unpack the storage (above).
@@ -160,6 +160,12 @@ part and unpack the storage (above).
 - The debug info names the repo `.` and PlatformIO's packages `/platformio/packages`. gdb and
   `analyze_coredump.py` still find functions and lines; to open framework sources in gdb:
   `set substitute-path /platformio/packages /home/<you>/.platformio/packages`.
+- The first build downloads PlatformIO's espressif32@6.12.0 (toolchain, framework, tools) and the
+  libraries (the PlatformIO registry; AsyncTCP from a GitHub tag). PlatformIO itself isn't pinned
+  (6.2.0 and 6.1.19 gave the same program apart from its build time). For a build years from now
+  those must still be online; keep a copy of `~/.platformio` and `.pio/libdeps` if that matters.
+- The script stops if the committed web page (`src/display/webassets`) is missing or older than
+  the last change in `web/` (demo files and .md left out): run `scripts/build_webui.sh` and commit.
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
@@ -178,12 +184,15 @@ part and unpack the storage (above).
     "Update DeLongezzi (erases everything)" (the release file also overwrites NVS and storage),
     and "Bookmark the address: http://IP/" after Wi-Fi setup.
 - **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) at the tag on a clean tree,
-  run `bash scripts/build_release.sh` (section 6), note its SHA-256; (3) create the
+  run `bash scripts/build_release.sh` (section 6), note its SHA-256; (3) flash the file to a test
+  board, not a machine in use (erase first, as the Web Flasher does), and check: it boots as
+  vX.Y.Z, the Web Flasher's Wi-Fi setup works, the themes and brew-button videos show; (4) create the
   GitHub release by hand in the browser (no GitHub token on the build PC): the notes with the
-  SHA-256, the `.bin` and `delongezzi-themes-vX.Y.Z.json` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
+  SHA-256, the `.bin` and `delongezzi-themes-vX.Y.Z.json` attached; (5) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
   old one, update the version and file name in `manifest.json`, the version in
   `flasher/index.html` (title line, button, description) and on the landing page `index.html`,
-  push; (5) README: the file name in Flash the firmware and the theme backup link in Optional extras; (6) this file: the "Released" line in
+  push; (6) check that the release's downloaded `.bin` and `flasher/delongezzi-vX.Y.Z.bin` have
+  the SHA-256 from (2); (7) README: the file name in Flash the firmware and the theme backup link in Optional extras; (8) this file: the "Released" line in
   section 1.
 - **Demo, repo `centurius222/centurius222.github.io`:** it must sit at a site root, because the
   app's addresses all start with `/`. Build with

@@ -146,7 +146,8 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
   esp-arduino-ble-scales (a lock against a crash) and `lib/WiFi` (a private copy of Arduino's Wi-Fi
   library with changed buffer settings). Each change is commented where it is.
 - The firmware version comes from the git tag: a build at tag `vX.Y.Z` shows that version, any
-  other build shows none.
+  other build shows none. A source zip has no git, so for a release build clone the tag:
+  `git clone --branch vX.Y.Z https://github.com/centurius222/DeLongezzi.git`.
 
 <h2></h2>
 

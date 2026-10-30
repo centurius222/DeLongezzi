@@ -17,8 +17,9 @@ cd "$ROOT"
 ENV=delongezzi-single
 BUILD=".pio/build/$ENV"
 CORE="${PLATFORMIO_CORE_DIR:-$HOME/.platformio}"
-PY="$CORE/penv/bin/python"
-[ -x "$PY" ] || PY=python3
+# esptool runs on the Python PlatformIO itself uses (it has pyserial); a plain python3 may not.
+PY="$(pio system info 2>/dev/null | awk '/^Python Executable/ {print $NF}')"
+[ -x "${PY:-}" ] || PY=python3
 
 # Offsets and sizes come from the partition table, so a changed table can't give a wrong file.
 part() { awk -F', *' -v n="$1" '$1 == n {print $4, $5}' partitions_16mb.csv; }
@@ -57,6 +58,24 @@ if [ -z "${SOURCE_DATE_EPOCH:-}" ]; then
   fi
 fi
 export SOURCE_DATE_EPOCH
+
+# The web page is the committed one (src/display/webassets, made by scripts/build_webui.sh). Stop
+# if it's missing (the build would serve an empty page) or older than the last change in web/.
+for f in web_ui.bin web_ui_blob.S web_ui_manifest.h; do
+  if [ ! -f "src/display/webassets/$f" ]; then
+    echo "src/display/webassets/$f is missing: run scripts/build_webui.sh" >&2
+    exit 1
+  fi
+done
+if git diff --quiet HEAD 2>/dev/null; then
+  page="$(git log -1 --format=%H -- src/display/webassets)"
+  web="$(git log -1 --format=%H -- web ':!web/src/demo' ':!web/demo.html' ':!web/vite.demo.config.js' ':!web/*.md')"
+  if [ -n "$web" ] && { [ -z "$page" ] || ! git merge-base --is-ancestor "$web" "$page"; }; then
+    echo "web/ changed after the page was last built ($(git log -1 --format='%h %s' "$web"))." >&2
+    echo "Run scripts/build_webui.sh and commit the page first." >&2
+    exit 1
+  fi
+fi
 
 echo ">> Building the program..."
 # From clean: parts compiled earlier would keep their old build times.
