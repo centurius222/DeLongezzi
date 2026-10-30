@@ -131,7 +131,8 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
   checksum is written into `web_ui_blob.S`).
 - Libraries are pinned to exact versions. NimBLE-Arduino 1.4.3 is kept in `lib/NimBLE-Arduino` with
   4 memory settings changed (listed at the top of its `nimconfig.h`), and Improv WiFi Library 0.0.4 in
-  `lib/ImprovWiFi` with a fix (it dropped the command that came right after a successful one).
+  `lib/ImprovWiFi` with 2 fixes (it dropped the command that came right after a successful one,
+  and a packet over 128 bytes overran its buffer).
 - The firmware version comes from the git tag: a build at tag `vX.Y.Z` shows that version, any
   other build shows none.
 
