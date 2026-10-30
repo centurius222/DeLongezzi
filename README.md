@@ -88,7 +88,8 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
 
 ## Flash the firmware
 **Easiest:** the ⚡ <a href="https://centurius222.github.io/DeLongezzi/flasher/"><sub><img src="docs/web-flasher-button.png" alt="WEB FLASHER" height="16"></sub></a>, nothing to install
-(Chrome on a computer, USB cable). Pick the port named USB JTAG/serial debug unit. Flashing takes a few minutes (16 MB file).
+(Chrome on a computer, USB cable). When flashing, pick the port named USB JTAG/serial debug unit; if no port shows up,
+hold BOOT while you plug in the USB cable. Flashing takes a few minutes (16 MB file).
 
 **Or by hand:** download `delongezzi-v2.2.3.bin` from [Releases](https://github.com/centurius222/DeLongezzi/releases/latest)
 and write it with [esptool](https://github.com/espressif/esptool):
@@ -97,8 +98,6 @@ and write it with [esptool](https://github.com/espressif/esptool):
 esptool.py --chip esp32s3 erase_flash
 esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
 ```
-
-If no port shows up, hold BOOT while you plug in the USB cable.
 
 The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures, 5 starter
 profiles and 10 theme fonts, with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
