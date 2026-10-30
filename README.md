@@ -96,8 +96,7 @@ Everything this build uses, 28 parts with pictures and shop links: **[parts list
    esptool.py --chip esp32s3 erase_flash
    esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin
    ```
-3. **Or build it yourself:** see [Build from source](#build-from-source) below (program only; themes and
-   videos come from the release file).
+3. **Or build it yourself:** see [Build from source](#build-from-source) below (it makes the full 16 MB file).
 
 The file holds the firmware, 32 custom themes, 18 brew-button videos and pictures,
 with no Wi-Fi details or passwords in it. Writing it replaces everything on the board
@@ -134,8 +133,8 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 - **Don't use PlatformIO's "Upload Filesystem Image"** (`-t uploadfs`): it replaces the whole storage
   (themes, videos, fonts, your own profiles and shots) with only the 5 starter profiles. On a blank board, flash
   the release file once first; `pio run -t upload` then updates the program on top.
-- A source build makes the program only. The full 16 MB release file also holds the storage (themes, videos,
-  fonts), which can't be rebuilt from the repo, so get that from the release.
+- **The full 16 MB file:** `bash scripts/build_release.sh` builds it the same way as the release: the program
+  plus the storage (themes and videos in `storage/`, profiles in `data/p`, fonts in `web/fonts`).
 - The web page is committed ready-built in `src/display/webassets/`. After changing `web/`, run
   `scripts/build_webui.sh` (bash, Node 20.19+ or 22.12+ with npm, gzip and python3; on Windows use WSL); the next `pio run` builds the new page in (the page's
   checksum is written into `web_ui_blob.S`).

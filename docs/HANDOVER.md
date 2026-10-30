@@ -15,8 +15,9 @@ v2.2.3). If this file and the code disagree, the code is right: fix this file.
   (3-wire), pressure through an ADS1115, pump dimmer with zero-cross sensing (PSM), heater SSR,
   water-level touch pin, Bluetooth scales.
 - Released: v2.2.3 (tag `v2.2.3`): the v2.2.2 program; the release file adds the 10 theme fonts.
-  Commits on `main` after the tag: docs, the demo site, `.gitattributes`, and the page files rebuilt
-  with `gzip -n` (same content).
+  Commits on `main` after the tag: docs, the demo site, `.gitattributes`, the page files rebuilt
+  with `gzip -n` (same content), and `storage/` with `scripts/build_release.sh` (the full release
+  file from the repo).
 
 ## 2. Where things are
 | Path | What |
@@ -33,8 +34,9 @@ v2.2.3). If this file and the code disagree, the code is right: fix this file.
 | `web/` | the web app (Preact, Vite, Tailwind 4, daisyUI 5, Chart.js) |
 | `web/src/demo/`, `web/demo.html`, `web/vite.demo.config.js` | the demo site: the same page with a fake machine in the browser |
 | `web/fonts/` | the 10 optional theme fonts (in the release file's storage since v2.2.3, not in the program; see traps) |
-| `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload) |
+| `scripts/` | `build_webui.sh`, `embed_webui.py`, `auto_firmware_version.py`, `upload_fonts.py`, `analyze_coredump.py`, `flash.sh` (page build + program-only upload), `build_release.sh` (the full release file) |
 | `data/p/` | the 5 starter profiles |
+| `storage/` | the rest of the release file's storage: the 32 themes (`ct/`), the 18 brew-button videos (`vid/`), the fonts' tag file (`hol/fonts/tag`) |
 | `themes/` | the 32 custom themes in one file (videos left out) |
 | `partitions_16mb.csv` | flash layout |
 
@@ -100,20 +102,21 @@ sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and 
 | coredump | 0xFF0000 | 64 KB | the last crash |
 
 The release file `delongezzi-vX.Y.Z.bin` (16,711,680 bytes, written at 0x0) holds everything up to
-the end of LittleFS. NVS is left blank, so it carries no Wi-Fi details or passwords. It was made
-like this:
+the end of LittleFS. NVS is left blank, so it carries no Wi-Fi details or passwords.
+`bash scripts/build_release.sh` makes it from the repo alone: `pio run`, then these two steps:
 ```sh
-# data/ holds ct/<theme id>/, vid/<video id>/, p/ (= data/p from the repo) and hol/fonts/
-# (the 10 fonts from web/fonts plus the tag file the firmware writes when they are uploaded)
+# data/ = storage/ (ct/<theme id>/, vid/<video id>/, hol/fonts/tag) + p/ (= data/p from the repo)
+# + the 10 fonts from web/fonts in hol/fonts/ (tag is the file the firmware writes when they are uploaded)
 mklittlefs -c data -b 4096 -p 256 -s 0xBE0000 storage_all.bin
 esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin --flash_mode dio --flash_freq 80m --flash_size 16MB \
   0x0 bootloader.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 firmware.bin 0x410000 storage_all.bin
 ```
-The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`,
+The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`
+(PlatformIO installs it only for `pio run -t buildfs`; the script runs that when it's missing),
 `esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
-`~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. The theme pictures and
-videos are not in the repo; to reuse them, take the storage out of the last release file (v2.2.3,
-fonts included) and unpack it (works for images mklittlefs made):
+`~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. `storage/` was taken out of
+the v2.2.3 release file. To take a release file's storage out again (to check it, or to start from
+it), unpack it (works for images mklittlefs made):
 ```sh
 dd if=delongezzi-v2.2.3.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count=$((0xBE0000/4096))
 mklittlefs -u data -b 4096 -p 256 -s 0xBE0000 storage.bin
@@ -122,6 +125,12 @@ Tested 2026-10-30: a fresh clone at `v2.2.3` built with these steps gives a file
 bootloader, partition table and boot_app0 byte for byte, the same code (every symbol at the same
 address) and the same 217 storage files as the published v2.2.3; it was flashed to a board and
 answered as DeLongezzi v2.2.3.
+
+Tested 2026-10-30 with `storage/` in the repo: `bash scripts/build_release.sh` at tag `v2.2.3`
+(with `storage/` and the script copied in) gives the same bootloader, partition table and
+boot_app0 byte for byte, the same 217 storage files, and a program with all 17,812 symbols at the
+same address that differs in 79 bytes only: the two build times inside it and the checksums over
+them. In a fresh clone of `main` the script runs from start to end too.
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
@@ -139,8 +148,8 @@ answered as DeLongezzi v2.2.3.
   - Texts: "Erasing / This might take 1 minute.", the same-version menu item "Erase and reflash",
     "Update DeLongezzi (erases everything)" (the release file also overwrites NVS and storage),
     and "Bookmark the address: http://IP/" after Wi-Fi setup.
-- **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) build at the tag on a clean
-  tree, make the storage image and the release file (section 6), note its SHA-256; (3) create the
+- **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) at the tag on a clean tree,
+  run `bash scripts/build_release.sh` (section 6), note its SHA-256; (3) create the
   GitHub release by hand in the browser (no GitHub token on the build PC): the notes with the
   SHA-256, the `.bin` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
   old one, update the version and file name in `manifest.json`, the version in
