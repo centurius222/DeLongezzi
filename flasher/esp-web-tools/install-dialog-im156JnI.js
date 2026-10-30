@@ -572,7 +572,7 @@ import{e,_ as t,o as i,i as r,x as s,a as o,n as a,t as n,m as l,b as d,E as c,c
                 >
                   ${oa}
                   <div slot="headline">
-                    ${this._isSameFirmware?`Update ${this._manifest.name}`:`Install ${this._manifest.name}`}
+                    ${this._isSameFirmware?`Update ${this._manifest.name} (erases everything)`:`Install ${this._manifest.name}`}
                   </div>
                 </ew-list-item>
               `}

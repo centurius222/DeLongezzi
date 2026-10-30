@@ -93,8 +93,8 @@
         <p style="color:#ff0000">WI-FI MUST BE 2.4 GHZ: THE ESP32-S3 BOARD CAN'T CONNECT TO 5 GHZ.</p>
         <ul>
           <li>Best to flash with the Chrome browser on a desktop or laptop (phones and Safari can't flash).</li>
-          <li>Some boards require holding the BOOT button while you plug them in, so if your board is brand new or won't flash, try holding BOOT while you plug it in.</li>
-          <li>If running the current version, hold BOOT while you plug it in to reinstall it.</li>
+          <li>Some boards require holding the BOOT button while you plug them in, so if your board is brand new or won't flash, try holding BOOT while you plug it in, then let go.</li>
+          <li>If running the current version, hold BOOT while you plug it in (then let go) to reinstall it.</li>
           <li>Flashing <b>erases everything</b> on the board and installs the full DeLongezzi.</li>
           <li>Only for an ESP32-S3 <b>N16R8</b> board.</li>
         </ul>
@@ -107,7 +107,7 @@
             desktop or laptop.</span>
           <span slot="not-allowed" class="unsupported">Flashing only works from an https:// page or from localhost.</span>
         </esp-web-install-button>
-        <p class="note">Plug the board in with a <span style="color:#ff0000">USB data cable</span>, press the Install button and pick its port (usually
+        <p class="note">Plug the board in with a <span style="color:#ff0000">USB data cable</span>, into the port marked USB (not COM/UART), press the Install button and pick its port (usually
           "USB JTAG/serial debug unit"). Flashing the 16 MB file takes a few minutes.</p>
       </div>
 
@@ -130,11 +130,12 @@
       <div class="card" id="trouble">
         <strong>Having trouble?</strong>
         <ul>
-          <li><b>No port in the list:</b> use a USB data cable, or hold BOOT while you plug the board in.</li>
-          <li><b>Flasher can't connect:</b> hold BOOT while you plug the board in, then press Install again.</li>
+          <li><b>No port in the list:</b> use a USB data cable, or hold BOOT while you plug the board in, then let go.</li>
+          <li><b>Flasher can't connect:</b> hold BOOT while you plug the board in, let go, then press Install again.</li>
+          <li><b>Serial port is not ready:</b> close other programs or tabs using the board.</li>
           <li><b>Skipped the Wi-Fi question:</b> press Change Wi-Fi above.</li>
           <li><b>New router or Wi-Fi password:</b> plug it in and press Change Wi-Fi above, or set it from your phone through the board's
-            hotspot (network <b>DeLongezzi</b>, password <code>delongezzi</code>), which turns on by itself when the board can't reach your Wi-Fi.</li>
+            hotspot (network <b>DeLongezzi</b>, password <code>delongezzi</code> unless you changed it), which turns on by itself when the board can't reach your Wi-Fi at start-up (turn the machine off and on).</li>
           <li><b>Lost the board's address:</b> find DeLongezzi in your router's device list.</li>
         </ul>
         <table class="phones">
@@ -142,7 +143,7 @@
           <tr><td>Joining the DeLongezzi hotspot</td><td>tap the "Sign in to network" notification and the Wi-Fi page opens</td>
             <td>the Wi-Fi page pops up by itself; if you close it, pick "Use Without Internet"</td></tr>
           <tr><td>Typing <a href="http://4.4.4.1">http://4.4.4.1</a></td>
-            <td>may not open while mobile data is on: turn mobile data off</td><td>works</td></tr>
+            <td>may not open while mobile data is on: turn mobile data off</td><td>usually works</td></tr>
           <tr><td><a href="http://delongezzi.local">http://delongezzi.local</a></td>
             <td>often doesn't open: use the board's IP</td><td>works (also on Mac and PC)</td></tr>
         </table>
