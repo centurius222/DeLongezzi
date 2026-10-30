@@ -106,10 +106,11 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 <h2></h2>
 
 ## First start (Wi-Fi)
-1. The [Web Flasher](https://centurius222.github.io/DeLongezzi/flasher/) asks for your Wi-Fi: enter it, then press **Visit Device** to open the web UI and bookmark its address.
-2. Flashed with esptool, or skipped the question? Plug the board in by USB and press **Change Wi-Fi** on the
+1. The [Web Flasher](https://centurius222.github.io/DeLongezzi/flasher/) asks for your Wi-Fi: enter it, then press **Visit Device** (if it doesn't load, wait a few seconds and reload) to open the web UI and bookmark its address.
+2. Flashed with esptool, or skipped the question? Plug the board's **USB** port (not COM/UART) in and press **Change Wi-Fi** on the
    [Web Flasher](https://centurius222.github.io/DeLongezzi/flasher/).
-3. Run the water and PID calibration under Settings › Calibration.
+3. With the board in the machine: run the water and PID calibration under Settings › Calibration (set Heater Wattage
+   to your machine's label value).
 4. Problems? See [Having trouble?](https://centurius222.github.io/DeLongezzi/flasher/#trouble) on the flasher page
    (hotspot, phones, lost address).
 
