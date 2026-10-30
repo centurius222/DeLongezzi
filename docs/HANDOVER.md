@@ -72,8 +72,10 @@ sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and 
    `src/display/webassets/`.
 2. **Firmware:** `pio run` (default env `delongezzi-single`). Output in
    `.pio/build/delongezzi-single/`: `firmware.bin`, `firmware.elf`, `bootloader.bin`, `partitions.bin`.
-- Every library version is pinned in `platformio.ini`. A fresh clone builds the same code (identical
-  symbol table); the bytes can differ in layout.
+- Every library version is pinned in `platformio.ini`. A fresh clone builds the same code, with every
+  symbol at the same address. The bytes still differ: the build time is built in (our
+  `BUILD_TIMESTAMP`, "firmware built <time>", and HomeSpan's "Sketch Compiled" `__DATE__ __TIME__`),
+  which shifts the merged text strings by a few bytes and every reference to them.
 - The version comes from the git tag through `scripts/auto_firmware_version.py`: only `vX.Y.Z`
   is used, anything else (or no git) gives an empty version.
 
@@ -117,8 +119,9 @@ dd if=delongezzi-v2.2.3.bin of=storage.bin bs=4096 skip=$((0x410000/4096)) count
 mklittlefs -u data -b 4096 -p 256 -s 0xBE0000 storage.bin
 ```
 Tested 2026-10-30: a fresh clone at `v2.2.3` built with these steps gives a file with the same
-bootloader, partition table and boot_app0 byte for byte, the same code (identical symbol table)
-and the same 217 storage files as the published v2.2.3.
+bootloader, partition table and boot_app0 byte for byte, the same code (every symbol at the same
+address) and the same 217 storage files as the published v2.2.3; it was flashed to a board and
+answered as DeLongezzi v2.2.3.
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
