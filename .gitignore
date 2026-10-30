@@ -18,3 +18,5 @@ sim_data/
 # Scale simulator run log (tools/scale_sim.py)
 tools/sim_out.txt
 compile_commands.json
+# Made by scripts/build_release.sh
+/delongezzi-*.bin

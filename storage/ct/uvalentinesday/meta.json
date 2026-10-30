@@ -1,0 +1,1 @@
+{"name":"Valentine's Day","neon":"#ff9a1a","glow":100,"clock":true,"permanent":true,"shade":0,"numSize":100,"font":"","brewVideo":"vspwbcusssg","when":{"type":"date","on":[2,14]},"fit":{"template":"16:10"},"bars":{"lr":"linear-gradient(to right, #602a1b, #39110b)","tb":"linear-gradient(to bottom, #783132, #643523)"},"nudge":{}}

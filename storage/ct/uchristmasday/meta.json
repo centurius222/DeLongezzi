@@ -1,0 +1,1 @@
+{"name":"Christmas","neon":"#ffffff","glow":45,"clock":true,"permanent":true,"shade":0,"numSize":100,"font":"","brewVideo":"vwhabggnkwz","when":{"type":"range","from":[12,1],"to":[12,25]},"fit":{"template":"16:10"},"bars":{"lr":"linear-gradient(to right, #513527, #3c2314)","tb":"linear-gradient(to bottom, #7b6054, #5f3428)"},"nudge":{"brewX":-3,"brewY":11}}

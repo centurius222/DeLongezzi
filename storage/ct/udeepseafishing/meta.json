@@ -1,0 +1,1 @@
+{"name":"Deep Sea Fishing","neon":"#1e9bff","glow":100,"clock":true,"permanent":true,"shade":0,"numSize":100,"font":"","brewVideo":"","when":{"type":"never"},"fit":{"template":"16:10"},"bars":{"lr":"linear-gradient(to right, #53524b, #554336)","tb":"linear-gradient(to bottom, #4e7b97, #5b564c)"},"nudge":{"brewX":-1,"brewY":8}}

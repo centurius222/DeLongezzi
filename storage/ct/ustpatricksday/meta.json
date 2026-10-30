@@ -1,0 +1,1 @@
+{"name":"St. Patrick's Day","neon":"#ff9a1a","glow":100,"clock":true,"permanent":true,"shade":0,"numSize":100,"font":"","brewVideo":"","when":{"type":"date","on":[3,17]},"fit":{"template":"16:10"},"bars":{"lr":"linear-gradient(to right, #2f330e, #2e2f0a)","tb":"linear-gradient(to bottom, #615f40, #553f14)"},"nudge":{"brewX":-2,"brewY":4}}

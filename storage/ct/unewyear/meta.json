@@ -1,0 +1,1 @@
+{"name":"New Year","neon":"#ff9a1a","glow":100,"clock":true,"permanent":true,"shade":0,"numSize":100,"font":"","brewVideo":"","when":{"type":"date","on":[1,1]},"fit":{"template":"16:10"},"bars":{"lr":"linear-gradient(to right, #482a16, #5f4325)","tb":"linear-gradient(to bottom, #473e3a, #785939)"},"nudge":{"brewX":-1,"brewY":-9}}
