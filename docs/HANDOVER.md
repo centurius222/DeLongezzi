@@ -1,7 +1,8 @@
 # DeLongezzi: handover
 
 For whoever picks this project up, person or AI. Checked against the code on 2026-10-23 (release
-v2.2.2). If this file and the code disagree, the code is right: fix this file.
+v2.2.2); release, flasher and build notes updated 2026-10-30 (v2.2.3). If this file and the code
+disagree, the code is right: fix this file.
 
 ## 1. What it is
 - Espresso-machine firmware forked from [GaggiMate](https://github.com/jniebuhr/gaggimate)
@@ -14,7 +15,9 @@ v2.2.2). If this file and the code disagree, the code is right: fix this file.
   `lib/GaggiMateController/src/ControllerConfig.h`). Boiler probe PT1000 through a MAX31865
   (3-wire), pressure through an ADS1115, pump dimmer with zero-cross sensing (PSM), heater SSR,
   water-level touch pin, Bluetooth scales.
-- Released: v2.2.2 (tag `v2.2.2`). Commits on `main` after the tag are docs and the demo site only.
+- Released: v2.2.3 (tag `v2.2.3`): the v2.2.2 program; the release file adds the 10 theme fonts.
+  Commits on `main` after the tag: docs, the demo site, `.gitattributes`, and the page files rebuilt
+  with `gzip -n` (same content).
 
 ## 2. Where things are
 | Path | What |
@@ -62,9 +65,11 @@ Scale: BLE (NimBLE) ─► BLEScalePlugin ─► Controller::onVolumetricMeasure
 
 ## 4. Build
 Tools: PlatformIO with espressif32@6.12.0 (Arduino-ESP32 2.0.17 / ESP-IDF 4.4.7, precompiled, so
-sdkconfig can't be changed), Node 20.19 or newer, Python 3.
+sdkconfig can't be changed), Node 20.19+ or 22.12+ (Vite 7), Python 3, bash and gzip (on Windows: WSL).
 1. **Web page** (after any change in `web/`): `bash scripts/build_webui.sh`. It runs `npm ci` and
-   the Vite build, gzips the files, and `embed_webui.py` writes `src/display/webassets/`.
+   the Vite build, gzips the files (`gzip -n`: no name or time, so a rerun without `web/` changes
+   leaves the files as they are and a tag build keeps its version), and `embed_webui.py` writes
+   `src/display/webassets/`.
 2. **Firmware:** `pio run` (default env `delongezzi-single`). Output in
    `.pio/build/delongezzi-single/`: `firmware.bin`, `firmware.elf`, `bootloader.bin`, `partitions.bin`.
 - Every library version is pinned in `platformio.ini`. A fresh clone builds the same code (identical
@@ -80,9 +85,9 @@ sdkconfig can't be changed), Node 20.19 or newer, Python 3.
   partition table (0x8000), boot_app0 (0xe000) and program (0x10000), nothing else.
   Same with esptool: `esptool.py --chip esp32s3 --port <board> write_flash 0x10000 firmware.bin`.
 - **Fresh install, wipes everything:**
-  `esptool.py --chip esp32s3 erase_flash && esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.2.bin`.
+  `esptool.py --chip esp32s3 erase_flash && esptool.py --chip esp32s3 write_flash 0x0 delongezzi-v2.2.3.bin`.
 - Or from Chrome: https://centurius222.github.io/DeLongezzi/flasher/ (erase offered, then
-  Wi-Fi over USB with Improv).
+  Wi-Fi over USB with Improv; our changes to the flasher are in section 7).
 
 ## 6. Flash layout and the release file
 | Part | Start | Size | Holds |
@@ -96,21 +101,40 @@ The release file `delongezzi-vX.Y.Z.bin` (16,711,680 bytes, written at 0x0) hold
 the end of LittleFS. NVS is left blank, so it carries no Wi-Fi details or passwords. It was made
 like this:
 ```sh
-# data/ holds ct/<theme id>/, vid/<video id>/ and p/ (= data/p from the repo)
+# data/ holds ct/<theme id>/, vid/<video id>/, p/ (= data/p from the repo) and hol/fonts/
+# (the 10 fonts from web/fonts plus the tag file the firmware writes when they are uploaded)
 mklittlefs -c data -b 4096 -p 256 -s 0xBE0000 storage_all.bin
 esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin --flash_mode dio --flash_freq 80m --flash_size 16MB \
   0x0 bootloader.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 firmware.bin 0x410000 storage_all.bin
 ```
 `boot_app0.bin` is in `~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. The
 theme pictures and videos are not in the repo; to reuse them, cut 0x410000–0xFF0000 out of the
-v2.2.2 release file and unpack it with `mklittlefs -u` (works for images mklittlefs made).
+v2.2.3 release file (fonts included) and unpack it with `mklittlefs -u` (works for images mklittlefs
+made).
 
 ## 7. Published sites
 - **Repo `centurius222/DeLongezzi`:** `main` is the code. Branch `gh-pages` holds the landing page
-  and `flasher/`: ESP Web Tools 10.4.0 (kept in the site), `manifest.json` (one part at offset 0,
-  `new_install_prompt_erase: true`, `new_install_improv_wait_time: 30`) and the release `.bin`.
-  For a new release: copy the new `.bin` into `flasher/`, update the version and file name in
-  `manifest.json`, push `gh-pages`.
+  and `flasher/`: ESP Web Tools 10.4.0 (kept in the site, **patched by us**, see below),
+  `manifest.json` (one part at offset 0, `new_install_prompt_erase: true`,
+  `new_install_improv_wait_time: 30`) and the release `.bin`.
+- **Our changes to ESP Web Tools** (`flasher/esp-web-tools/install-dialog-im156JnI.js` and
+  `install-button.js`; redo them if ESP Web Tools is ever replaced):
+  - After flashing a board put in flash mode with BOOT (GPIO0 strap low), restart it with the RTC
+    watchdog (esptool's ESP32-S3 values) instead of the USB restart, which keeps it in flash mode;
+    then reopen the port or find the board again among the page's ports (`__dlzReopen`, up to
+    20 s), so the Wi-Fi step comes without unplugging. Tested on a board 2026-10-29.
+  - A second `<esp-web-install-button wifi-only>` ("Change Wi-Fi" on the page) opens the Wi-Fi
+    form directly when DeLongezzi answers.
+  - Texts: "Erasing / This might take 1 minute.", the same-version menu item "Erase and reflash",
+    "Update DeLongezzi (erases everything)" (the release file also overwrites NVS and storage),
+    and "Bookmark the address: http://IP/" after Wi-Fi setup.
+- **New release:** (1) tag `vX.Y.Z` on `main` and push the tag; (2) build at the tag on a clean
+  tree, make the storage image and the release file (section 6), note its SHA-256; (3) create the
+  GitHub release by hand in the browser (no GitHub token on the build PC): the notes with the
+  SHA-256, the `.bin` attached; (4) `gh-pages`: copy the new `.bin` into `flasher/` and delete the
+  old one, update the version and file name in `manifest.json`, the version in
+  `flasher/index.html` (title line, button, description) and on the landing page `index.html`,
+  push; (5) README: the file name in Flash the firmware.
 - **Demo, repo `centurius222/centurius222.github.io`:** it must sit at a site root, because the
   app's addresses all start with `/`. Build with
   `cd web && npx vite build --config vite.demo.config.js` (output `web/dist-demo/`), then copy it
@@ -138,7 +162,7 @@ v2.2.2 release file and unpack it with `mklittlefs -u` (works for images mklittl
 | Bench without sensors | ADS1115 and PCA9634 errors at boot | expected |
 | Improv over USB (the web flasher's Wi-Fi step) | before v2.2.2: the reply waited in the USB send buffer (step skipped), and an unset library callback crashed the board on a wrong password | keep `sendUsbNow()` in `ImprovPlugin.cpp` and the `nullptr` callbacks in `lib/ImprovWiFi` |
 | ESP Web Tools asks for Wi-Fi only if Improv answers within 30 s and erase was ticked | users never get the Wi-Fi step | keep the manifest settings; the firmware must answer Improv soon after boot |
-| Holding BOOT while installing from the web flasher | the board doesn't restart afterwards, so no Wi-Fi step | only needed on a blank board; unplug and replug after |
+| Holding BOOT while installing (GPIO0 is latched until power-off) | the USB restart leaves the board in flash mode, so no Wi-Fi step | fixed in the site's ESP Web Tools (section 7); after an esptool flash with BOOT, unplug and replug |
 | `delongezzi.local` (mDNS) doesn't resolve on many PCs | a dead link after setup | Improv reports `http://<IP>/` |
 | `mklittlefs` can make images the firmware mounts but can't unpack the machine's own LittleFS | hours lost on flash dumps | read a machine's files through the web API |
 | LittleFS is formatted only if the partition's first 8 KB are all 0xFF | none: any other mount error keeps the data | erase the partition to start empty |
@@ -147,7 +171,7 @@ v2.2.2 release file and unpack it with `mklittlefs -u` (works for images mklittl
 | `/api/settings` and full flash backups contain the Wi-Fi and Home Assistant passwords | leaked credentials | never print, log, commit or publish them |
 | A crash dump needs that build's exact `firmware.elf` | an undecodable dump | keep the `.elf` of every build you flash; PlatformIO's gdb needs libpython2.7 (else use esp-coredump and addr2line) |
 | An unknown page address | blank page (a stray `{' '}` inside `<Router>` in `web/src/index.jsx`), also on the machine | known bug, not fixed in v2.2.2 |
-| The 10 optional theme fonts are not in the release file | a theme set to one of them shows the default font | `python3 scripts/upload_fonts.py <machine address>` |
+| A machine flashed with v2.2.2 or older has no theme fonts | a theme set to one of them shows the default font | reflash v2.2.3 or later, or `python3 scripts/upload_fonts.py <machine address>` |
 | Hotspot password `delongezzi` is public, and the web page has no login | anyone nearby, or on the network, can run the machine | change the hotspot password; never forward a port to it |
 
 ## 9. Rules the code depends on
@@ -231,5 +255,4 @@ appears when there is a current or last process:
 
 ## 12. Open items
 - Unknown page addresses give a blank page (section 8).
-- The 10 optional theme fonts are not in the release file (section 8).
 - The header comment of `scripts/build_webui.sh` is outdated: LittleFS holds more than `/p` and `/h` now.
