@@ -1,4 +1,6 @@
 # Shell scripts keep Linux line endings on every system, so bash (also in WSL on Windows) can run them.
 *.sh text eol=lf
-# The storage files go into the release file byte for byte (scripts/build_release.sh): never change their line endings.
+# The storage files, starter profiles and fonts go into the release file byte for byte (scripts/build_release.sh): never change their line endings.
 storage/** -text
+data/p/** -text
+web/fonts/** -text
