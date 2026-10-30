@@ -106,10 +106,13 @@ the end of LittleFS. NVS is left blank, so it carries no Wi-Fi details or passwo
 ```sh
 # data/ = storage/ (ct/<theme id>/, vid/<video id>/) + p/ (= data/p from the repo)
 # + the 10 fonts from web/fonts in hol/fonts/, and a cache tag in every theme, video and font folder
+# (the script reads 0x10000, 0x410000 and 0xBE0000 from partitions_16mb.csv)
 mklittlefs -c data -b 4096 -p 256 -s 0xBE0000 storage_all.bin
-esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin --flash_mode dio --flash_freq 80m --flash_size 16MB \
+esptool.py --chip esp32s3 merge_bin -o delongezzi-vX.Y.Z.bin \
   0x0 bootloader.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 firmware.bin 0x410000 storage_all.bin
 ```
+The merge keeps the flash settings PlatformIO wrote into the bootloader (DIO, 80 MHz, 16 MB; the
+releases up to v2.2.3 passed the same values by hand).
 Cache tags: the board sends a folder's `tag` file as the ETag of its pictures, video or fonts (and
 the page puts a video's tag in its link), and a browser keeps its copy until the tag changes. So
 the script makes every tag from the folder's files (`"h-<16 hex>"`): a changed file always gets a
@@ -121,7 +124,10 @@ the README links the copy at tag v2.2.3 until v2.2.4 is out).
 The tools come with PlatformIO: `mklittlefs` is `~/.platformio/packages/tool-mklittlefs/mklittlefs`
 (PlatformIO installs it only for `pio run -t buildfs`; the script runs that when it's missing),
 `esptool.py` is `python3 ~/.platformio/packages/tool-esptoolpy/esptool.py`, and `boot_app0.bin` is in
-`~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. `storage/` was taken out of
+`~/.platformio/packages/framework-arduinoespressif32/tools/partitions/`. The script picks each in
+the version espressif32@6.12.0 uses (mklittlefs 1.203, tool-esptoolpy 2.40900 = esptool 4.9,
+framework 3.20017 = Arduino 2.0.17) from whichever copy has it, since another ESP32 platform may
+own the plain folders, and stops with a message if one is missing. `storage/` was taken out of
 the v2.2.3 release file. To take a release file's storage out again (to check it, or to start from
 it; leave out its `tag` files, the script makes them), unpack it (works for images mklittlefs made):
 ```sh

@@ -17,11 +17,28 @@ cd "$ROOT"
 ENV=delongezzi-single
 BUILD=".pio/build/$ENV"
 CORE="${PLATFORMIO_CORE_DIR:-$HOME/.platformio}"
-MKLITTLEFS="$CORE/packages/tool-mklittlefs/mklittlefs"
-ESPTOOL="$CORE/packages/tool-esptoolpy/esptool.py"
-BOOT_APP0="$CORE/packages/framework-arduinoespressif32/tools/partitions/boot_app0.bin"
 PY="$CORE/penv/bin/python"
 [ -x "$PY" ] || PY=python3
+
+# Offsets and sizes come from the partition table, so a changed table can't give a wrong file.
+part() { awk -F', *' -v n="$1" '$1 == n {print $4, $5}' partitions_16mb.csv; }
+read -r APP_OFFSET _ <<< "$(part app0)"
+read -r FS_OFFSET FS_SIZE <<< "$(part spiffs)"
+if [ -z "${APP_OFFSET:-}" ] || [ -z "${FS_SIZE:-}" ]; then
+  echo "partitions_16mb.csv has no app0 or spiffs line" >&2
+  exit 1
+fi
+
+# PlatformIO's tools in the versions espressif32@6.12.0 uses (platformio.ini). Another ESP32
+# platform may have put other versions in the plain folders, so every copy is looked at.
+pkg() {
+  local d
+  for d in "$CORE/packages/$1" "$CORE/packages/$1"@*; do
+    if grep -qs "\"version\": *\"$2" "$d/package.json"; then echo "$d"; return 0; fi
+  done
+  return 1
+}
+need() { pkg "$1" "$2" || { echo "PlatformIO's $1 ${2}x is missing in $CORE/packages" >&2; exit 1; }; }
 
 # At a vX.Y.Z tag this is the release's own name; other builds get git's longer name (and no
 # version inside the firmware, see scripts/auto_firmware_version.py).
@@ -46,8 +63,11 @@ echo ">> Building the program..."
 pio run -e "$ENV" -t clean > /dev/null
 pio run -e "$ENV"
 
+ESPTOOL="$(need tool-esptoolpy 2.40900.)/esptool.py"
+BOOT_APP0="$(need framework-arduinoespressif32 3.20017.)/tools/partitions/boot_app0.bin"
 # PlatformIO installs its mklittlefs only for a filesystem build.
-[ -x "$MKLITTLEFS" ] || pio run -e "$ENV" -t buildfs
+pkg tool-mklittlefs 1.203. > /dev/null || pio run -e "$ENV" -t buildfs > /dev/null
+MKLITTLEFS="$(need tool-mklittlefs 1.203.)/mklittlefs"
 
 echo ">> Making the storage..."
 TMP="$(mktemp -d)"
@@ -70,12 +90,13 @@ for d, ds, fs in os.walk(sys.argv[2]):
     for n in ds + fs:
         os.utime(os.path.join(d, n), (t, t))
 os.utime(sys.argv[2], (t, t))' "$SOURCE_DATE_EPOCH" "$TMP/data"
-"$MKLITTLEFS" -c "$TMP/data" -b 4096 -p 256 -s 0xBE0000 "$TMP/storage.bin" > /dev/null
+"$MKLITTLEFS" -c "$TMP/data" -b 4096 -p 256 -s "$FS_SIZE" "$TMP/storage.bin" > /dev/null
 
 echo ">> Merging the release file..."
-"$PY" "$ESPTOOL" --chip esp32s3 merge_bin -o "$OUT" --flash_mode dio --flash_freq 80m --flash_size 16MB \
+# Flash mode, speed and size stay as PlatformIO wrote them into the bootloader.
+"$PY" "$ESPTOOL" --chip esp32s3 merge_bin -o "$OUT" \
   0x0 "$BUILD/bootloader.bin" 0x8000 "$BUILD/partitions.bin" 0xe000 "$BOOT_APP0" \
-  0x10000 "$BUILD/firmware.bin" 0x410000 "$TMP/storage.bin"
+  "$APP_OFFSET" "$BUILD/firmware.bin" "$FS_OFFSET" "$TMP/storage.bin"
 
 echo ">> Making the theme backup..."
 # For Settings > Custom Themes > Restore themes (the page's own backup format), made from
