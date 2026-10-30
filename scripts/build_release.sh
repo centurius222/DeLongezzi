@@ -72,10 +72,25 @@ MKLITTLEFS="$(need tool-mklittlefs 1.203.)/mklittlefs"
 echo ">> Making the storage..."
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
+# Only files git tracks go in, so stray or uncommitted extra files can't; without git (a source
+# zip) the folders are taken as they are.
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  git ls-files -z -- storage data/p 'web/fonts/*.ttf' 'web/fonts/*.otf' |
+    while IFS= read -r -d '' f; do
+      [ -f "$f" ] || continue # deleted, not committed yet
+      mkdir -p "$TMP/src/$(dirname "$f")"
+      cp "$f" "$TMP/src/$f"
+    done
+else
+  mkdir -p "$TMP/src/data" "$TMP/src/web/fonts"
+  cp -R storage "$TMP/src/"
+  cp -R data/p "$TMP/src/data/"
+  cp web/fonts/*.ttf web/fonts/*.otf "$TMP/src/web/fonts/"
+fi
 mkdir -p "$TMP/data/hol/fonts"
-cp -R storage/. "$TMP/data/"
-cp -R data/p "$TMP/data/p"
-cp web/fonts/*.ttf web/fonts/*.otf "$TMP/data/hol/fonts/"
+cp -R "$TMP/src/storage/." "$TMP/data/"
+cp -R "$TMP/src/data/p" "$TMP/data/p"
+cp "$TMP/src/web/fonts/"* "$TMP/data/hol/fonts/"
 # Cache tags: the board sends each theme, video and font folder's tag as the ETag, and a browser
 # keeps its copy until the tag changes, so every tag is made here from the folder's files.
 sha256() { if command -v sha256sum > /dev/null; then sha256sum; else shasum -a 256; fi; }
@@ -99,19 +114,19 @@ echo ">> Merging the release file..."
   "$APP_OFFSET" "$BUILD/firmware.bin" "$FS_OFFSET" "$TMP/storage.bin"
 
 echo ">> Making the theme backup..."
-# For Settings > Custom Themes > Restore themes (the page's own backup format), made from
-# storage/ct and attached to the release next to the .bin, instead of a second copy in git.
+# For Settings > Custom Themes > Restore themes (the page's own backup format), made from the
+# storage's themes and attached to the release next to the .bin, instead of a second copy in git.
 THEMES="delongezzi-themes-$VERSION.json"
 b64() { base64 | tr -d '\n'; }
 {
   printf '{"format":"delongezzi-custom-themes","version":2,"themes":['
-  for d in storage/ct/*/; do
+  for d in "$TMP"/data/ct/*/; do
     printf '%s\t%s\n' "$(sed -n 's/^{"name":"\([^"]*\)".*/\1/p' "$d/meta.json")" "$(basename "$d")"
   done | LC_ALL=C sort | {
     sep=""
     while IFS="$(printf '\t')" read -r _name id; do
-      printf '%s{"id":"%s","meta":%s,"picture":"%s"}' "$sep" "$id" "$(cat "storage/ct/$id/meta.json")" \
-        "$(b64 < "storage/ct/$id/page.webp")"
+      printf '%s{"id":"%s","meta":%s,"picture":"%s"}' "$sep" "$id" "$(cat "$TMP/data/ct/$id/meta.json")" \
+        "$(b64 < "$TMP/data/ct/$id/page.webp")"
       sep=","
     done
   }

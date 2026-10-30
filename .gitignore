@@ -21,3 +21,8 @@ compile_commands.json
 # Made by scripts/build_release.sh
 /delongezzi-*.bin
 /delongezzi-themes-*.json
+# Junk that file browsers leave in folders
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
