@@ -3,7 +3,7 @@
 #
 # The web UI is embedded into the firmware app image (GM-106). The real bundle
 # is produced by scripts/build_webui.sh (npm build -> gzip -> embed_webui.py) and
-# lands, git-ignored, in src/display/webassets/. That step is the source of truth
+# lands, committed (since build 969), in src/display/webassets/. That step is the source of truth
 # and is run explicitly in CI and locally when the UI changes.
 #
 # This hook only guarantees the build can compile *without* a prior web build: if
