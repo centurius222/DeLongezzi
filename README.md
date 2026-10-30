@@ -117,7 +117,8 @@ with no Wi-Fi details or passwords in it. Writing it replaces everything on the 
 
 ## Optional extras
 - **Theme backup:** `themes/delongezzi-themes-v2.2.2.json` holds the same 32 themes. Restore it under
-  Settings › General › Web Settings › Custom Themes › Restore themes.
+  Settings › General › Web Settings › Custom Themes › Restore themes. Videos are not included; if you want
+  the videos, reflash the full 16 MB file.
 - **Too many?** Delete the themes and brew-button videos you don't want under Settings › General ›
   Web Settings (Custom Themes, Pictures).
 
